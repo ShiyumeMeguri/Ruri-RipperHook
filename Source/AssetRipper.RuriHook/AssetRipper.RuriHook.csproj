@@ -41,4 +41,11 @@
 		<ProjectReference Include="..\AssetRipper.Yaml\AssetRipper.Yaml.csproj" />
 	</ItemGroup>
 	
+	<ItemGroup>
+		<ContentWithTargetPath Include="Libraries\hlslcc.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<TargetPath>hlslcc.dll</TargetPath>
+		</ContentWithTargetPath>
+	</ItemGroup>
+
 </Project>
