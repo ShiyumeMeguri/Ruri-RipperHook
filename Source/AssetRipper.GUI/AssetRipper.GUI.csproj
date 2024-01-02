@@ -30,6 +30,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\AssetRipper.Export\AssetRipper.Export.csproj" />
 		<ProjectReference Include="..\AssetRipper.GUI.Localizations\AssetRipper.GUI.Localizations.csproj" />
+		<ProjectReference Include="..\AssetRipper.RuriHook\AssetRipper.RuriHook.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
