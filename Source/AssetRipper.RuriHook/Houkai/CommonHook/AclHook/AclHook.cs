@@ -3,7 +3,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System.Runtime.InteropServices;
 
-namespace AssetRipper.RuriHook.Houkai_7_1;
+namespace AssetRipper.RuriHook.HoukaiCommon;
 public static class AclHook
 {
 	[RetargetMethodFunc(typeof(AnimationClip_2017_3_0))]

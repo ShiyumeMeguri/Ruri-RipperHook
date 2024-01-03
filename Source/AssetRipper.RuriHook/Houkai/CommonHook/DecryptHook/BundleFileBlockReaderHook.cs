@@ -6,9 +6,9 @@ using K4os.Compression.LZ4;
 using System.Reflection;
 using AssetRipper.IO.Files.Extensions;
 
-namespace AssetRipper.RuriHook.Houkai_7_1
+namespace AssetRipper.RuriHook.HoukaiCommon
 {
-	public partial class Houkai_7_1_Hook
+	public partial class HoukaiCommon_Hook
 	{
 		private static MethodInfo CreateStream = Type.GetType(TYPE).GetMethod("CreateStream", ReflectionExtension.PrivateStaticBindFlag());
 		private const string TYPE = "AssetRipper.IO.Files.BundleFiles.FileStream.BundleFileBlockReader, AssetRipper.IO.Files";

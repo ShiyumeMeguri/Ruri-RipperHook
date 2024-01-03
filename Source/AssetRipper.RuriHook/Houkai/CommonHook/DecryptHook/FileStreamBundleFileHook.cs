@@ -6,9 +6,9 @@ using System.Reflection;
 using AssetRipper.IO.Files.Extensions;
 using AssetRipper.IO.Files.Exceptions;
 
-namespace AssetRipper.RuriHook.Houkai_7_1
+namespace AssetRipper.RuriHook.HoukaiCommon
 {
-	public partial class Houkai_7_1_Hook
+	public partial class HoukaiCommon_Hook
 	{
 		private static MethodInfo ReadMetadata = typeof(FileStreamBundleFile).GetMethod("ReadMetadata", ReflectionExtension.PrivateInstanceBindFlag());
 

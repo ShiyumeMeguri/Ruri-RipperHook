@@ -8,4 +8,10 @@ public partial class Houkai_3_8_Hook : AssetHook
 	{
 		RuriRuntimeHook.gameCrypto = new Mr0k(PackExpansionKey, blockKey: PackBlockKey);
 	}
+	protected override void InitAttributeHook()
+	{
+		additionalNamespaces.Clear();
+		additionalNamespaces.Add("AssetRipper.RuriHook.HoukaiCommon");
+		base.InitAttributeHook();
+	}
 }

@@ -12,7 +12,7 @@ using AssetRipper.Primitives;
 using System.Reflection;
 using AssetRipper.IO.Endian;
 
-namespace AssetRipper.RuriHook.Houkai_7_1;
+namespace AssetRipper.RuriHook.HoukaiCommon;
 public sealed class GameBundleHook
 {
 	private static bool blockXmfInited;

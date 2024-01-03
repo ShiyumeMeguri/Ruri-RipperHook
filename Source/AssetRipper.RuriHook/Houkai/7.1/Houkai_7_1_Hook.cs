@@ -10,4 +10,10 @@ public partial class Houkai_7_1_Hook : AssetHook
 	{
 		RuriRuntimeHook.gameCrypto = new Mr0k(BH3ExpansionKey, BH3SBox, BH3InitVector, BH3BlockKey);
 	}
+	protected override void InitAttributeHook()
+	{
+		additionalNamespaces.Clear();
+		additionalNamespaces.Add("AssetRipper.RuriHook.HoukaiCommon");
+		base.InitAttributeHook();
+	}
 }

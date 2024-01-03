@@ -7,17 +7,19 @@ using System.Reflection;
 namespace AssetRipper.RuriHook;
 public abstract class AssetHook
 {
-	protected AssetHook() 
+	protected List<string> additionalNamespaces = new List<string>();
+	protected AssetHook()
 	{
 		InitAttributeHook();
 	}
 	protected virtual void InitAttributeHook()
 	{
 		var bindingFlags = ReflectionExtension.AnyBindFlag();
-		var currentNamespace = GetType().Namespace;
+		var namespacesToConsider = new List<string> { GetType().Namespace };
+		namespacesToConsider.AddRange(additionalNamespaces); // 添加一些通用空间 避免写编写重复代码
 
 		var methods = Assembly.GetExecutingAssembly().GetTypes()
-					.Where(t => t.Namespace != null && t.Namespace.StartsWith(currentNamespace))
+					.Where(t => t.Namespace != null && namespacesToConsider.Any(ns => t.Namespace.StartsWith(ns)))
 					.SelectMany(t => t.GetMethods(bindingFlags));
 
 		var targetMethods = methods.Where(m => m.GetCustomAttributes<RetargetMethodAttribute>(true).Any());

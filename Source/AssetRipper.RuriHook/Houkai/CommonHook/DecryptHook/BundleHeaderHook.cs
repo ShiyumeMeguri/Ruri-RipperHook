@@ -3,8 +3,8 @@ using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.RuriHook.Crypto;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
 
-namespace AssetRipper.RuriHook.Houkai_7_1;
-public partial class Houkai_7_1_Hook
+namespace AssetRipper.RuriHook.HoukaiCommon;
+public partial class HoukaiCommon_Hook
 {
 	[RetargetMethod(typeof(FileStreamBundleHeader), nameof(Read))]
 	public void Read(EndianReader reader)

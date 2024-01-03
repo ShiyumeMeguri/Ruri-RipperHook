@@ -1,10 +1,11 @@
 ﻿using AssetRipper.Assets.Generics;
 using AssetRipper.IO.Endian;
+using AssetRipper.RuriHook.HoukaiCommon;
 using AssetRipper.SourceGenerated.Subclasses.Clip;
 using System.Runtime.CompilerServices;
 
-namespace AssetRipper.RuriHook.Houkai_3_8;
-public partial class Houkai_3_8_Hook
+namespace AssetRipper.RuriHook.HoukaiCommon;
+public partial class HoukaiCommon_Hook
 {
 	[RetargetMethod(typeof(Clip_5_5_0))]
 	public unsafe void Clip_5_5_0_ReadRelease(ref EndianSpanReader reader)
