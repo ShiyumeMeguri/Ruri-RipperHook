@@ -57,7 +57,7 @@ namespace AssetRipper.RuriHook.ShaderDecompiler.Exporters.DirectX
 					else
 					{
 						byte[] exportData = DXShaderProgramRestorer.RestoreProgramData(reader, writer.Version, ref subProgram);
-
+						// todo Fix Memory Leak
 						uint flag = 0x1;
 						GLLang language = GLLang.LANG_DEFAULT;
 						IntPtr sourceCode = TranslateHLSLFromMemCSharp(exportData, flag, language);
