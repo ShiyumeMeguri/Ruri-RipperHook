@@ -17,7 +17,7 @@ public static class RuriRuntimeHook
 		InstallHook(gameName);
 
 		Console.ForegroundColor = ConsoleColor.Green;
-		Console.WriteLine($"Initialization {gameName} completed Number of Hooks {ilHooks.Count}");
+		Console.WriteLine($"Initialization {gameName} completed Current Hooks Count {ilHooks.Count}");
 		Console.ResetColor();
 	}
 	private static void InstallHook(GameHookType hookName)
