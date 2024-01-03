@@ -15,7 +15,6 @@ using AssetRipper.IO.Endian;
 namespace AssetRipper.RuriHook.Houkai_7_1;
 public sealed class GameBundleHook
 {
-	private const string FileHeader = "UnityFS\x00";
 	private static bool blockXmfInited;
 	private static List<WMVInfo> wmwFileInfo;
 	private static MethodInfo FromSerializedFile = typeof(SerializedAssetCollection).GetMethod("FromSerializedFile", ReflectionExtension.PrivateStaticBindFlag());
