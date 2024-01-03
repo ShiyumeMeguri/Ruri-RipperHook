@@ -46,6 +46,10 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<TargetPath>hlslcc.dll</TargetPath>
 		</ContentWithTargetPath>
+		<ContentWithTargetPath Include="Libraries\acl.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<TargetPath>acl.dll</TargetPath>
+		</ContentWithTargetPath>
 	</ItemGroup>
 
 </Project>
