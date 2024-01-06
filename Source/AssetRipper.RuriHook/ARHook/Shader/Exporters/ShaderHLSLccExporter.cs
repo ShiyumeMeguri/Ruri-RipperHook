@@ -52,7 +52,8 @@ namespace AssetRipper.RuriHook.ShaderDecompiler.Exporters.DirectX
 					// HACK: since we can't restore UAV info and HLSLcc requires it, process such shader with default exporter
 					if (header.UAVs > 0)
 					{
-						base.Export(writer, ref subProgram);
+						Console.WriteLine("Shader: 发现UAVs数据 跳过");
+						//base.Export(writer, ref subProgram);
 					}
 					else
 					{

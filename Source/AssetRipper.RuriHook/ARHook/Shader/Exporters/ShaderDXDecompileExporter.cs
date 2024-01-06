@@ -39,7 +39,7 @@ public sealed class ShaderDXDecompileExporter : ShaderExporterBase
 				return new ShaderMetalExporter();
 
 			case GPUPlatform.unknown:
-				//return new ShaderTextExporter();
+				return new ShaderTextExporter();
 
 			default:
 				return new ShaderUnknownExporter(graphicApi);
