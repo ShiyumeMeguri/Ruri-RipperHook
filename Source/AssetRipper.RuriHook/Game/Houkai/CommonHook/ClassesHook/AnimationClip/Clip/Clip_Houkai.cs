@@ -1,6 +1,5 @@
 ﻿using AssetRipper.Assets.Generics;
 using AssetRipper.IO.Endian;
-using AssetRipper.RuriHook.HoukaiCommon;
 using AssetRipper.SourceGenerated.Subclasses.Clip;
 using System.Runtime.CompilerServices;
 
@@ -29,8 +28,7 @@ public partial class HoukaiCommon_Hook
 		var endPosition = reader.Position;
 
 		reader.Position = currentPosition;
-		AssetList<uint> data = _this.StreamedClip.Data;
-		MergeAclClip(ref reader, aclClipData, data, aclCurveCount);
+		MergeAclClip(ref reader, aclClipData, _this.StreamedClip.Data, aclCurveCount);
 		reader.Position = endPosition;
 	}
 	private static unsafe void MergeAclClip(ref EndianSpanReader reader, byte[] aclClipData, AssetList<uint> data, uint aclCurveCount)
