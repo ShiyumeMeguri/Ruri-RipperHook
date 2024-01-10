@@ -48,8 +48,7 @@ public abstract class AssetHook
 
 	protected void SetPrivateField(Type type, string name, object newValue)
 	{
-		FieldInfo field = type.GetField(name, ReflectionExtension.PrivateInstanceBindFlag());
-		field.SetValue(this, newValue);
+		type.GetField(name, ReflectionExtension.PrivateInstanceBindFlag()).SetValue(this, newValue);
 	}
 	protected object GetPrivateField(Type type, string name)
 	{
