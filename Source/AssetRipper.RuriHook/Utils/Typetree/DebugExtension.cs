@@ -6,11 +6,8 @@ public static class DebugExtension
 	/// <summary>
 	/// 子类查找器
 	/// </summary>
-	public static void SubClassFinder()
+	public static void SubClassFinder(Type baseType, string targetAssemblyName, string targetNamespace)
 	{
-		Type baseType = typeof(Renderer_2017_3_0);
-		string targetAssemblyName = "AssetRipper.SourceGenerated";
-		string targetNamespace = "AssetRipper.SourceGenerated.Classes";
 		foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
 		{
 			if (assembly.GetName().Name == targetAssemblyName)
