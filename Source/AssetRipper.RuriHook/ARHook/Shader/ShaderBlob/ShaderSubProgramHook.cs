@@ -32,7 +32,7 @@ public static class ShaderSubProgramHook
 			var reader = new EndianSpanReader(programData, EndianType.LittleEndian);
 			List<byte> newData = new List<byte>(programData.Length - 0x20);
 			newData.AddRange(reader.ReadBytes(6));
-			reader.Position += 20;
+			reader.Position += 0x20;
 			newData.AddRange(reader.ReadBytes(programData.Length - 0x26));
 			programData = newData.ToArray();
 		}

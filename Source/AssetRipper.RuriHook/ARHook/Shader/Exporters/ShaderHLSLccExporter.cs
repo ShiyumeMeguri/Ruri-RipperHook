@@ -10,8 +10,8 @@ namespace AssetRipper.RuriHook.ShaderDecompiler.Exporters.DirectX
 {
 	public partial class ShaderHLSLccExporter : ShaderTextExporter
 	{
-		[LibraryImport("hlslcc.dll")]
-		private static partial IntPtr TranslateHLSLFromMemCSharp(byte[] shader, uint flags, GLLang language);
+		[DllImport("hlslcc", CallingConvention = CallingConvention.StdCall)]
+		private static extern IntPtr TranslateHLSLFromMemCSharp(byte[] shader, uint flags, GLLang language);
 
 		public enum GLLang
 		{
@@ -52,7 +52,7 @@ namespace AssetRipper.RuriHook.ShaderDecompiler.Exporters.DirectX
 					// HACK: since we can't restore UAV info and HLSLcc requires it, process such shader with default exporter
 					if (header.UAVs > 0)
 					{
-						Console.WriteLine("Shader: 发现UAVs数据 跳过");
+						Console.WriteLine("Shader: Unsupported UAVs Export");
 						//base.Export(writer, ref subProgram);
 					}
 					else
