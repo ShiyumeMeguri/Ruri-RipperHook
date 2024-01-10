@@ -8,7 +8,6 @@ bin
 Source
 Localizations
 !Source/AssetRipper.RuriHook
-AssetRipper.sln
 *.user
 .idea
 **/build/
