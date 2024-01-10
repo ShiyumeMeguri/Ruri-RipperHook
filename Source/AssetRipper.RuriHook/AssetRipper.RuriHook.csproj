@@ -10,6 +10,8 @@
 		</RestoreAdditionalProjectSources>
 
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+		<OutputType>Exe</OutputType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -33,6 +35,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\AssetRipper.Assets\AssetRipper.Assets.csproj" />
 		<ProjectReference Include="..\AssetRipper.Export.UnityProjects\AssetRipper.Export.UnityProjects.csproj" />
+		<ProjectReference Include="..\AssetRipper.GUI\AssetRipper.GUI.csproj" />
 		<ProjectReference Include="..\AssetRipper.IO.Endian\AssetRipper.IO.Endian.csproj" />
 		<ProjectReference Include="..\AssetRipper.IO.Files\AssetRipper.IO.Files.csproj" />
 		<ProjectReference Include="..\AssetRipper.Numerics\AssetRipper.Numerics.csproj" />
