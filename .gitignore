@@ -4,15 +4,12 @@ packages/
 **/packages.config
 obj
 0Bins/
+Test/
 bin
-Source
-Localizations
-!Source/AssetRipper.RuriHook
-!Source/Directory.Build.props
-AssetRipper.sln
 *.user
 .idea
 **/build/
 .vscode
 *.blend1
 launchSettings.json
+AssetRipper.SourceGenerated.xml
