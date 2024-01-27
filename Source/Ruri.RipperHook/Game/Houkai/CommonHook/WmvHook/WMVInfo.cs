@@ -1,4 +1,5 @@
 ﻿namespace Ruri.RipperHook.HoukaiCommon;
+
 public struct WMVInfo
 {
     public struct UnitAssetInfo
@@ -7,6 +8,7 @@ public struct WMVInfo
         public int Offset { get; set; }
         public int FileSize { get; set; }
     }
+
     public string FilePath { get; set; }
     public int FileSize { get; set; }
     public int FileCount { get; set; }

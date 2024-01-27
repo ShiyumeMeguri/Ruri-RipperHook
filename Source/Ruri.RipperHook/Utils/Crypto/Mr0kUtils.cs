@@ -1,72 +1,61 @@
-﻿using AssetRipper.SourceGenerated.Extensions;
-using System.Buffers;
-using System.Buffers.Binary;
+﻿using System.Buffers.Binary;
+using AssetRipper.SourceGenerated.Extensions;
 
-namespace Ruri.RipperHook.Crypto
+namespace Ruri.RipperHook.Crypto;
+
+public static class Mr0kUtils
 {
-    public static class Mr0kUtils
-	{
-		private const int BlockSize = 0x400;
+    private const int BlockSize = 0x400;
 
-        private static readonly byte[] mr0kMagic = { 0x6D, 0x72, 0x30, 0x6B };
-        public static Span<byte> Decrypt(Span<byte> data, Mr0k mr0k)
-        {
-            var key1 = new byte[0x10];
-            var key2 = new byte[0x10];
-            var key3 = new byte[0x10];
+    private static readonly byte[] mr0kMagic = { 0x6D, 0x72, 0x30, 0x6B };
 
-            data.Slice(4, 0x10).CopyTo(key1);
-            data.Slice(0x74, 0x10).CopyTo(key2);
-            data.Slice(0x84, 0x10).CopyTo(key3);
+    public static Span<byte> Decrypt(Span<byte> data, Mr0k mr0k)
+    {
+        var key1 = new byte[0x10];
+        var key2 = new byte[0x10];
+        var key3 = new byte[0x10];
 
-            var encryptedBlockSize = Math.Min(0x10 * ((data.Length - 0x94) >> 7), BlockSize);
+        data.Slice(4, 0x10).CopyTo(key1);
+        data.Slice(0x74, 0x10).CopyTo(key2);
+        data.Slice(0x84, 0x10).CopyTo(key3);
 
-            if (!mr0k.InitVector.IsNullOrEmpty())
-            {
-                for (int i = 0; i < mr0k.InitVector.Length; i++)
-                    key2[i] ^= mr0k.InitVector[i];
-            }
+        var encryptedBlockSize = Math.Min(0x10 * ((data.Length - 0x94) >> 7), BlockSize);
 
-            if (!mr0k.SBox.IsNullOrEmpty())
-            {
-                for (int i = 0; i < 0x10; i++)
-                    key1[i] = mr0k.SBox[(i % 4 * 0x100) | key1[i]];
-            }
+        if (!mr0k.InitVector.IsNullOrEmpty())
+            for (var i = 0; i < mr0k.InitVector.Length; i++)
+                key2[i] ^= mr0k.InitVector[i];
 
-            AES.Decrypt(key1, mr0k.ExpansionKey);
-            AES.Decrypt(key3, mr0k.ExpansionKey);
+        if (!mr0k.SBox.IsNullOrEmpty())
+            for (var i = 0; i < 0x10; i++)
+                key1[i] = mr0k.SBox[(i % 4 * 0x100) | key1[i]];
 
-            for (int i = 0; i < key1.Length; i++)
-            {
-                key1[i] ^= key3[i];
-            }
+        AES.Decrypt(key1, mr0k.ExpansionKey);
+        AES.Decrypt(key3, mr0k.ExpansionKey);
 
-            key1.CopyTo(data.Slice(0x84, 0x10));
+        for (var i = 0; i < key1.Length; i++) key1[i] ^= key3[i];
 
-            var seed1 = BinaryPrimitives.ReadUInt64LittleEndian(key2);
-            var seed2 = BinaryPrimitives.ReadUInt64LittleEndian(key3);
-            var seed = seed2 ^ seed1 ^ (seed1 + (uint)data.Length - 20);
+        key1.CopyTo(data.Slice(0x84, 0x10));
 
-            var encryptedBlock = data.Slice(0x94, encryptedBlockSize);
-            var seedSpan = BitConverter.GetBytes(seed);
-            for (var i = 0; i < encryptedBlockSize; i++)
-            {
-                encryptedBlock[i] ^= (byte)(seedSpan[i % seedSpan.Length] ^ mr0k.BlockKey[i % mr0k.BlockKey.Length]);
-            }
+        var seed1 = BinaryPrimitives.ReadUInt64LittleEndian(key2);
+        var seed2 = BinaryPrimitives.ReadUInt64LittleEndian(key3);
+        var seed = seed2 ^ seed1 ^ (seed1 + (uint)data.Length - 20);
 
-            data = data[0x14..];
+        var encryptedBlock = data.Slice(0x94, encryptedBlockSize);
+        var seedSpan = BitConverter.GetBytes(seed);
+        for (var i = 0; i < encryptedBlockSize; i++)
+            encryptedBlock[i] ^= (byte)(seedSpan[i % seedSpan.Length] ^ mr0k.BlockKey[i % mr0k.BlockKey.Length]);
 
-            if (!mr0k.PostKey.IsNullOrEmpty())
-            {
-                for (int i = 0; i < 0xC00; i++)
-                {
-                    data[i] ^= mr0k.PostKey[i % mr0k.PostKey.Length];
-                }
-            }
+        data = data[0x14..];
 
-            return data;
-        }
+        if (!mr0k.PostKey.IsNullOrEmpty())
+            for (var i = 0; i < 0xC00; i++)
+                data[i] ^= mr0k.PostKey[i % mr0k.PostKey.Length];
 
-        public static bool IsMr0k(ReadOnlySpan<byte> data) => data[..4].SequenceEqual(mr0kMagic);
+        return data;
+    }
+
+    public static bool IsMr0k(ReadOnlySpan<byte> data)
+    {
+        return data[..4].SequenceEqual(mr0kMagic);
     }
 }
