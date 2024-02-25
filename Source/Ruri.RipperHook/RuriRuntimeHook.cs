@@ -13,6 +13,7 @@ public static class RuriRuntimeHook
     public static string gameName;
     public static string gameVer;
     public static GameCrypto gameCrypto;
+    public static UnityCN unityCN;
 
     public static void Init(GameHookType gameName)
     {
