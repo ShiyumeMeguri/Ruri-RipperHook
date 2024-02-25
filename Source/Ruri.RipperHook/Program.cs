@@ -47,7 +47,7 @@ internal static class Program
     private static void RunAssetRipper()
     {
         var programType = Type.GetType("AssetRipper.GUI.Program, AssetRipper");
-        var mainMethod = programType.GetMethod("Main", ReflectionExtension.AnyBindFlag());
+        var mainMethod = programType.GetMethod("Main", ReflectionExtensions.AnyBindFlag());
         object[] parameters = { new string[0] };
         mainMethod.Invoke(null, parameters);
     }

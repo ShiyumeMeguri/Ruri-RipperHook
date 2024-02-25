@@ -16,7 +16,7 @@ public static class AclHook
         ilCursor.Emit(OpCodes.Ldarg_0);
         ilCursor.Emit(OpCodes.Ldc_I4_0);
         ilCursor.Emit(OpCodes.Stfld,
-            typeof(AnimationClip_2017_3_0).GetField("m_Compressed", ReflectionExtension.PrivateInstanceBindFlag()));
+            typeof(AnimationClip_2017_3_0).GetField("m_Compressed", ReflectionExtensions.PrivateInstanceBindFlag()));
         return true;
     }
 

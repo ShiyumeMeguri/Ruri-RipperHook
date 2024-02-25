@@ -11,7 +11,7 @@ namespace Ruri.RipperHook.HoukaiCommon;
 public partial class HoukaiCommon_Hook
 {
     private static readonly MethodInfo ReadMetadata =
-        typeof(FileStreamBundleFile).GetMethod("ReadMetadata", ReflectionExtension.PrivateInstanceBindFlag());
+        typeof(FileStreamBundleFile).GetMethod("ReadMetadata", ReflectionExtensions.PrivateInstanceBindFlag());
 
     [RetargetMethod(typeof(FileStreamBundleFile), nameof(ReadFileStreamMetadata), 2)]
     public void ReadFileStreamMetadata(Stream stream, long basePosition)

@@ -19,11 +19,11 @@ public sealed class GameBundleHook
     private static List<WMVInfo> wmwFileInfo;
 
     private static readonly MethodInfo FromSerializedFile =
-        typeof(SerializedAssetCollection).GetMethod("FromSerializedFile", ReflectionExtension.PrivateStaticBindFlag());
+        typeof(SerializedAssetCollection).GetMethod("FromSerializedFile", ReflectionExtensions.PrivateStaticBindFlag());
 
     private static MethodInfo LoadFilesAndDependenciesMethod =
         typeof(SerializedAssetCollection).GetMethod("LoadFilesAndDependencies",
-            ReflectionExtension.PrivateStaticBindFlag());
+            ReflectionExtensions.PrivateStaticBindFlag());
 
     [RetargetMethod(typeof(GameBundle), nameof(InitializeFromPaths), 5)]
     public void InitializeFromPaths(IEnumerable<string> paths,

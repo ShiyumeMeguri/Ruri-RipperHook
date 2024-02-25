@@ -14,7 +14,7 @@ public partial class HoukaiCommon_Hook
         "AssetRipper.IO.Files.BundleFiles.FileStream.BundleFileBlockReader, AssetRipper.IO.Files";
 
     private static readonly MethodInfo CreateStream =
-        Type.GetType(TYPE).GetMethod("CreateStream", ReflectionExtension.PrivateStaticBindFlag());
+        Type.GetType(TYPE).GetMethod("CreateStream", ReflectionExtensions.PrivateStaticBindFlag());
 
     [RetargetMethod(TYPE, nameof(ReadEntry))]
     public SmartStream ReadEntry(FileStreamNode entry)

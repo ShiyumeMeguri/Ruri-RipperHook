@@ -7,7 +7,7 @@ using MonoMod.Cil;
 
 namespace Ruri.RipperHook;
 
-public static class ILCursorExtension
+public static class ILCursorExtensions
 {
     // 直接插入代码 但是否出错完全看编译器心情 所以不用了
     public static bool TypeTreeInject(this ILCursor ilCursor,
@@ -25,10 +25,10 @@ public static class ILCursorExtension
                 var calledMethod = ilCursor.Instrs[ilCursor.Index].Operand as MethodReference;
                 var newMethodName = calledMethod.Name.Replace("Align", "");
                 var newMethod =
-                    typeof(ReadReleaseMethods).GetMethod(newMethodName, ReflectionExtension.PublicStaticBindFlag());
+                    typeof(ReadReleaseMethods).GetMethod(newMethodName, ReflectionExtensions.PublicStaticBindFlag());
                 if (newMethod == null)
                     newMethod = typeof(EndianSpanReader).GetMethod(newMethodName,
-                        ReflectionExtension.PublicStaticBindFlag());
+                        ReflectionExtensions.PublicStaticBindFlag());
                 var newMethodRef = ilCursor.Module.ImportReference(newMethod);
                 ilCursor.Instrs[ilCursor.Index].Operand = newMethodRef;
             }

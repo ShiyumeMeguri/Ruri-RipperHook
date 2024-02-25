@@ -18,7 +18,7 @@ public abstract class AssetHook
 
     protected virtual void InitAttributeHook()
     {
-        var bindingFlags = ReflectionExtension.AnyBindFlag();
+        var bindingFlags = ReflectionExtensions.AnyBindFlag();
         var namespacesToConsider = new List<string> { GetType().Namespace };
         namespacesToConsider.AddRange(additionalNamespaces); // 添加一些通用空间 避免写编写重复代码
         namespacesToConsider = namespacesToConsider.Where(ns => !excludedNamespaces.Contains(ns)).ToList(); // 排除继承等情况导致重复的hook
@@ -54,18 +54,18 @@ public abstract class AssetHook
 
     protected void SetPrivateField(Type type, string name, object newValue)
     {
-        type.GetField(name, ReflectionExtension.PrivateInstanceBindFlag()).SetValue(this, newValue);
+        type.GetField(name, ReflectionExtensions.PrivateInstanceBindFlag()).SetValue(this, newValue);
     }
 
     protected object GetPrivateField(Type type, string name)
     {
-        return type.GetField(name, ReflectionExtension.PrivateInstanceBindFlag()).GetValue(this);
+        return type.GetField(name, ReflectionExtensions.PrivateInstanceBindFlag()).GetValue(this);
     }
 
     protected void SetAssetListField<T>(Type type, string name, ref EndianSpanReader reader, bool isAlign = true)
         where T : UnityAssetBase, new()
     {
-        var field = type.GetField(name, ReflectionExtension.PrivateInstanceBindFlag());
+        var field = type.GetField(name, ReflectionExtensions.PrivateInstanceBindFlag());
 
         var fieldType = field.FieldType;
         var filedObj = Activator.CreateInstance(fieldType);

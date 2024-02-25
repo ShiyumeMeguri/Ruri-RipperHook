@@ -20,7 +20,7 @@ public static class ShaderSubProgramHook
         ilCursor.Emit(OpCodes.Call, getProgramDataMethod);
         var destMethod =
             typeof(ShaderSubProgramHook).GetMethod(nameof(ProcessShaderData),
-                ReflectionExtension.PublicStaticBindFlag());
+                ReflectionExtensions.PublicStaticBindFlag());
         ilCursor.Emit(OpCodes.Call, destMethod);
         var setProgramDataMethod = typeof(ShaderSubProgram).GetMethod("set_ProgramData");
         ilCursor.Emit(OpCodes.Call, setProgramDataMethod);

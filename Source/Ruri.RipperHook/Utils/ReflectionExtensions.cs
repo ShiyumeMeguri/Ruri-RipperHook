@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Ruri.RipperHook;
 
-public static class ReflectionExtension
+public static class ReflectionExtensions
 {
     #region 通用判断
 
