@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AssetRipper.GUI;
+using AssetRipper.Import.Logging;
+using Avalonia;
 using System.CommandLine;
 
 namespace Ruri.RipperHook;
@@ -46,9 +48,21 @@ internal static class Program
 
     private static void RunAssetRipper()
     {
-        var programType = Type.GetType("AssetRipper.GUI.Program, AssetRipper");
-        var mainMethod = programType.GetMethod("Main", ReflectionExtensions.AnyBindFlag());
-        object[] parameters = { new string[0] };
-        mainMethod.Invoke(null, parameters);
+        Logger.Add(new FileLogger());
+        Logger.Add(new ConsoleLogger());
+        Logger.LogSystemInformation("AssetRipper GUI Version");
+        BuildAvaloniaApp().Start(App.AppMain, Array.Empty<string>());
+    }
+    private static AppBuilder BuildAvaloniaApp()
+    {
+        return AppBuilder.Configure<App>()
+                    .UsePlatformDetect()
+                    .With(new X11PlatformOptions
+                    {
+                        UseDBusFilePicker = false
+                        //Disable FreeDesktop file picker
+                        //https://github.com/AvaloniaUI/Avalonia/issues/9383
+                    })
+                    .LogToTrace();
     }
 }
