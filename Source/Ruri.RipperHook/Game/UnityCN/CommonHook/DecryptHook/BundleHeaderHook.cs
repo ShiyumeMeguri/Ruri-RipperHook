@@ -23,7 +23,7 @@ public partial class UnityCNCommon_Hook
         _this.Flags = (BundleFlags)reader.ReadInt32();
         if (!_this.Flags.GetBlocksInfoAtTheEnd())
         {
-            RuriRuntimeHook.unityCN = new UnityCN(reader);
+            RuriRuntimeHook.unityCN[_this] = new UnityCN(reader);
         }
     }
 }

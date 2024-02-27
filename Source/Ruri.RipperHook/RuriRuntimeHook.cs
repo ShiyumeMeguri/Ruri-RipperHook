@@ -13,7 +13,11 @@ public static class RuriRuntimeHook
     public static string gameName;
     public static string gameVer;
     public static GameCrypto gameCrypto;
-    public static UnityCN unityCN;
+    /// <summary>
+    /// Hook到方法体时当前this相当于变成了方法所在的类
+    /// 因此不能在类里添加任何成员 否则会访问到错误的内存
+    /// </summary>
+    public static Dictionary<object, UnityCN> unityCN = new Dictionary<object, UnityCN>();
 
     public static void Init(GameHookType gameName)
     {

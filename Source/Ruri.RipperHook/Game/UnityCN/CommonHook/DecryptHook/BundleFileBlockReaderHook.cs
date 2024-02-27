@@ -91,7 +91,7 @@ public partial class UnityCNCommon_Hook
 
                             if ((block.Flags & (StorageBlockFlags)0x100) != 0)
                             {
-                                RuriRuntimeHook.unityCN.DecryptBlock(compressedBytes, (int)compressedSize, m_cachedBlockIndex);
+                                RuriRuntimeHook.unityCN[this].DecryptBlock(compressedBytes, (int)compressedSize, m_cachedBlockIndex);
                             }
 
                             var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
