@@ -21,16 +21,8 @@ public sealed class GameBundleHook
     private static readonly MethodInfo FromSerializedFile =
         typeof(SerializedAssetCollection).GetMethod("FromSerializedFile", ReflectionExtensions.PrivateStaticBindFlag());
 
-    private static MethodInfo LoadFilesAndDependenciesMethod =
-        typeof(SerializedAssetCollection).GetMethod("LoadFilesAndDependencies",
-            ReflectionExtensions.PrivateStaticBindFlag());
-
     [RetargetMethod(typeof(GameBundle), nameof(InitializeFromPaths), 5)]
-    public void InitializeFromPaths(IEnumerable<string> paths,
-        AssetFactoryBase assetFactory,
-        IDependencyProvider? dependencyProvider,
-        IResourceProvider? resourceProvider,
-        UnityVersion defaultVersion = default)
+    public void InitializeFromPaths(IEnumerable<string> paths, AssetFactoryBase assetFactory, IDependencyProvider? dependencyProvider, IResourceProvider? resourceProvider, UnityVersion defaultVersion = default)
     {
         var _this = (object)this as GameBundle;
 
@@ -94,8 +86,7 @@ public sealed class GameBundleHook
             switch (RemoveLastItem(fileStack))
             {
                 case SerializedFile serializedFile:
-                    FromSerializedFile.Invoke(null,
-                        new object[] { this, serializedFile, assetFactory, defaultVersion });
+                    FromSerializedFile.Invoke(null, new object[] { this, serializedFile, assetFactory, defaultVersion });
                     break;
                 case FileContainer container:
                     var serializedBundle = SerializedBundle.FromFileContainer(container, assetFactory, defaultVersion);
