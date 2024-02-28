@@ -7,7 +7,7 @@ public partial class Houkai_7_2_Hook : Houkai_7_1_Hook
     protected override void InitAttributeHook()
     {
         excludedNamespaces.Add(GetType().Namespace);
-        additionalNamespaces.Add("Ruri.RipperHook.Houkai_7_1");
+        additionalNamespaces.Add(typeof(Houkai_7_1_Hook).Namespace);
         base.InitAttributeHook();
     }
 }

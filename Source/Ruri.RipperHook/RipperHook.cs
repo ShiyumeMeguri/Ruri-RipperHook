@@ -6,12 +6,12 @@ using MonoMod.Cil;
 
 namespace Ruri.RipperHook;
 
-public abstract class AssetHook
+public abstract class RipperHook
 {
     protected List<string> additionalNamespaces = new();
     protected List<string> excludedNamespaces = new();
 
-    protected AssetHook()
+    protected RipperHook()
     {
         InitAttributeHook();
     }
@@ -34,7 +34,7 @@ public abstract class AssetHook
             foreach (var attr in attrs)
             {
                 var methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags);
-                RuriRuntimeHook.RetargetCall(methodSrc, methodDest, attr.ArgCount);
+                ReflectionExtensions.RetargetCall(methodSrc, methodDest, attr.ArgCount);
             }
         }
 
@@ -47,7 +47,7 @@ public abstract class AssetHook
                 var methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags);
                 var HookCallback =
                     (Func<ILContext, bool>)Delegate.CreateDelegate(typeof(Func<ILContext, bool>), methodDest);
-                RuriRuntimeHook.RetargetCallFunc(HookCallback, methodSrc);
+                ReflectionExtensions.RetargetCallFunc(HookCallback, methodSrc);
             }
         }
     }

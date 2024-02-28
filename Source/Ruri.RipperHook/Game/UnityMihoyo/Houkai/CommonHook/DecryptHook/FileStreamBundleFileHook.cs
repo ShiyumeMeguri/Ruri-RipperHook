@@ -10,8 +10,7 @@ namespace Ruri.RipperHook.HoukaiCommon;
 
 public partial class HoukaiCommon_Hook
 {
-    private static readonly MethodInfo ReadMetadata =
-        typeof(FileStreamBundleFile).GetMethod("ReadMetadata", ReflectionExtensions.PrivateInstanceBindFlag());
+    private static readonly MethodInfo ReadMetadata = typeof(FileStreamBundleFile).GetMethod("ReadMetadata", ReflectionExtensions.PrivateInstanceBindFlag());
 
     [RetargetMethod(typeof(FileStreamBundleFile), nameof(ReadFileStreamMetadata), 2)]
     public void ReadFileStreamMetadata(Stream stream, long basePosition)
@@ -62,12 +61,12 @@ public partial class HoukaiCommon_Hook
                 ReadMetadata.Invoke(this, new object[] { new MemoryStream(uncompressedBytes), uncompressedSize });
             }
                 break;
-
+            // 修改开始
             case (CompressionType)5:
-                if (Mr0kUtils.IsMr0k(compressedBytes))
-                    compressedBytes = Mr0kUtils.Decrypt(compressedBytes, (Mr0k)RuriRuntimeHook.gameCrypto).ToArray();
+                if (Mr0k.IsMr0k(compressedBytes))
+                    compressedBytes = RuriRuntimeHook.commonDecryptor.Decrypt(compressedBytes).ToArray();
                 goto case CompressionType.Lz4HC;
-
+            // 修改结束
             default:
                 UnsupportedBundleDecompression.Throw(NameFixed, metaCompression);
                 break;

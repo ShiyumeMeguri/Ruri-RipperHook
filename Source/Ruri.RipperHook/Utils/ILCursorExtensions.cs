@@ -65,8 +65,7 @@ public static class ILCursorExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool IsFieldReference(Instruction instr)
     {
-        return instr.OpCode == OpCodes.Ldfld || instr.OpCode == OpCodes.Stfld || instr.OpCode == OpCodes.Ldsfld ||
-               instr.OpCode == OpCodes.Stsfld;
+        return instr.OpCode == OpCodes.Ldfld || instr.OpCode == OpCodes.Stfld || instr.OpCode == OpCodes.Ldsfld || instr.OpCode == OpCodes.Stsfld;
     }
 
     #endregion

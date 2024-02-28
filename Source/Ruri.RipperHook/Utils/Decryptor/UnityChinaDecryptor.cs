@@ -4,7 +4,7 @@ using AssetRipper.Import.Logging;
 using AssetRipper.IO.Endian;
 
 namespace Ruri.RipperHook.Crypto;
-public class UnityCN
+public class UnityChinaDecryptor
 {
     private const string Signature = "#$unity3dchina!@";
 
@@ -13,7 +13,7 @@ public class UnityCN
     public byte[] Index = new byte[0x10];
     public byte[] Sub = new byte[0x10];
 
-    public UnityCN(EndianReader reader)
+    public UnityChinaDecryptor(EndianReader reader)
     {
         reader.ReadUInt32();
 

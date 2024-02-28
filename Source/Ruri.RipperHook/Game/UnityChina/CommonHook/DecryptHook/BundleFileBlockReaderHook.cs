@@ -6,9 +6,9 @@ using AssetRipper.IO.Files.Streams.Smart;
 using K4os.Compression.LZ4;
 using Ruri.RipperHook.Crypto;
 
-namespace Ruri.RipperHook.UnityCNCommon;
+namespace Ruri.RipperHook.UnityChinaCommon;
 
-public partial class UnityCNCommon_Hook
+public partial class UnityChinaCommon_Hook
 {
     private const string TYPE =
         "AssetRipper.IO.Files.BundleFiles.FileStream.BundleFileBlockReader, AssetRipper.IO.Files";
@@ -91,7 +91,7 @@ public partial class UnityCNCommon_Hook
 
                             if ((block.Flags & (StorageBlockFlags)0x100) != 0)
                             {
-                                RuriRuntimeHook.unityCN[this].DecryptBlock(compressedBytes, (int)compressedSize, m_cachedBlockIndex);
+                                RuriRuntimeHook.unityChinaDecryptor[this].DecryptBlock(compressedBytes, (int)compressedSize, m_cachedBlockIndex);
                             }
 
                             var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);

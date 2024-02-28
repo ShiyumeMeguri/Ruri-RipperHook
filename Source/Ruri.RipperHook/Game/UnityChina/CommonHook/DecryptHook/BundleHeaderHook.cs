@@ -3,9 +3,9 @@ using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
 using Ruri.RipperHook.Crypto;
 
-namespace Ruri.RipperHook.UnityCNCommon;
+namespace Ruri.RipperHook.UnityChinaCommon;
 
-public partial class UnityCNCommon_Hook
+public partial class UnityChinaCommon_Hook
 {
     [RetargetMethod(typeof(FileStreamBundleHeader), nameof(Read))]
     public void Read(EndianReader reader)
@@ -23,7 +23,7 @@ public partial class UnityCNCommon_Hook
         _this.Flags = (BundleFlags)reader.ReadInt32();
         if (!_this.Flags.GetBlocksInfoAtTheEnd())
         {
-            RuriRuntimeHook.unityCN[_this] = new UnityCN(reader);
+            RuriRuntimeHook.unityChinaDecryptor[_this] = new UnityChinaDecryptor(reader);
         }
     }
 }

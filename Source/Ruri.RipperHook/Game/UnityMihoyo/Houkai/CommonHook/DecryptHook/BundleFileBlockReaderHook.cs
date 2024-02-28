@@ -10,11 +10,9 @@ namespace Ruri.RipperHook.HoukaiCommon;
 
 public partial class HoukaiCommon_Hook
 {
-    private const string TYPE =
-        "AssetRipper.IO.Files.BundleFiles.FileStream.BundleFileBlockReader, AssetRipper.IO.Files";
+    private const string TYPE = "AssetRipper.IO.Files.BundleFiles.FileStream.BundleFileBlockReader, AssetRipper.IO.Files";
 
-    private static readonly MethodInfo CreateStream =
-        Type.GetType(TYPE).GetMethod("CreateStream", ReflectionExtensions.PrivateStaticBindFlag());
+    private static readonly MethodInfo CreateStream = Type.GetType(TYPE).GetMethod("CreateStream", ReflectionExtensions.PrivateStaticBindFlag());
 
     [RetargetMethod(TYPE, nameof(ReadEntry))]
     public SmartStream ReadEntry(FileStreamNode entry)
@@ -91,8 +89,8 @@ public partial class HoukaiCommon_Hook
                             Span<byte> compressedBytes =
                                 new BinaryReader(m_stream).ReadBytes((int)block.CompressedSize);
 
-                            if (compressType == (CompressionType)5 && Mr0kUtils.IsMr0k(compressedBytes))
-                                compressedBytes = Mr0kUtils.Decrypt(compressedBytes, (Mr0k)RuriRuntimeHook.gameCrypto);
+                            if (compressType == (CompressionType)5 && Mr0k.IsMr0k(compressedBytes))
+                                compressedBytes = RuriRuntimeHook.commonDecryptor.Decrypt(compressedBytes);
 
                             var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
                             if (bytesWritten < 0)

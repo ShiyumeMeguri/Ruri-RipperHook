@@ -35,7 +35,7 @@ public sealed class GameBundleHook
                 if (fileData.Length >= 4 && fileData[0] == 0x47 && fileData[1] == 0x46 && fileData[2] == 0x46 && fileData[3] == 0x00)
                     continue; // 这应该是索引文件
 
-                fileData = RuriRuntimeHook.gameCrypto.Decrypt(fileData).ToArray(); // 解密处
+                fileData = RuriRuntimeHook.commonDecryptor.Decrypt(fileData).ToArray(); // 解密处
                 fileStack.AddRange(LoadFilesAndDependencies(fileData, MultiFileStream.GetFilePath(path),
                     MultiFileStream.GetFileName(path), dependencyProvider));
             }
