@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
+using AssetRipper.Import.Logging;
 using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Extensions;
 using AssetRipper.IO.Files.Streams.Smart;
 using K4os.Compression.LZ4;
-using Ruri.RipperHook.Crypto;
 
 namespace Ruri.RipperHook.UnityChinaCommon;
 
@@ -94,9 +94,9 @@ public partial class UnityChinaCommon_Hook
 
                             var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
                             if (bytesWritten < 0)
-                                Console.WriteLine("EncryptedFileException.Throw(entry.PathFixed)");
+                                Logger.Error("EncryptedFileException.Throw(entry.PathFixed)");
                             else if (bytesWritten != uncompressedSize)
-                                Console.WriteLine(
+                                Logger.Error(
                                     "DecompressionFailedException.ThrowIncorrectNumberBytesWritten(entry.PathFixed, uncompressedSize, bytesWritten)");
                             new MemoryStream(uncompressedBytes).CopyTo(m_cachedBlockStream);
                             break;
@@ -126,7 +126,7 @@ public partial class UnityChinaCommon_Hook
         }
 
         if (left < 0)
-            Console.WriteLine("DecompressionFailedException.ThrowReadMoreThanExpected(entry.Size, entry.Size - left)");
+            Logger.Error("DecompressionFailedException.ThrowReadMoreThanExpected(entry.Size, entry.Size - left)");
         entryStream.Position = 0;
         return entryStream.CreateReference();
     }
