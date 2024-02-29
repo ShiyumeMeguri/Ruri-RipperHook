@@ -3,6 +3,10 @@ using Ruri.RipperHook.Crypto;
 
 namespace Ruri.RipperHook;
 
+/// <summary>
+/// Hook到方法体时当前this相当于变成了方法所在的类
+/// 因此不能在类里添加任何成员 否则会访问到错误的内存
+/// </summary>
 public static class RuriRuntimeHook
 {
     public static List<ILHook> ilHooks = new();
@@ -10,11 +14,7 @@ public static class RuriRuntimeHook
     public static string gameName;
     public static string gameVer;
     public static CommonDecryptor commonDecryptor;
-    /// <summary>
-    /// Hook到方法体时当前this相当于变成了方法所在的类
-    /// 因此不能在类里添加任何成员 否则会访问到错误的内存
-    /// </summary>
-    public static Dictionary<object, UnityChinaDecryptor> unityChinaDecryptor = new Dictionary<object, UnityChinaDecryptor>();
+    public static UnityChinaDecryptor unityChinaDecryptor;
 
     public static void Init(GameHookType gameName)
     {

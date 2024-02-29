@@ -10,11 +10,9 @@ namespace Ruri.RipperHook.UnityChinaCommon;
 
 public partial class UnityChinaCommon_Hook
 {
-    private const string TYPE =
-        "AssetRipper.IO.Files.BundleFiles.FileStream.BundleFileBlockReader, AssetRipper.IO.Files";
+    private const string TYPE = "AssetRipper.IO.Files.BundleFiles.FileStream.BundleFileBlockReader, AssetRipper.IO.Files";
 
-    private static readonly MethodInfo CreateStream =
-        Type.GetType(TYPE).GetMethod("CreateStream", ReflectionExtensions.PrivateStaticBindFlag());
+    private static readonly MethodInfo CreateStream = Type.GetType(TYPE).GetMethod("CreateStream", ReflectionExtensions.PrivateStaticBindFlag());
 
     [RetargetMethod(TYPE, nameof(ReadEntry))]
     public SmartStream ReadEntry(FileStreamNode entry)
@@ -91,7 +89,7 @@ public partial class UnityChinaCommon_Hook
 
                             if ((block.Flags & (StorageBlockFlags)0x100) != 0)
                             {
-                                RuriRuntimeHook.unityChinaDecryptor[this].DecryptBlock(compressedBytes, (int)compressedSize, m_cachedBlockIndex);
+                                RuriRuntimeHook.unityChinaDecryptor.DecryptBlock(compressedBytes, (int)compressedSize, m_cachedBlockIndex);
                             }
 
                             var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);

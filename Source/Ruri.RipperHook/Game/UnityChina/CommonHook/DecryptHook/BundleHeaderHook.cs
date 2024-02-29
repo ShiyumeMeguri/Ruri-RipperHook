@@ -23,7 +23,7 @@ public partial class UnityChinaCommon_Hook
         _this.Flags = (BundleFlags)reader.ReadInt32();
         if (!_this.Flags.GetBlocksInfoAtTheEnd())
         {
-            RuriRuntimeHook.unityChinaDecryptor[_this] = new UnityChinaDecryptor(reader);
+            RuriRuntimeHook.unityChinaDecryptor = new UnityChinaDecryptor(reader);
         }
     }
 }
