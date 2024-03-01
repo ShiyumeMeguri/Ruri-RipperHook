@@ -98,7 +98,7 @@ public class BundleFileBlockReaderHook : CommonHook
         }
 
         if (left < 0)
-            Console.WriteLine("DecompressionFailedException.ThrowReadMoreThanExpected(entry.Size, entry.Size - left)");
+            throw new Exception("DecompressionFailedException.ThrowReadMoreThanExpected(entry.Size, entry.Size - left)");
         entryStream.Position = 0;
         return entryStream.CreateReference();
     }

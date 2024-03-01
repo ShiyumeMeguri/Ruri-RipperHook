@@ -29,10 +29,9 @@ public partial class HoukaiCommon_Hook
 
                 var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
                 if (bytesWritten < 0)
-                    Console.WriteLine("EncryptedFileException.Throw(entry.PathFixed)");
+                    throw new Exception("EncryptedFileException.Throw(entry.PathFixed)");
                 else if (bytesWritten != uncompressedSize)
-                    Console.WriteLine(
-                        "DecompressionFailedException.ThrowIncorrectNumberBytesWritten(entry.PathFixed, uncompressedSize, bytesWritten)");
+                    throw new Exception("DecompressionFailedException.ThrowIncorrectNumberBytesWritten(entry.PathFixed, uncompressedSize, bytesWritten)");
                 new MemoryStream(uncompressedBytes).CopyTo(m_cachedBlockStream);
                 break;
 

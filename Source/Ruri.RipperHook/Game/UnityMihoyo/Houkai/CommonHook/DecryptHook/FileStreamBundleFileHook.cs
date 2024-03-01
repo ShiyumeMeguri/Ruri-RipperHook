@@ -53,19 +53,18 @@ public partial class HoukaiCommon_Hook
                 var uncompressedBytes = new byte[uncompressedSize];
                 var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
                 if (bytesWritten < 0)
-                    Console.WriteLine("EncryptedFileException.Throw(NameFixed)");
+                    throw new Exception("EncryptedFileException.Throw(NameFixed)");
                 else if (bytesWritten != uncompressedSize)
-                    Console.WriteLine(
-                        "DecompressionFailedException.ThrowIncorrectNumberBytesWritten(NameFixed, uncompressedSize, bytesWritten)");
+                    throw new Exception("DecompressionFailedException.ThrowIncorrectNumberBytesWritten(NameFixed, uncompressedSize, bytesWritten)");
                 ReadMetadata.Invoke(this, new object[] { new MemoryStream(uncompressedBytes), uncompressedSize });
             }
                 break;
-            // 修改开始
+
             case (CompressionType)5:
                 if (Mr0k.IsMr0k(compressedBytes))
                     compressedBytes = RuriRuntimeHook.commonDecryptor.Decrypt(compressedBytes).ToArray();
                 goto case CompressionType.Lz4HC;
-            // 修改结束
+
             default:
                 UnsupportedBundleDecompression.Throw(NameFixed, metaCompression);
                 break;

@@ -31,10 +31,9 @@ public partial class UnityChinaCommon_Hook
 
                 var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
                 if (bytesWritten < 0)
-                    Logger.Error("EncryptedFileException.Throw(entry.PathFixed)");
+                    throw new Exception("EncryptedFileException.Throw(entry.PathFixed)");
                 else if (bytesWritten != uncompressedSize)
-                    Logger.Error(
-                        "DecompressionFailedException.ThrowIncorrectNumberBytesWritten(entry.PathFixed, uncompressedSize, bytesWritten)");
+                    throw new Exception("DecompressionFailedException.ThrowIncorrectNumberBytesWritten(entry.PathFixed, uncompressedSize, bytesWritten)");
                 new MemoryStream(uncompressedBytes).CopyTo(m_cachedBlockStream);
                 break;
 

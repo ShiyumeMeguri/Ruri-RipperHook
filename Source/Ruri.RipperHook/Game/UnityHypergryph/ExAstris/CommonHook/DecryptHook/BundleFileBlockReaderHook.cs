@@ -27,8 +27,7 @@ public partial class ExAstrisCommon_Hook
                 if (bytesWritten < 0)
                     throw new Exception("EncryptedFileException.Throw(entry.PathFixed)");
                 else if (bytesWritten != uncompressedSize)
-                    throw new Exception(
-                        "DecompressionFailedException.ThrowIncorrectNumberBytesWritten(entry.PathFixed, uncompressedSize, bytesWritten)");
+                    throw new Exception("DecompressionFailedException.ThrowIncorrectNumberBytesWritten(entry.PathFixed, uncompressedSize, bytesWritten)");
                 new MemoryStream(uncompressedBytes).CopyTo(m_cachedBlockStream);
                 break;
 
