@@ -4,6 +4,7 @@ using AssetRipper.Export.Modules.Shaders.Exporters;
 using AssetRipper.Export.Modules.Shaders.Exporters.DirectX;
 using AssetRipper.Export.Modules.Shaders.IO;
 using AssetRipper.Export.Modules.Shaders.ShaderBlob;
+using AssetRipper.Import.Logging;
 using AssetRipper.SourceGenerated.Extensions.Enums.Shader;
 
 namespace Ruri.RipperHook.AR_ShaderDecompiler.Exporters.DirectX;
@@ -55,7 +56,7 @@ public class ShaderHLSLccExporter : ShaderTextExporter
                 // HACK: since we can't restore UAV info and HLSLcc requires it, process such shader with default exporter
                 if (header.UAVs > 0)
                 {
-                    Console.WriteLine("Shader: Unsupported UAVs Export");
+                    Logger.Error("Shader: Unsupported UAVs Export");
                     //base.Export(writer, ref subProgram);
                 }
                 else

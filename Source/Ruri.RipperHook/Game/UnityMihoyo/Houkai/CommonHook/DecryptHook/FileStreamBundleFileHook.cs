@@ -21,7 +21,6 @@ public partial class HoukaiCommon_Hook
         if (Header.Version >= BundleVersion.BF_LargeFilesSupport) stream.Align(16);
         if (Header.Flags.GetBlocksInfoAtTheEnd())
         {
-            Console.WriteLine(NameFixed);
             stream.Position = basePosition + (Header.Size - Header.CompressedBlocksInfoSize);
         }
 
