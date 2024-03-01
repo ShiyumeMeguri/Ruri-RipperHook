@@ -13,7 +13,7 @@ using AssetRipper.Primitives;
 
 namespace Ruri.RipperHook.GirlsFrontline2Common;
 
-public sealed class GameBundleHook
+public partial class GirlsFrontline2Common_Hook
 {
     private static readonly MethodInfo FromSerializedFile =
         typeof(SerializedAssetCollection).GetMethod("FromSerializedFile", ReflectionExtensions.PrivateStaticBindFlag());

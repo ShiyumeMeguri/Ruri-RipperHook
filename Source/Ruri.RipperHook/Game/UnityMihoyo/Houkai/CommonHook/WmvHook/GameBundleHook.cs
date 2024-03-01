@@ -13,7 +13,7 @@ using AssetRipper.Primitives;
 
 namespace Ruri.RipperHook.HoukaiCommon;
 
-public sealed class GameBundleHook
+public partial class HoukaiCommon_Hook
 {
     private static bool blockXmfInited;
     private static List<WMVInfo> wmwFileInfo;

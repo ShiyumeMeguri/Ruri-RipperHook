@@ -5,7 +5,7 @@ using MonoMod.Cil;
 
 namespace Ruri.RipperHook.HoukaiCommon;
 
-public static class AclHook
+public partial class HoukaiCommon_Hook
 {
     [RetargetMethodFunc(typeof(AnimationClip_2017_3_0))]
     private static bool AnimationClip_2017_3_0_ReadRelease(ILContext il)
