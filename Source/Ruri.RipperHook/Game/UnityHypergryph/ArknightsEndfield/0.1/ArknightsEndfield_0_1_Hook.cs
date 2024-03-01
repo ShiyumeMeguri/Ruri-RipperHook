@@ -1,5 +1,5 @@
-﻿using Ruri.RipperHook.Crypto;
-using Ruri.RipperHook.ArknightsEndfieldCommon;
+﻿using Ruri.RipperHook.ArknightsEndfieldCommon;
+using Ruri.RipperHook.Crypto;
 using Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
 
 namespace Ruri.RipperHook.ArknightsEndfield_0_1;

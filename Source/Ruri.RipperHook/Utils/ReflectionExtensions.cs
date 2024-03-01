@@ -1,8 +1,8 @@
-﻿using Mono.Cecil.Cil;
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
+using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace Ruri.RipperHook;
 

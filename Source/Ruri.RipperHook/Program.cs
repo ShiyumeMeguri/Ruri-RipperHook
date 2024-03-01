@@ -1,7 +1,7 @@
-﻿using AssetRipper.GUI;
+﻿using System.CommandLine;
+using AssetRipper.GUI;
 using AssetRipper.Import.Logging;
 using Avalonia;
-using System.CommandLine;
 
 namespace Ruri.RipperHook;
 

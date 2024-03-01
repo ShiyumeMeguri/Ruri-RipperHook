@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Ruri.RipperHook.Crypto;
+﻿namespace Ruri.RipperHook.Crypto;
 
 public class LZ4
 {

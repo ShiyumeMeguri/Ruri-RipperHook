@@ -1,5 +1,5 @@
-﻿using AssetRipper.Import.Logging;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using AssetRipper.Import.Logging;
 
 namespace Ruri.RipperHook.Crypto;
 

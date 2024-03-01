@@ -1,6 +1,6 @@
+using System.Buffers.Binary;
 using AssetRipper.SourceGenerated.Extensions;
 using Ruri.RipperHook.Crypto;
-using System.Buffers.Binary;
 
 namespace Ruri.RipperHook.UnityMihoyo;
 

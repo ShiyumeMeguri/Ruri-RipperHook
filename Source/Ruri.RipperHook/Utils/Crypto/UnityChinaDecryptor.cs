@@ -1,5 +1,5 @@
-﻿using System.Text;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
+using System.Text;
 using AssetRipper.Import.Logging;
 using AssetRipper.IO.Endian;
 
