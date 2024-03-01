@@ -1,4 +1,4 @@
-﻿using Ruri.RipperHook.Crypto;
+﻿using Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
 using Ruri.RipperHook.HoukaiCommon;
 
 namespace Ruri.RipperHook.Houkai_3_8;
@@ -11,6 +11,7 @@ public partial class Houkai_3_8_Hook : RipperHook
     protected Houkai_3_8_Hook()
     {
         RuriRuntimeHook.commonDecryptor = new Mr0k(PackExpansionKey, blockKey: PackBlockKey);
+        BundleFileBlockReaderHook.CustomBlockCompression = HoukaiCommon_Hook.CustomBlockCompression;
     }
 
     protected override void InitAttributeHook()
