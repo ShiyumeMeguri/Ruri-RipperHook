@@ -13,7 +13,7 @@ public partial class Houkai_7_1_Hook : RipperHook
     public static readonly byte[] BH3InitVector = [0x28, 0x20, 0x24, 0xC9, 0x95, 0x36, 0x70, 0x22, 0xFF, 0x23, 0x0A, 0x03, 0x3F, 0x5D, 0xD0, 0x88];
     protected Houkai_7_1_Hook()
     {
-        RuriRuntimeHook.commonDecryptor = new Mr0k(BH3ExpansionKey, BH3SBox, BH3InitVector, BH3BlockKey);
+        RuriRuntimeHook.commonDecryptor = new Mr0kDecryptor(BH3ExpansionKey, BH3SBox, BH3InitVector, BH3BlockKey);
         GameBundleHook.CustomFilePreInitialize= HoukaiCommon_Hook.CustomFilePreInitialize;
         BundleFileBlockReaderHook.CustomBlockCompression = HoukaiCommon_Hook.CustomBlockCompression;
     }

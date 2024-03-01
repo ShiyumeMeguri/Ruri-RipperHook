@@ -25,7 +25,7 @@ public partial class HoukaiCommon_Hook
                 var uncompressedBytes = new byte[uncompressedSize];
                 Span<byte> compressedBytes = new BinaryReader(m_stream).ReadBytes((int)block.CompressedSize);
 
-                if (compressType == (CompressionType)5 && Mr0k.IsMr0k(compressedBytes))
+                if (compressType == (CompressionType)5 && Mr0kDecryptor.IsMr0k(compressedBytes))
                     compressedBytes = RuriRuntimeHook.commonDecryptor.Decrypt(compressedBytes);
 
                 var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);

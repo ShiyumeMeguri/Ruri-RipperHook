@@ -11,7 +11,7 @@ public partial class Houkai_3_8_Hook : RipperHook
 
     protected Houkai_3_8_Hook()
     {
-        RuriRuntimeHook.commonDecryptor = new Mr0k(PackExpansionKey, blockKey: PackBlockKey);
+        RuriRuntimeHook.commonDecryptor = new Mr0kDecryptor(PackExpansionKey, blockKey: PackBlockKey);
         BundleFileBlockReaderHook.CustomBlockCompression = HoukaiCommon_Hook.CustomBlockCompression;
     }
 
