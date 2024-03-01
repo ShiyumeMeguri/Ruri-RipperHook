@@ -47,9 +47,7 @@ public sealed class ShaderDXDecompileExporter : ShaderExporterBase
         }
     }
 
-    private static void ExportBinary(IShader shader,
-        Stream stream,
-        Func<GPUPlatform, ShaderTextExporter> exporterInstantiator)
+    private static void ExportBinary(IShader shader, Stream stream, Func<GPUPlatform, ShaderTextExporter> exporterInstantiator)
     {
         if (shader.Has_ParsedForm())
         {

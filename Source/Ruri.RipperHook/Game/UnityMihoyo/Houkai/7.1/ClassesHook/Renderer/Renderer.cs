@@ -31,8 +31,7 @@ public partial class Houkai_7_1_Hook
     {
         var ilCursor = new ILCursor(il);
         var startIndex = ilCursor.Index;
-        if (ilCursor.TryGotoNext(MoveType.After,
-                instr => instr.OpCode == OpCodes.Stfld && ((FieldReference)instr.Operand).Name == "m_SortingOrder"))
+        if (ilCursor.TryGotoNext(MoveType.After, instr => instr.OpCode == OpCodes.Stfld && ((FieldReference)instr.Operand).Name == "m_SortingOrder"))
         {
             var targetLabel = ilCursor.MarkLabel();
             ilCursor.Goto(startIndex);

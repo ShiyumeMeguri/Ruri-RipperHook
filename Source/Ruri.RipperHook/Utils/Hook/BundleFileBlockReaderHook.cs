@@ -11,9 +11,9 @@ public class BundleFileBlockReaderHook : CommonHook
     private const string TYPE = "AssetRipper.IO.Files.BundleFiles.FileStream.BundleFileBlockReader, AssetRipper.IO.Files";
 
     private static readonly MethodInfo CreateStream = Type.GetType(TYPE).GetMethod("CreateStream", ReflectionExtensions.PrivateStaticBindFlag());
-    
+
     public delegate void BlockCompressionDelegate(Stream mStream, StorageBlock block, SmartStream cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex);
-    
+
     public static BlockCompressionDelegate CustomBlockCompression;
 
     [RetargetMethod(TYPE, nameof(ReadEntry))]
@@ -33,9 +33,7 @@ public class BundleFileBlockReaderHook : CommonHook
         int blockIndex;
         long blockCompressedOffset = 0;
         long blockDecompressedOffset = 0;
-        for (blockIndex = 0;
-             blockDecompressedOffset + m_blocksInfo.StorageBlocks[blockIndex].UncompressedSize <= entry.Offset;
-             blockIndex++)
+        for (blockIndex = 0; blockDecompressedOffset + m_blocksInfo.StorageBlocks[blockIndex].UncompressedSize <= entry.Offset; blockIndex++)
         {
             blockCompressedOffset += m_blocksInfo.StorageBlocks[blockIndex].CompressedSize;
             blockDecompressedOffset += m_blocksInfo.StorageBlocks[blockIndex].UncompressedSize;

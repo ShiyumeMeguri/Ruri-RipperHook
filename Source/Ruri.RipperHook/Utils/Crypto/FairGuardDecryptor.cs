@@ -166,6 +166,7 @@ public record class FairGuardDecryptor : CommonDecryptor
                     else
                         r >>= 1;
                 }
+
                 Table[i] = r;
             }
         }
@@ -178,7 +179,10 @@ public record class FairGuardDecryptor : CommonDecryptor
                 _value = (Table[(byte)_value ^ data[offset + i]] ^ (_value >> 9)) + 0x5B;
         }
 
-        public uint GetDigest() { return ~_value - 0x41607A3D; }
+        public uint GetDigest()
+        {
+            return ~_value - 0x41607A3D;
+        }
 
         public static uint CalculateDigest(byte[] data, uint offset, uint size)
         {

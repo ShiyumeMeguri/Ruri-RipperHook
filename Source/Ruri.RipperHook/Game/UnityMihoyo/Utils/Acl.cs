@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 
 namespace Ruri.RipperHook.UnityMihoyo;
+
 public class Acl
 {
     public static void DecompressAll(byte[] data, out float[] values, out float[] times)

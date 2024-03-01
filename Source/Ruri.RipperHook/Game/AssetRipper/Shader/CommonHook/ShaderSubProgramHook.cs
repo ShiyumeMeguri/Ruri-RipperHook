@@ -18,9 +18,7 @@ public partial class AR_ShaderDecompiler_Hook
         ilCursor.Emit(OpCodes.Ldarg_0);
         var getProgramDataMethod = typeof(ShaderSubProgram).GetMethod("get_ProgramData");
         ilCursor.Emit(OpCodes.Call, getProgramDataMethod);
-        var destMethod =
-            typeof(AR_ShaderDecompiler_Hook).GetMethod(nameof(ProcessShaderData),
-                ReflectionExtensions.PublicStaticBindFlag());
+        var destMethod = typeof(AR_ShaderDecompiler_Hook).GetMethod(nameof(ProcessShaderData), ReflectionExtensions.PublicStaticBindFlag());
         ilCursor.Emit(OpCodes.Call, destMethod);
         var setProgramDataMethod = typeof(ShaderSubProgram).GetMethod("set_ProgramData");
         ilCursor.Emit(OpCodes.Call, setProgramDataMethod);

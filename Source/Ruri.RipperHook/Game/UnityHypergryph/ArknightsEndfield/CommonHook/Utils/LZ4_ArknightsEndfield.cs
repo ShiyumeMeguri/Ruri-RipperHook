@@ -1,7 +1,9 @@
 ﻿namespace Ruri.RipperHook.Crypto;
+
 public class LZ4_ArknightsEndfield : LZ4
 {
     public new static LZ4_ArknightsEndfield Instance => new();
+
     public override int Decompress(ReadOnlySpan<byte> cmp, Span<byte> dec)
     {
         int cmpPos = 0;
@@ -44,8 +46,7 @@ public class LZ4_ArknightsEndfield : LZ4
             }
 
             //Copy compressed chunk
-            int back = cmp[cmpPos++] << 8 |
-                       cmp[cmpPos++] << 0;
+            int back = cmp[cmpPos++] << 8 | cmp[cmpPos++] << 0;
 
             encCount = GetLength(encCount, cmp) + 4;
 
@@ -64,11 +65,11 @@ public class LZ4_ArknightsEndfield : LZ4
                     dec[decPos++] = dec[encPos++];
                 }
             }
-        } while (cmpPos < cmp.Length &&
-                 decPos < dec.Length);
+        } while (cmpPos < cmp.Length && decPos < dec.Length);
 
         return decPos;
     }
+
     protected override (int encCount, int litCount) GetLiteralToken(ReadOnlySpan<byte> cmp, ref int cmpPos) => ((cmp[cmpPos] >> 4) & 0xf, (cmp[cmpPos++] >> 0) & 0xf);
     protected override int GetChunkEnd(ReadOnlySpan<byte> cmp, ref int cmpPos) => cmp[cmpPos++] << 8 | cmp[cmpPos++] << 0;
 }

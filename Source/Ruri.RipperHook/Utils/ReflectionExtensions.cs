@@ -55,11 +55,7 @@ public static class ReflectionExtensions
         Console.WriteLine($"Created Hook of {srcMethod.DeclaringType.Name}.{srcMethod.Name} Success");
     }
 
-    public static void RetargetCall(MethodInfo srcMethod,
-        MethodInfo targetMethod,
-        int argsCount = 1,
-        bool isBefore = true,
-        bool isReturn = true)
+    public static void RetargetCall(MethodInfo srcMethod, MethodInfo targetMethod, int argsCount = 1, bool isBefore = true, bool isReturn = true)
     {
         var hookDest = new ILContext.Manipulator(il =>
         {
@@ -95,5 +91,6 @@ public static class ReflectionExtensions
         RuriRuntimeHook.ilHooks.Add(new ILHook(srcMethod, hookDest));
         Console.WriteLine($"Created Hook of {srcMethod.DeclaringType.Name}.{srcMethod.Name} Success");
     }
+
     #endregion
 }

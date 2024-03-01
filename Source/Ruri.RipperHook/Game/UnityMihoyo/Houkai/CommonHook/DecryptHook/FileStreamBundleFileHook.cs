@@ -38,8 +38,7 @@ public partial class HoukaiCommon_Hook
             case CompressionType.Lzma:
             {
                 using var uncompressedStream = new MemoryStream(new byte[Header.UncompressedBlocksInfoSize]);
-                LzmaCompression.DecompressLzmaStream(stream, Header.CompressedBlocksInfoSize, uncompressedStream,
-                    Header.UncompressedBlocksInfoSize);
+                LzmaCompression.DecompressLzmaStream(stream, Header.CompressedBlocksInfoSize, uncompressedStream, Header.UncompressedBlocksInfoSize);
 
                 uncompressedStream.Position = 0;
                 ReadMetadata.Invoke(this, new object[] { uncompressedStream, Header.UncompressedBlocksInfoSize });

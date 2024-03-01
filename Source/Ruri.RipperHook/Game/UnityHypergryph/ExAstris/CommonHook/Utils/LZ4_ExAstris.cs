@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace Ruri.RipperHook.Crypto;
+
 public class LZ4_ExAstris : LZ4
 {
     public new static LZ4_ExAstris Instance => new();

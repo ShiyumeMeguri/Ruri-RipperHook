@@ -12,8 +12,7 @@ public partial class ArknightsEndfieldCommon_Hook
         switch (compressType)
         {
             case CompressionType.Lzma:
-                LzmaCompression.DecompressLzmaStream(m_stream, block.CompressedSize, m_cachedBlockStream,
-                    block.UncompressedSize);
+                LzmaCompression.DecompressLzmaStream(m_stream, block.CompressedSize, m_cachedBlockStream, block.UncompressedSize);
                 break;
 
             case CompressionType.Lz4:
@@ -23,7 +22,7 @@ public partial class ArknightsEndfieldCommon_Hook
                 var uncompressedSize = block.UncompressedSize;
                 var uncompressedBytes = new byte[uncompressedSize];
                 Span<byte> compressedBytes = new BinaryReader(m_stream).ReadBytes((int)block.CompressedSize);
-                
+
                 if (m_cachedBlockIndex == 0)
                     compressedBytes = RuriRuntimeHook.commonDecryptor.Decrypt(compressedBytes);
 

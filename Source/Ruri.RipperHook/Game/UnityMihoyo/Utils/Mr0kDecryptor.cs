@@ -3,6 +3,7 @@ using Ruri.RipperHook.Crypto;
 using System.Buffers.Binary;
 
 namespace Ruri.RipperHook.UnityMihoyo;
+
 public record Mr0kDecryptor : CommonDecryptor
 {
     public byte[] ExpansionKey { get; }

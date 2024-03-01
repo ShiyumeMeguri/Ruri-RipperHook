@@ -53,10 +53,7 @@ public partial class GameBundleHook
     }
 
     // 稍微修改了下
-    public static List<FileBase> LoadFilesAndDependencies(byte[] buffer,
-        string path,
-        string name,
-        IDependencyProvider? dependencyProvider)
+    public static List<FileBase> LoadFilesAndDependencies(byte[] buffer, string path, string name, IDependencyProvider? dependencyProvider)
     {
         List<FileBase> files = new();
         HashSet<string> serializedFileNames = new(); //Includes missing dependencies
@@ -92,10 +89,7 @@ public partial class GameBundleHook
         return files;
     }
 
-    private static void LoadDependencies(SerializedFile serializedFile,
-        List<FileBase> files,
-        HashSet<string> serializedFileNames,
-        IDependencyProvider? dependencyProvider)
+    private static void LoadDependencies(SerializedFile serializedFile, List<FileBase> files, HashSet<string> serializedFileNames, IDependencyProvider? dependencyProvider)
     {
         foreach (var fileIdentifier in serializedFile.Dependencies)
         {

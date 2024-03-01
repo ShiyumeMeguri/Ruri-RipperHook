@@ -19,6 +19,7 @@ public record XorDecryptor : CommonDecryptor
         {
             result[i] = (byte)(buffer[i] ^ key[i]);
         }
+
         return result;
     }
 
@@ -29,6 +30,7 @@ public record XorDecryptor : CommonDecryptor
         {
             data[i] = (byte)(data[i] ^ key[i % key.Length]);
         }
+
         return data;
     }
 }

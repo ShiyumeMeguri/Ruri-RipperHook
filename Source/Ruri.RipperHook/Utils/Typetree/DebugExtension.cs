@@ -10,8 +10,7 @@ public static class DebugExtension
         foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             if (assembly.GetName().Name == targetAssemblyName)
             {
-                var typesInNamespace = assembly.GetTypes()
-                    .Where(t => t.Namespace != null && t.Namespace.StartsWith(targetNamespace));
+                var typesInNamespace = assembly.GetTypes().Where(t => t.Namespace != null && t.Namespace.StartsWith(targetNamespace));
                 foreach (var type in typesInNamespace)
                     if (type.IsSubclassOf(baseType))
                         Console.WriteLine("Found subclass: " + type.FullName);

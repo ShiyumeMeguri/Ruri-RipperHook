@@ -14,11 +14,7 @@ public partial class AR_ShaderDecompiler_Hook
         var ilCursor = new ILCursor(il);
 
         var newobjIndex = -1;
-        if (ilCursor.TryGotoNext(instr => instr.OpCode == OpCodes.Newobj
-                                          && instr.Operand is MethodReference methodRef
-                                          && methodRef.DeclaringType.FullName ==
-                                          "AssetRipper.Export.UnityProjects.Shaders.USCShaderExporter"
-                                          && methodRef.Name == ".ctor"))
+        if (ilCursor.TryGotoNext(instr => instr.OpCode == OpCodes.Newobj && instr.Operand is MethodReference methodRef && methodRef.DeclaringType.FullName == "AssetRipper.Export.UnityProjects.Shaders.USCShaderExporter" && methodRef.Name == ".ctor"))
         {
             newobjIndex = ilCursor.Index;
 

@@ -11,8 +11,7 @@ public partial class ExAstrisCommon_Hook
         switch (compressType)
         {
             case CompressionType.Lzma:
-                LzmaCompression.DecompressLzmaStream(m_stream, block.CompressedSize, m_cachedBlockStream,
-                    block.UncompressedSize);
+                LzmaCompression.DecompressLzmaStream(m_stream, block.CompressedSize, m_cachedBlockStream, block.UncompressedSize);
                 break;
 
             case CompressionType.Lz4:

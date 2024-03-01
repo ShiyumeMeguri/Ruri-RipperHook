@@ -16,13 +16,12 @@ public partial class GirlsFrontline2Common_Hook
             {
                 var fileData = new byte[stream.Length];
                 stream.Read(fileData, 0, fileData.Length);
-                
+
                 if (fileData.Length >= 4 && fileData[0] == 0x47 && fileData[1] == 0x46 && fileData[2] == 0x46 && fileData[3] == 0x00)
                     continue; // 文件头 "GFF" 这应该是索引文件
 
                 fileData = RuriRuntimeHook.commonDecryptor.Decrypt(fileData).ToArray(); // 解密处
-                fileStack.AddRange(GameBundleHook.LoadFilesAndDependencies(fileData, MultiFileStream.GetFilePath(path),
-                    MultiFileStream.GetFileName(path), dependencyProvider));
+                fileStack.AddRange(GameBundleHook.LoadFilesAndDependencies(fileData, MultiFileStream.GetFilePath(path), MultiFileStream.GetFileName(path), dependencyProvider));
             }
         }
     }

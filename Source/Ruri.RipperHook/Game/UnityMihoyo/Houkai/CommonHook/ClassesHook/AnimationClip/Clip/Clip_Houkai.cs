@@ -34,10 +34,7 @@ public partial class HoukaiCommon_Hook
         reader.Position = endPosition;
     }
 
-    private static unsafe void MergeAclClip(ref EndianSpanReader reader,
-        byte[] aclClipData,
-        AssetList<uint> data,
-        uint aclCurveCount)
+    private static unsafe void MergeAclClip(ref EndianSpanReader reader, byte[] aclClipData, AssetList<uint> data, uint aclCurveCount)
     {
         Acl.DecompressAll(aclClipData, out var curveValues, out var aclTimes);
         var streamedIndex = 0;
@@ -75,11 +72,7 @@ public partial class HoukaiCommon_Hook
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static unsafe void ProcessAcl(AssetList<uint> data,
-        float[] curveValues,
-        float time,
-        uint aclCurveCount,
-        int aclFrameIndex)
+    private static unsafe void ProcessAcl(AssetList<uint> data, float[] curveValues, float time, uint aclCurveCount, int aclFrameIndex)
     {
         var offset = (uint)(aclFrameIndex * aclCurveCount);
         for (var curveIndex = 0; curveIndex < aclCurveCount;)
@@ -97,11 +90,7 @@ public partial class HoukaiCommon_Hook
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void ProcessStreamed(ref EndianSpanReader reader,
-        ref int streamedIndex,
-        AssetList<uint> data,
-        uint count,
-        uint aclCurveCount)
+    private static void ProcessStreamed(ref EndianSpanReader reader, ref int streamedIndex, AssetList<uint> data, uint count, uint aclCurveCount)
     {
         for (var j = 0; j < count; j++)
         {

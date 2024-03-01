@@ -1,9 +1,11 @@
 ﻿using System;
 
 namespace Ruri.RipperHook.Crypto;
+
 public class LZ4
 {
     public static LZ4 Instance => new();
+
     public virtual int Decompress(ReadOnlySpan<byte> cmp, Span<byte> dec)
     {
         int cmpPos = 0;
@@ -46,13 +48,14 @@ public class LZ4
                     dec[decPos++] = dec[encPos++];
                 }
             }
-        } while (cmpPos < cmp.Length &&
-                 decPos < dec.Length);
+        } while (cmpPos < cmp.Length && decPos < dec.Length);
 
         return decPos;
     }
+
     protected virtual (int encCount, int litCount) GetLiteralToken(ReadOnlySpan<byte> cmp, ref int cmpPos) => ((cmp[cmpPos] >> 0) & 0xf, (cmp[cmpPos++] >> 4) & 0xf);
     protected virtual int GetChunkEnd(ReadOnlySpan<byte> cmp, ref int cmpPos) => cmp[cmpPos++] << 0 | cmp[cmpPos++] << 8;
+
     protected virtual int GetLength(int length, ReadOnlySpan<byte> cmp, ref int cmpPos)
     {
         byte sum;

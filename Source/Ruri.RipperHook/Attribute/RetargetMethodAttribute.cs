@@ -5,13 +5,7 @@ namespace Ruri.RipperHook;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
 public class RetargetMethodAttribute : Attribute
 {
-    public RetargetMethodAttribute(Type sourceType,
-        string sourceMethodName = "ReadRelease",
-        int argCount = 1,
-        bool isBefore = true,
-        bool isReturn = true,
-        Type[] methodParameters = null
-        )
+    public RetargetMethodAttribute(Type sourceType, string sourceMethodName = "ReadRelease", int argCount = 1, bool isBefore = true, bool isReturn = true, Type[] methodParameters = null)
     {
         SourceType = sourceType;
         SourceMethodName = sourceMethodName;
@@ -21,13 +15,7 @@ public class RetargetMethodAttribute : Attribute
         MethodParameters = methodParameters;
     }
 
-    public RetargetMethodAttribute(string sourceTypeName,
-        string sourceMethodName = "ReadRelease",
-        int argCount = 1,
-        bool isBefore = true,
-        bool isReturn = true,
-        Type[] methodParameters = null
-        )
+    public RetargetMethodAttribute(string sourceTypeName, string sourceMethodName = "ReadRelease", int argCount = 1, bool isBefore = true, bool isReturn = true, Type[] methodParameters = null)
     {
         SourceType = Type.GetType(sourceTypeName);
         Debug.Assert(SourceType != null);

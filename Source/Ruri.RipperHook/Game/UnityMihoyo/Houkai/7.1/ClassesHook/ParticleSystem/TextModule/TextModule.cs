@@ -7,8 +7,7 @@ using AssetRipper.SourceGenerated.Subclasses.PPtr_GameObject;
 
 namespace Ruri.RipperHook.Houkai_7_1.Classes.Subclasses.TextModule;
 
-public sealed class TextModule : UnityAssetBase, ITextModule, IUnityAssetBase, IEndianSpanReadable, IAssetWritable,
-    IYamlExportable
+public sealed class TextModule : UnityAssetBase, ITextModule, IUnityAssetBase, IEndianSpanReadable, IAssetWritable, IYamlExportable
 {
     public int FontSize { get; set; }
     public int FontStyle { get; set; }

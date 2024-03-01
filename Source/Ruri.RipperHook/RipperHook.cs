@@ -23,9 +23,7 @@ public abstract class RipperHook
         namespacesToConsider.AddRange(additionalNamespaces); // 添加一些通用空间 避免写编写重复代码
         namespacesToConsider = namespacesToConsider.Where(ns => !excludedNamespaces.Contains(ns)).ToList(); // 排除继承等情况导致重复的hook
 
-        var methods = Assembly.GetExecutingAssembly().GetTypes()
-            .Where(t => t.Namespace != null && namespacesToConsider.Any(ns => t.Namespace.StartsWith(ns)))
-            .SelectMany(t => t.GetMethods(bindingFlags));
+        var methods = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace != null && namespacesToConsider.Any(ns => t.Namespace.StartsWith(ns))).SelectMany(t => t.GetMethods(bindingFlags));
 
         var targetMethods = methods.Where(m => m.GetCustomAttributes<RetargetMethodAttribute>(true).Any());
         foreach (var methodDest in targetMethods)
@@ -42,6 +40,7 @@ public abstract class RipperHook
                 {
                     methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags, attr.MethodParameters);
                 }
+
                 ReflectionExtensions.RetargetCall(methodSrc, methodDest, attr.ArgCount);
             }
         }
@@ -61,6 +60,7 @@ public abstract class RipperHook
                 {
                     methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags, attr.MethodParameters);
                 }
+
                 var HookCallback = (Func<ILContext, bool>)Delegate.CreateDelegate(typeof(Func<ILContext, bool>), methodDest);
                 ReflectionExtensions.RetargetCallFunc(HookCallback, methodSrc);
             }
@@ -77,8 +77,7 @@ public abstract class RipperHook
         return type.GetField(name, ReflectionExtensions.PrivateInstanceBindFlag()).GetValue(this);
     }
 
-    protected void SetAssetListField<T>(Type type, string name, ref EndianSpanReader reader, bool isAlign = true)
-        where T : UnityAssetBase, new()
+    protected void SetAssetListField<T>(Type type, string name, ref EndianSpanReader reader, bool isAlign = true) where T : UnityAssetBase, new()
     {
         var field = type.GetField(name, ReflectionExtensions.PrivateInstanceBindFlag());
 

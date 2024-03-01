@@ -4,6 +4,7 @@ using AssetRipper.Import.Logging;
 using AssetRipper.IO.Endian;
 
 namespace Ruri.RipperHook.Crypto;
+
 public class UnityChinaDecryptor
 {
     private const string Signature = "#$unity3dchina!@";
@@ -44,7 +45,6 @@ public class UnityChinaDecryptor
             var idx = (i % 4 * 4) + (i / 4);
             Sub[idx] = subBytes[i];
         }
-
     }
 
     public static bool SetKey(Entry entry)
@@ -64,6 +64,7 @@ public class UnityChinaDecryptor
             Logger.Error($"[UnityCN] Invalid key !!\n{e.Message}");
             return false;
         }
+
         return true;
     }
 

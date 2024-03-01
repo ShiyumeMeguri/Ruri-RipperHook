@@ -30,7 +30,7 @@ public partial class HoukaiCommon_Hook
                     blockXmfInited = true;
                     wmwFileInfo = ReadXMF(blockXmfPath, wmwPath);
                 }
-                else 
+                else
                 {
                     throw new Exception($"把Blocks.xmf放到wmw所在目录下或者程序根目录 {Directory.GetCurrentDirectory()}/Game/{RuriRuntimeHook.gameName}/{RuriRuntimeHook.gameVer}/ 下");
                 }
@@ -61,8 +61,7 @@ public partial class HoukaiCommon_Hook
                 {
                     var fileData = new byte[stream.Length];
                     stream.Read(fileData, 0, fileData.Length);
-                    fileStack.AddRange(GameBundleHook.LoadFilesAndDependencies(fileData, MultiFileStream.GetFilePath(path),
-                        MultiFileStream.GetFileName(path), dependencyProvider));
+                    fileStack.AddRange(GameBundleHook.LoadFilesAndDependencies(fileData, MultiFileStream.GetFilePath(path), MultiFileStream.GetFileName(path), dependencyProvider));
                 }
             }
         }

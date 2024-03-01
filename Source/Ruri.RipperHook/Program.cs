@@ -18,10 +18,9 @@ internal static class Program
     {
         RootCommand rootCommand = new() { Description = "Example command line application" };
 
-        var hookOption = new Option<string>(
-            aliases: ["-h", "--hooks"],
-            description: "A list of hooks separated by commas",
-            getDefaultValue: () => string.Empty);
+        var hookOption = new Option<string>(aliases:["-h", "--hooks"], description: "A list of hooks separated by commas",
+        getDefaultValue:
+        () => string.Empty);
 
         rootCommand.AddOption(hookOption);
 
@@ -53,16 +52,14 @@ internal static class Program
         Logger.LogSystemInformation("AssetRipper GUI Version");
         BuildAvaloniaApp().Start(App.AppMain, Array.Empty<string>());
     }
+
     private static AppBuilder BuildAvaloniaApp()
     {
-        return AppBuilder.Configure<App>()
-                    .UsePlatformDetect()
-                    .With(new X11PlatformOptions
-                    {
-                        UseDBusFilePicker = false
-                        //Disable FreeDesktop file picker
-                        //https://github.com/AvaloniaUI/Avalonia/issues/9383
-                    })
-                    .LogToTrace();
+        return AppBuilder.Configure<App>().UsePlatformDetect().With(new X11PlatformOptions
+        {
+            UseDBusFilePicker = false
+            //Disable FreeDesktop file picker
+            //https://github.com/AvaloniaUI/Avalonia/issues/9383
+        }).LogToTrace();
     }
 }

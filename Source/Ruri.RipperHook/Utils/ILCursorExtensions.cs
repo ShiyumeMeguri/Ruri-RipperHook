@@ -10,25 +10,17 @@ namespace Ruri.RipperHook;
 public static class ILCursorExtensions
 {
     // 直接插入代码 但是否出错完全看编译器心情 所以不用了
-    public static bool TypeTreeInject(this ILCursor ilCursor,
-        MethodInfo destMethod,
-        string injectAfterField,
-        bool isRemoveAlign = false)
+    public static bool TypeTreeInject(this ILCursor ilCursor, MethodInfo destMethod, string injectAfterField, bool isRemoveAlign = false)
     {
-        if (ilCursor.TryGotoNext(MoveType.After,
-                instr => IsFieldReference(instr) && ((FieldReference)instr.Operand).Name == injectAfterField))
+        if (ilCursor.TryGotoNext(MoveType.After, instr => IsFieldReference(instr) && ((FieldReference)instr.Operand).Name == injectAfterField))
         {
-            if (isRemoveAlign &&
-                ilCursor.TryGotoPrev(instr =>
-                    instr.OpCode == OpCodes.Call || instr.OpCode == OpCodes.Callvirt)) // 少部分情况需要移除原有的对齐
+            if (isRemoveAlign && ilCursor.TryGotoPrev(instr => instr.OpCode == OpCodes.Call || instr.OpCode == OpCodes.Callvirt)) // 少部分情况需要移除原有的对齐
             {
                 var calledMethod = ilCursor.Instrs[ilCursor.Index].Operand as MethodReference;
                 var newMethodName = calledMethod.Name.Replace("Align", "");
-                var newMethod =
-                    typeof(ReadReleaseMethods).GetMethod(newMethodName, ReflectionExtensions.PublicStaticBindFlag());
+                var newMethod = typeof(ReadReleaseMethods).GetMethod(newMethodName, ReflectionExtensions.PublicStaticBindFlag());
                 if (newMethod == null)
-                    newMethod = typeof(EndianSpanReader).GetMethod(newMethodName,
-                        ReflectionExtensions.PublicStaticBindFlag());
+                    newMethod = typeof(EndianSpanReader).GetMethod(newMethodName, ReflectionExtensions.PublicStaticBindFlag());
                 var newMethodRef = ilCursor.Module.ImportReference(newMethod);
                 ilCursor.Instrs[ilCursor.Index].Operand = newMethodRef;
             }
@@ -49,8 +41,7 @@ public static class ILCursorExtensions
 
     public static bool TypeTreeRemove(this ILCursor ilCursor, string injectAfterField)
     {
-        if (ilCursor.TryGotoNext(MoveType.After,
-                instr => IsFieldReference(instr) && ((FieldReference)instr.Operand).Name == injectAfterField))
+        if (ilCursor.TryGotoNext(MoveType.After, instr => IsFieldReference(instr) && ((FieldReference)instr.Operand).Name == injectAfterField))
             if (ilCursor.TryGotoPrev(instr => instr.OpCode == OpCodes.Ldarg_0))
             {
                 ilCursor.RemoveRange(4);
