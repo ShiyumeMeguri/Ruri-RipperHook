@@ -2,11 +2,11 @@ using Ruri.RipperHook.Crypto;
 
 namespace Ruri.RipperHook.GirlsFrontline2Common;
 
-public record GF2Xor : CommonDecryptor
+public record XorDecryptor : CommonDecryptor
 {
     public byte[] XorKey { get; }
 
-    public GF2Xor(byte[] key = null)
+    public XorDecryptor(byte[] key = null)
     {
         XorKey = key ?? Array.Empty<byte>();
     }

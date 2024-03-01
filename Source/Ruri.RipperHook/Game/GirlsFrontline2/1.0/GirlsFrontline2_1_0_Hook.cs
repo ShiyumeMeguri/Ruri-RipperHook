@@ -9,7 +9,7 @@ public partial class GirlsFrontline2_1_0_Hook : RipperHook
 
     protected GirlsFrontline2_1_0_Hook()
     {
-        RuriRuntimeHook.commonDecryptor = new GF2Xor(XorKey);
+        RuriRuntimeHook.commonDecryptor = new XorDecryptor(XorKey);
         GameBundleHook.CustomFilePreInitialize = GirlsFrontline2Common_Hook.CustomFilePreInitialize;
     }
 
