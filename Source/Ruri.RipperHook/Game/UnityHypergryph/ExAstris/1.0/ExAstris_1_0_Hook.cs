@@ -14,8 +14,8 @@ public partial class ExAstris_1_0_Hook : RipperHook
 
     protected override void InitAttributeHook()
     {
-        additionalNamespaces.Add(typeof(BundleFileBlockReaderHook).Namespace);
         additionalNamespaces.Add(typeof(ExAstrisCommon_Hook).Namespace);
+        additionalNamespaces.Add(typeof(BundleFileBlockReaderHook).Namespace);
         base.InitAttributeHook();
     }
 }

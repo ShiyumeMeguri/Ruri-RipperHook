@@ -18,6 +18,7 @@ public partial class Houkai_7_1_Hook : RipperHook
     protected override void InitAttributeHook()
     {
         additionalNamespaces.Add(typeof(HoukaiCommon_Hook).Namespace);
+        additionalNamespaces.Add(typeof(BundleFileBlockReaderHook).Namespace);
         base.InitAttributeHook();
     }
 }

@@ -7,7 +7,7 @@ namespace Ruri.RipperHook.HoukaiCommon;
 
 public partial class HoukaiCommon_Hook
 {
-    public static void CustomBlockCompression(Stream m_stream, StorageBlock block, SmartStream m_cachedBlockStream, CompressionType compressType)
+    public static void CustomBlockCompression(Stream m_stream, StorageBlock block, SmartStream m_cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex)
     {
         switch (compressType)
         {

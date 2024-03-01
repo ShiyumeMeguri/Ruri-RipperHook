@@ -1,5 +1,4 @@
-﻿using Ruri.RipperHook.Crypto;
-using Ruri.RipperHook.GirlsFrontline2Common;
+﻿using Ruri.RipperHook.GirlsFrontline2Common;
 
 namespace Ruri.RipperHook.GirlsFrontline2_1_0;
 

@@ -12,7 +12,7 @@ public class BundleFileBlockReaderHook : CommonHook
 
     private static readonly MethodInfo CreateStream = Type.GetType(TYPE).GetMethod("CreateStream", ReflectionExtensions.PrivateStaticBindFlag());
     
-    public delegate void BlockCompressionDelegate(Stream mStream, StorageBlock block, SmartStream cachedBlockStream, CompressionType compressType);
+    public delegate void BlockCompressionDelegate(Stream mStream, StorageBlock block, SmartStream cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex);
     
     public static BlockCompressionDelegate CustomBlockCompression;
 
@@ -75,7 +75,7 @@ public class BundleFileBlockReaderHook : CommonHook
                     m_cachedBlockIndex = blockIndex;
                     m_cachedBlockStream.Move((SmartStream)CreateStream.Invoke(null, new object[] { block.UncompressedSize }));
 
-                    CustomBlockCompression(m_stream, block, m_cachedBlockStream, compressType);
+                    CustomBlockCompression(m_stream, block, m_cachedBlockStream, compressType, m_cachedBlockIndex);
 
                     blockStream = m_cachedBlockStream;
                 }
