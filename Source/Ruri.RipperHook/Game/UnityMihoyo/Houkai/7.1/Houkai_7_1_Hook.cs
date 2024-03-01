@@ -1,6 +1,7 @@
 ﻿using Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
 using Ruri.RipperHook.HookUtils.GameBundleHook;
 using Ruri.RipperHook.HoukaiCommon;
+using Ruri.RipperHook.UnityMihoyo;
 
 namespace Ruri.RipperHook.Houkai_7_1;
 

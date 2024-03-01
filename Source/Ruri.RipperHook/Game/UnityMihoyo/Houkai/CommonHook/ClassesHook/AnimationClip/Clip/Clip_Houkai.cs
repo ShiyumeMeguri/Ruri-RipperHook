@@ -2,6 +2,7 @@
 using AssetRipper.Assets.Generics;
 using AssetRipper.IO.Endian;
 using AssetRipper.SourceGenerated.Subclasses.Clip;
+using Ruri.RipperHook.UnityMihoyo;
 
 namespace Ruri.RipperHook.HoukaiCommon;
 
@@ -38,7 +39,7 @@ public partial class HoukaiCommon_Hook
         AssetList<uint> data,
         uint aclCurveCount)
     {
-        AclHook.DecompressAll(aclClipData, out var curveValues, out var aclTimes);
+        Acl.DecompressAll(aclClipData, out var curveValues, out var aclTimes);
         var streamedIndex = 0;
         var aclFrameIndex = 0;
         var streamedCount = reader.ReadInt32();

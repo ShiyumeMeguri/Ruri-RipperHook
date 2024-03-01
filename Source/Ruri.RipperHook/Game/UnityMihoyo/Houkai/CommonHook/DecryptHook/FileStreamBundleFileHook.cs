@@ -4,6 +4,7 @@ using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Exceptions;
 using AssetRipper.IO.Files.Extensions;
 using K4os.Compression.LZ4;
+using Ruri.RipperHook.UnityMihoyo;
 
 namespace Ruri.RipperHook.HoukaiCommon;
 

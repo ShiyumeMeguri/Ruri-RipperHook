@@ -1,8 +1,8 @@
 using AssetRipper.SourceGenerated.Extensions;
-using Ruri.RipperHook;
 using Ruri.RipperHook.Crypto;
 using System.Buffers.Binary;
 
+namespace Ruri.RipperHook.UnityMihoyo;
 public record Mr0k : CommonDecryptor
 {
     public byte[] ExpansionKey { get; }

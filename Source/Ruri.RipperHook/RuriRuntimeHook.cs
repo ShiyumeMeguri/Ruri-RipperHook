@@ -40,5 +40,4 @@ public static class RuriRuntimeHook
         var type = Type.GetType("Ruri.RipperHook." + name + "." + name + "_Hook");
         currentGameHook[hookName] = (RipperHook)Activator.CreateInstance(type, true);
     }
-
 }
