@@ -5,7 +5,7 @@ using MonoMod.Cil;
 
 namespace Ruri.RipperHook.AR_ShaderDecompiler;
 
-public static class ShaderSubProgramHook
+public partial class AR_ShaderDecompiler_Hook
 {
     // Fix 2019.4 DXDecompile Data
     [RetargetMethodFunc(typeof(ShaderSubProgram), nameof(Read))]
@@ -19,7 +19,7 @@ public static class ShaderSubProgramHook
         var getProgramDataMethod = typeof(ShaderSubProgram).GetMethod("get_ProgramData");
         ilCursor.Emit(OpCodes.Call, getProgramDataMethod);
         var destMethod =
-            typeof(ShaderSubProgramHook).GetMethod(nameof(ProcessShaderData),
+            typeof(AR_ShaderDecompiler_Hook).GetMethod(nameof(ProcessShaderData),
                 ReflectionExtensions.PublicStaticBindFlag());
         ilCursor.Emit(OpCodes.Call, destMethod);
         var setProgramDataMethod = typeof(ShaderSubProgram).GetMethod("set_ProgramData");

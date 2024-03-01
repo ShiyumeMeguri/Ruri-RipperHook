@@ -5,7 +5,7 @@ using MonoMod.Cil;
 
 namespace Ruri.RipperHook.AR_ShaderDecompiler;
 
-public static class RipperHook
+public partial class AR_ShaderDecompiler_Hook
 {
     // DXDecompile Retarget
     [RetargetMethodFunc(typeof(Ripper), nameof(OverrideNormalExporters))]

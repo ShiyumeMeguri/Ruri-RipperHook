@@ -4,7 +4,7 @@ using MonoMod.Cil;
 
 namespace Ruri.RipperHook.AR_ShaderDecompiler;
 
-public static class LibraryConfigurationHook
+public partial class AR_ShaderDecompiler_Hook
 {
     // Set DXDecompile Default Value
     [RetargetMethodFunc(typeof(LibraryConfiguration), nameof(ResetToDefaultValues))]
