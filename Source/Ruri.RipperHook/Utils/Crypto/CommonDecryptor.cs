@@ -1,6 +1,4 @@
-﻿using System.Buffers.Binary;
-
-namespace Ruri.RipperHook.Crypto;
+﻿namespace Ruri.RipperHook.Crypto;
 
 public record CommonDecryptor
 {

@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Ruri.RipperHook.Crypto;
-public class LZ4Inv : LZ4
+﻿namespace Ruri.RipperHook.Crypto;
+public class LZ4_ArknightsEndfield : LZ4
 {
-    public new static LZ4Inv Instance => new();
+    public new static LZ4_ArknightsEndfield Instance => new();
     public override int Decompress(ReadOnlySpan<byte> cmp, Span<byte> dec)
     {
         int cmpPos = 0;

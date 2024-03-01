@@ -8,7 +8,7 @@ public partial class ArknightsEndfield_0_1_Hook : RipperHook
 {
     protected ArknightsEndfield_0_1_Hook()
     {
-        ArknightsEndfieldCommon_Hook.CustomLZ4 = new LZ4Inv();
+        ArknightsEndfieldCommon_Hook.CustomLZ4 = new LZ4_ArknightsEndfield();
         RuriRuntimeHook.commonDecryptor = new FairGuardDecryptor();
         BundleFileBlockReaderHook.CustomBlockCompression = ArknightsEndfieldCommon_Hook.CustomBlockCompression;
     }

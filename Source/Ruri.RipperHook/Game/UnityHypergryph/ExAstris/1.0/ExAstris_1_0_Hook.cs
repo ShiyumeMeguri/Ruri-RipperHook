@@ -8,7 +8,7 @@ public partial class ExAstris_1_0_Hook : RipperHook
 {
     protected ExAstris_1_0_Hook()
     {
-        ExAstrisCommon_Hook.CustomLZ4 = new LZ4Lit();
+        ExAstrisCommon_Hook.CustomLZ4 = new LZ4_ExAstris();
         BundleFileBlockReaderHook.CustomBlockCompression = ExAstrisCommon_Hook.CustomBlockCompression;
     }
 

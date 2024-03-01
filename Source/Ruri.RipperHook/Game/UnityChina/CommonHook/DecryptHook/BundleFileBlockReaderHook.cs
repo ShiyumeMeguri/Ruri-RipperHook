@@ -1,5 +1,4 @@
-﻿using AssetRipper.Import.Logging;
-using AssetRipper.IO.Files.BundleFiles;
+﻿using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Streams.Smart;
 using K4os.Compression.LZ4;
