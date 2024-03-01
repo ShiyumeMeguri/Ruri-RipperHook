@@ -1,4 +1,5 @@
 ﻿using Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
+using Ruri.RipperHook.HookUtils.GameBundleHook;
 using Ruri.RipperHook.HoukaiCommon;
 
 namespace Ruri.RipperHook.Houkai_7_1;
@@ -12,12 +13,14 @@ public partial class Houkai_7_1_Hook : RipperHook
     protected Houkai_7_1_Hook()
     {
         RuriRuntimeHook.commonDecryptor = new Mr0k(BH3ExpansionKey, BH3SBox, BH3InitVector, BH3BlockKey);
+        GameBundleHook.CustomFilePreInitialize= HoukaiCommon_Hook.CustomFilePreInitialize;
         BundleFileBlockReaderHook.CustomBlockCompression = HoukaiCommon_Hook.CustomBlockCompression;
     }
 
     protected override void InitAttributeHook()
     {
         additionalNamespaces.Add(typeof(HoukaiCommon_Hook).Namespace);
+        additionalNamespaces.Add(typeof(GameBundleHook).Namespace);
         additionalNamespaces.Add(typeof(BundleFileBlockReaderHook).Namespace);
         base.InitAttributeHook();
     }
