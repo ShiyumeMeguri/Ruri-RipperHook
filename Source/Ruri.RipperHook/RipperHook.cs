@@ -33,7 +33,15 @@ public abstract class RipperHook
             var attrs = methodDest.GetCustomAttributes<RetargetMethodAttribute>().ToArray();
             foreach (var attr in attrs)
             {
-                var methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags);
+                MethodInfo? methodSrc;
+                if (attr.MethodParameters == null)
+                {
+                    methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags);
+                }
+                else
+                {
+                    methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags, attr.MethodParameters);
+                }
                 ReflectionExtensions.RetargetCall(methodSrc, methodDest, attr.ArgCount);
             }
         }
@@ -44,9 +52,16 @@ public abstract class RipperHook
             var attrs = methodDest.GetCustomAttributes<RetargetMethodFuncAttribute>().ToArray();
             foreach (var attr in attrs)
             {
-                var methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags);
-                var HookCallback =
-                    (Func<ILContext, bool>)Delegate.CreateDelegate(typeof(Func<ILContext, bool>), methodDest);
+                MethodInfo? methodSrc;
+                if (attr.MethodParameters == null)
+                {
+                    methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags);
+                }
+                else
+                {
+                    methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags, attr.MethodParameters);
+                }
+                var HookCallback = (Func<ILContext, bool>)Delegate.CreateDelegate(typeof(Func<ILContext, bool>), methodDest);
                 ReflectionExtensions.RetargetCallFunc(HookCallback, methodSrc);
             }
         }
