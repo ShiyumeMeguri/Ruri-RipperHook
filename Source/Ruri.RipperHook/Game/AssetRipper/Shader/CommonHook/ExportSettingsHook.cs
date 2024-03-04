@@ -7,7 +7,7 @@ namespace Ruri.RipperHook.AR_ShaderDecompiler;
 public partial class AR_ShaderDecompiler_Hook
 {
     // Set DXDecompile Default Value
-    [RetargetMethodFunc(typeof(LibraryConfiguration), nameof(ResetToDefaultValues))]
+    [RetargetMethodCtorFunc(typeof(ExportSettings))]
     private static bool ResetToDefaultValues(ILContext il)
     {
         var ilCursor = new ILCursor(il);
@@ -15,7 +15,7 @@ public partial class AR_ShaderDecompiler_Hook
         ilCursor.GotoPrev();
         ilCursor.Emit(OpCodes.Ldarg_0);
         ilCursor.Emit(OpCodes.Ldc_I4_3);
-        var destMethod = typeof(LibraryConfiguration).GetMethod("set_ShaderExportMode");
+        var destMethod = typeof(ExportSettings).GetMethod("set_ShaderExportMode");
         ilCursor.Emit(OpCodes.Call, destMethod);
         return true;
     }

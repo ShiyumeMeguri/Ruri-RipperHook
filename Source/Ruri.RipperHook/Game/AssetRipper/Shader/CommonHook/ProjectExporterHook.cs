@@ -1,4 +1,6 @@
 using AssetRipper.Export.UnityProjects;
+using AssetRipper.Export.UnityProjects.Configuration;
+using AssetRipper.Import.Structure.Assembly.Managers;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
@@ -8,8 +10,8 @@ namespace Ruri.RipperHook.AR_ShaderDecompiler;
 public partial class AR_ShaderDecompiler_Hook
 {
     // DXDecompile Retarget
-    //[RetargetMethodFunc(typeof(Ripper), nameof(OverrideNormalExporters))]
-    private static bool OverrideNormalExporters(ILContext il)
+    [RetargetMethodCtorFunc(typeof(ProjectExporter), [typeof(LibraryConfiguration),typeof(IAssemblyManager)])]
+    private static bool Ctor(ILContext il)
     {
         var ilCursor = new ILCursor(il);
 

@@ -13,7 +13,7 @@ internal static class Program
 
     private static void Hook(string[] args)
     {
-        RuriRuntimeHook.Init(GameHookType.GirlsFrontline2_1_0);
+        RuriRuntimeHook.Init(GameHookType.AR_ShaderDecompiler);
     }
 
     private static void RunAssetRipper()

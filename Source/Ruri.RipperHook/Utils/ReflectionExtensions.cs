@@ -55,6 +55,17 @@ public static class ReflectionExtensions
         Console.WriteLine($"Created Hook of {srcMethod.DeclaringType.Name}.{srcMethod.Name} Success");
     }
 
+    public static void RetargetCallCtorFunc(Func<ILContext, bool> func, ConstructorInfo srcMethod)
+    {
+        var hookDest = new ILContext.Manipulator(il =>
+        {
+            if (!func(il))
+                throw new Exception($"Hook {srcMethod.DeclaringType.Name}.{srcMethod.Name} Fail");
+        });
+        RuriRuntimeHook.ilHooks.Add(new ILHook(srcMethod, hookDest));
+        Console.WriteLine($"Created Hook of {srcMethod.DeclaringType.Name}.{srcMethod.Name} Success");
+    }
+
     public static void RetargetCall(MethodInfo srcMethod, MethodInfo targetMethod, int argsCount = 1, bool isBefore = true, bool isReturn = true)
     {
         var hookDest = new ILContext.Manipulator(il =>

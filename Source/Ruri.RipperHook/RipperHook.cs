@@ -24,7 +24,7 @@ public abstract class RipperHook
         namespacesToConsider = namespacesToConsider.Where(ns => !excludedNamespaces.Contains(ns)).ToList(); // 排除继承等情况导致重复的hook
 
         var methods = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace != null && namespacesToConsider.Any(ns => t.Namespace.StartsWith(ns))).SelectMany(t => t.GetMethods(bindingFlags));
-
+        // 方法转发处理
         var targetMethods = methods.Where(m => m.GetCustomAttributes<RetargetMethodAttribute>(true).Any());
         foreach (var methodDest in targetMethods)
         {
@@ -44,7 +44,7 @@ public abstract class RipperHook
                 ReflectionExtensions.RetargetCall(methodSrc, methodDest, attr.ArgCount);
             }
         }
-
+        // 字节码插入处理
         var targetFuncMethods = methods.Where(m => m.GetCustomAttributes<RetargetMethodFuncAttribute>(true).Any());
         foreach (var methodDest in targetFuncMethods)
         {
@@ -63,6 +63,27 @@ public abstract class RipperHook
 
                 var HookCallback = (Func<ILContext, bool>)Delegate.CreateDelegate(typeof(Func<ILContext, bool>), methodDest);
                 ReflectionExtensions.RetargetCallFunc(HookCallback, methodSrc);
+            }
+        }
+        // 字节码插入处理 构造函数版
+        var targetCtorFuncMethods = methods.Where(m => m.GetCustomAttributes<RetargetMethodCtorFuncAttribute>(true).Any());
+        foreach (var methodDest in targetCtorFuncMethods)
+        {
+            var attrs = methodDest.GetCustomAttributes<RetargetMethodCtorFuncAttribute>().ToArray();
+            foreach (var attr in attrs)
+            {
+                ConstructorInfo? methodSrc;
+                if (attr.MethodParameters == null)
+                {
+                    methodSrc = attr.SourceType.GetConstructor(Type.EmptyTypes);
+                }
+                else
+                {
+                    methodSrc = attr.SourceType.GetConstructor(bindingFlags, attr.MethodParameters);
+                }
+
+                var HookCallback = (Func<ILContext, bool>)Delegate.CreateDelegate(typeof(Func<ILContext, bool>), methodDest);
+                ReflectionExtensions.RetargetCallCtorFunc(HookCallback, methodSrc);
             }
         }
     }
