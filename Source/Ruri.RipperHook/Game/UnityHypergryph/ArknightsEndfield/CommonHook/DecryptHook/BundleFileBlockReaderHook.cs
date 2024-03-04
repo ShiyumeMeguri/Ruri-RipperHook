@@ -1,5 +1,6 @@
 ﻿using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
+using AssetRipper.IO.Files.Exceptions;
 using AssetRipper.IO.Files.Streams.Smart;
 
 namespace Ruri.RipperHook.ArknightsEndfieldCommon;
@@ -17,9 +18,9 @@ public partial class ArknightsEndfieldCommon_Hook
             case CompressionType.Lz4:
             case CompressionType.Lz4HC:
             case (CompressionType)5:
+                uint uncompressedSize = block.UncompressedSize;
+                byte[] uncompressedBytes = new byte[uncompressedSize];
                 var compressedSize = block.CompressedSize;
-                var uncompressedSize = block.UncompressedSize;
-                var uncompressedBytes = new byte[uncompressedSize];
                 Span<byte> compressedBytes = new BinaryReader(m_stream).ReadBytes((int)block.CompressedSize);
 
                 if (m_cachedBlockIndex == 0)
@@ -27,14 +28,30 @@ public partial class ArknightsEndfieldCommon_Hook
 
                 var bytesWritten = CustomLZ4.Decompress(compressedBytes, uncompressedBytes);
                 if (bytesWritten < 0)
-                    throw new Exception("EncryptedFileException.Throw(entry.PathFixed)");
+                {
+                    throw new Exception($"bytesWritten < 0");
+                }
                 else if (bytesWritten != uncompressedSize)
-                    throw new Exception("DecompressionFailedException.ThrowIncorrectNumberBytesWritten(entry.PathFixed, uncompressedSize, bytesWritten)");
+                {
+                    throw new Exception($"bytesWritten != uncompressedSize, {compressType}, {uncompressedSize}, {bytesWritten}");
+                }
                 new MemoryStream(uncompressedBytes).CopyTo(m_cachedBlockStream);
                 break;
 
+            case CompressionType.Lzham:
+                UnsupportedBundleDecompression.ThrowLzham("CompressionType.Lzham");
+                break;
+
             default:
-                throw new NotSupportedException($"Bundle compression '{compressType}' isn't supported");
+                if (ZstdCompression.IsZstd(m_stream))
+                {
+                    ZstdCompression.DecompressStream(m_stream, block.CompressedSize, m_cachedBlockStream, block.UncompressedSize);
+                }
+                else
+                {
+                    UnsupportedBundleDecompression.Throw("UnsupportedBundleDecompression", compressType);
+                }
+                break;
         }
     }
 }
