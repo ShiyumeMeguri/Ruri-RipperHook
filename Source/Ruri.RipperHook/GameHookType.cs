@@ -3,6 +3,8 @@
 public enum GameHookType
 {
     AR_ShaderDecompiler,
+    AR_StaticMeshSeparation,
+    AR_PrefabOutlining,
     PunishingGrayRaven_2_11,
     ArknightsEndfield_0_1,
     GirlsFrontline2_1_0,
