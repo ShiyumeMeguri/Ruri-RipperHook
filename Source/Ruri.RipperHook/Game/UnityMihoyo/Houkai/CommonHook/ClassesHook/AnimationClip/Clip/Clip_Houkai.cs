@@ -8,22 +8,22 @@ namespace Ruri.RipperHook.HoukaiCommon;
 
 public partial class HoukaiCommon_Hook
 {
-    [RetargetMethod(typeof(Clip_5_5_0))]
-    public void Clip_5_5_0_ReadRelease(ref EndianSpanReader reader)
+    [RetargetMethod(typeof(Clip_5_5))]
+    public void Clip_5_5_ReadRelease(ref EndianSpanReader reader)
     {
-        var _this = (object)this as Clip_5_5_0;
-        var type = typeof(Clip_5_5_0);
+        var _this = (object)this as Clip_5_5;
+        var type = typeof(Clip_5_5);
 
         var currentPosition = reader.Position; // 预记录还原读取位置
 
         reader.Position += (reader.ReadInt32() + 1) * sizeof(uint);
-        _this.StreamedClip.CurveCount = reader.ReadUInt32();
+        _this.StreamedClip.CurveCount_UInt32 = reader.ReadUInt32();
         _this.DenseClip.ReadRelease(ref reader);
         _this.ConstantClip.ReadRelease(ref reader);
         // Acl Process
         var aclClipData = reader.ReadRelease_ArrayAlign_Byte();
         var aclCurveCount = reader.ReadUInt32();
-        _this.StreamedClip.CurveCount += aclCurveCount;
+        _this.StreamedClip.CurveCount_UInt32 += aclCurveCount;
         _this.Binding.ReadRelease(ref reader);
         if (aclCurveCount == 0) return;
 

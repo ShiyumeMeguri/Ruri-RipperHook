@@ -6,11 +6,11 @@ namespace Ruri.RipperHook.Houkai_7_1;
 
 public partial class Houkai_7_1_Hook
 {
-    [RetargetMethod(typeof(VelocityModule_2017_3_0))]
-    public void VelocityModule_2017_3_0_ReadRelease(ref EndianSpanReader reader)
+    [RetargetMethod(typeof(VelocityModule_2017_3))]
+    public void VelocityModule_2017_3_ReadRelease(ref EndianSpanReader reader)
     {
-        var _this = (object)this as VelocityModule_2017_3_0;
-        var type = typeof(VelocityModule_2017_3_0);
+        var _this = (object)this as VelocityModule_2017_3;
+        var type = typeof(VelocityModule_2017_3);
 
         MinMaxCurve_2017_1_0_b3 OrbitalX = new();
         MinMaxCurve_2017_1_0_b3 OrbitalY = new();

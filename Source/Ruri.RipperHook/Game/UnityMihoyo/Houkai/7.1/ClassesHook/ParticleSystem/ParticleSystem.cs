@@ -7,11 +7,11 @@ namespace Ruri.RipperHook.Houkai_7_1;
 
 public partial class Houkai_7_1_Hook
 {
-    [RetargetMethod(typeof(ParticleSystem_2017_3_0))]
-    public void ParticleSystem_2017_3_0_ReadRelease(ref EndianSpanReader reader)
+    [RetargetMethod(typeof(ParticleSystem_2017_3))]
+    public void ParticleSystem_2017_3_ReadRelease(ref EndianSpanReader reader)
     {
-        var _this = (object)this as ParticleSystem_2017_3_0;
-        var type = typeof(ParticleSystem_2017_3_0);
+        var _this = (object)this as ParticleSystem_2017_3;
+        var type = typeof(ParticleSystem_2017_3);
 
         _this.GameObject.ReadRelease(ref reader);
         _this.LengthInSec = reader.ReadSingle();

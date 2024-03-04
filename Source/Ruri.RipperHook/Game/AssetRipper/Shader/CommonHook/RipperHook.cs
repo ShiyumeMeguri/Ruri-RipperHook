@@ -8,7 +8,7 @@ namespace Ruri.RipperHook.AR_ShaderDecompiler;
 public partial class AR_ShaderDecompiler_Hook
 {
     // DXDecompile Retarget
-    [RetargetMethodFunc(typeof(Ripper), nameof(OverrideNormalExporters))]
+    //[RetargetMethodFunc(typeof(Ripper), nameof(OverrideNormalExporters))]
     private static bool OverrideNormalExporters(ILContext il)
     {
         var ilCursor = new ILCursor(il);

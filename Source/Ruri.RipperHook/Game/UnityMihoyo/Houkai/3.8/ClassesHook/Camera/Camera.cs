@@ -5,11 +5,11 @@ namespace Ruri.RipperHook.Houkai_3_8;
 
 public partial class Houkai_3_8_Hook
 {
-    [RetargetMethod(typeof(Camera_2017_3_0))]
-    public void Camera_2017_3_0_ReadRelease(ref EndianSpanReader reader)
+    [RetargetMethod(typeof(Camera_2017_3))]
+    public void Camera_2017_3_ReadRelease(ref EndianSpanReader reader)
     {
-        var _this = (object)this as Camera_2017_3_0;
-        var type = typeof(Camera_2017_3_0);
+        var _this = (object)this as Camera_2017_3;
+        var type = typeof(Camera_2017_3);
 
         _this.GameObject_C20.ReadRelease(ref reader);
         _this.Enabled_C20 = reader.ReadRelease_ByteAlign();

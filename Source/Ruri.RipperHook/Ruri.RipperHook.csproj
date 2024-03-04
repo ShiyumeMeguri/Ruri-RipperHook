@@ -10,32 +10,32 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+      <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+      <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AsmResolver.DotNet" Version="5.4.0"/>
-        <PackageReference Include="AsmResolver.PE.File" Version="5.4.0"/>
-        <PackageReference Include="AssetRipper.Primitives" Version="2.0.1"/>
-        <PackageReference Include="AssetRipper.SourceGenerated" Version="0.3.4.5"/>
-        <PackageReference Include="MonoMod.RuntimeDetour" Version="25.1.0-prerelease.2"/>
-        <PackageReference Include="Samboy063.Cpp2IL.Core" Version="2022.1.0-development.893"/>
+        <PackageReference Include="AssetRipper.Primitives" Version="2.1.1" />
+        <PackageReference Include="AsmResolver.DotNet" Version="5.5.0" />
+        <PackageReference Include="AsmResolver.PE.File" Version="5.5.0" />
+        <PackageReference Include="AssetRipper.SourceGenerated" Version="1.0.6" />
+        <PackageReference Include="Samboy063.Cpp2IL.Core" Version="2022.1.0-pre-release.14" />
+        <PackageReference Include="MonoMod.RuntimeDetour" Version="25.1.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Assets\AssetRipper.Assets.csproj"/>
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Export.UnityProjects\AssetRipper.Export.UnityProjects.csproj"/>
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.GUI\AssetRipper.GUI.csproj"/>
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.IO.Endian\AssetRipper.IO.Endian.csproj"/>
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.IO.Files\AssetRipper.IO.Files.csproj"/>
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Numerics\AssetRipper.Numerics.csproj"/>
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SerializationLogic\AssetRipper.SerializationLogic.csproj"/>
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SourceGenerated.Extensions\AssetRipper.SourceGenerated.Extensions.csproj"/>
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Yaml\AssetRipper.Yaml.csproj"/>
+        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Assets\AssetRipper.Assets.csproj" />
+        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Export.UnityProjects\AssetRipper.Export.UnityProjects.csproj" />
+        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.GUI.Web\AssetRipper.GUI.Web.csproj" />
+        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.IO.Endian\AssetRipper.IO.Endian.csproj" />
+        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.IO.Files\AssetRipper.IO.Files.csproj" />
+        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Numerics\AssetRipper.Numerics.csproj" />
+        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SerializationLogic\AssetRipper.SerializationLogic.csproj" />
+        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SourceGenerated.Extensions\AssetRipper.SourceGenerated.Extensions.csproj" />
+        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Yaml\AssetRipper.Yaml.csproj" />
     </ItemGroup>
 
     <ItemGroup>

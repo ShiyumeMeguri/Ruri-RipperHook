@@ -18,15 +18,15 @@ namespace Ruri.RipperHook.Houkai_7_1;
 
 public partial class Houkai_7_1_Hook
 {
-    [RetargetMethodFunc(typeof(TrailRenderer_2017_3_0))]
-    [RetargetMethodFunc(typeof(TilemapRenderer_2017_3_0))]
-    [RetargetMethodFunc(typeof(SpriteMask_2017_3_0))]
-    [RetargetMethodFunc(typeof(ParticleRenderer_2017_3_0))]
-    [RetargetMethodFunc(typeof(MeshRenderer_2017_3_0))]
-    [RetargetMethodFunc(typeof(BillboardRenderer_2017_3_0))]
-    [RetargetMethodFunc(typeof(SpriteRenderer_2017_3_0))]
-    [RetargetMethodFunc(typeof(SkinnedMeshRenderer_2017_3_0))]
-    [RetargetMethodFunc(typeof(LineRenderer_2017_3_0))]
+    [RetargetMethodFunc(typeof(TrailRenderer_2017_3))]
+    [RetargetMethodFunc(typeof(TilemapRenderer_2017_3))]
+    [RetargetMethodFunc(typeof(SpriteMask_2017_3))]
+    [RetargetMethodFunc(typeof(ParticleRenderer_2017_3))]
+    [RetargetMethodFunc(typeof(MeshRenderer_2017_3))]
+    [RetargetMethodFunc(typeof(BillboardRenderer_2017_3))]
+    [RetargetMethodFunc(typeof(SpriteRenderer_2017_3))]
+    [RetargetMethodFunc(typeof(SkinnedMeshRenderer_2017_3))]
+    [RetargetMethodFunc(typeof(LineRenderer_2017_3))]
     private static bool RendererReadRelease(ILContext il)
     {
         var ilCursor = new ILCursor(il);
@@ -37,7 +37,7 @@ public partial class Houkai_7_1_Hook
             ilCursor.Goto(startIndex);
             ilCursor.Emit(OpCodes.Br, targetLabel);
             ilCursor.GotoLabel(targetLabel);
-            var destMethod = typeof(Houkai_7_1_Hook).GetMethod(nameof(Renderer_2017_3_0_ReadRelease));
+            var destMethod = typeof(Houkai_7_1_Hook).GetMethod(nameof(Renderer_2017_3_ReadRelease));
             ilCursor.Emit(OpCodes.Ldarg_0);
             ilCursor.Emit(OpCodes.Ldarg_1);
             ilCursor.Emit(OpCodes.Call, destMethod);
@@ -47,10 +47,10 @@ public partial class Houkai_7_1_Hook
         return false;
     }
 
-    public void Renderer_2017_3_0_ReadRelease(ref EndianSpanReader reader)
+    public void Renderer_2017_3_ReadRelease(ref EndianSpanReader reader)
     {
-        var _this = (object)this as Renderer_2017_3_0;
-        var type = typeof(Renderer_2017_3_0);
+        var _this = (object)this as Renderer_2017_3;
+        var type = typeof(Renderer_2017_3);
 
         _this.GameObject_C25.ReadRelease(ref reader);
         _this.Enabled_C25 = reader.ReadBoolean();
@@ -67,7 +67,7 @@ public partial class Houkai_7_1_Hook
         _this.LightmapIndexDynamic_C25 = reader.ReadUInt16();
         _this.LightmapTilingOffset_C25.ReadRelease(ref reader);
         _this.LightmapTilingOffsetDynamic_C25.ReadRelease(ref reader);
-        SetAssetListField<PPtr_Material_5_0_0>(type, "m_Materials", ref reader);
+        SetAssetListField<PPtr_Material_5>(type, "m_Materials", ref reader);
         _this.StaticBatchInfo_C25.ReadRelease(ref reader);
         _this.StaticBatchRoot_C25.ReadRelease(ref reader);
         _this.ProbeAnchor_C25.ReadRelease(ref reader);

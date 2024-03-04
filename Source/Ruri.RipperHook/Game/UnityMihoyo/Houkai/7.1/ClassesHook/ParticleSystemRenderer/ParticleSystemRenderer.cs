@@ -5,13 +5,13 @@ namespace Ruri.RipperHook.Houkai_7_1;
 
 public partial class Houkai_7_1_Hook
 {
-    [RetargetMethod(typeof(ParticleSystemRenderer_2017_3_0))]
-    public void ParticleSystemRenderer_2017_3_0_ReadRelease(ref EndianSpanReader reader)
+    [RetargetMethod(typeof(ParticleSystemRenderer_2017_3))]
+    public void ParticleSystemRenderer_2017_3_ReadRelease(ref EndianSpanReader reader)
     {
-        var _this = (object)this as ParticleSystemRenderer_2017_3_0;
-        var type = typeof(ParticleSystemRenderer_2017_3_0);
+        var _this = (object)this as ParticleSystemRenderer_2017_3;
+        var type = typeof(ParticleSystemRenderer_2017_3);
 
-        Renderer_2017_3_0_ReadRelease(ref reader);
+        Renderer_2017_3_ReadRelease(ref reader);
         _this.RenderMode_UInt16 = reader.ReadUInt16();
         _this.SortMode_UInt16 = reader.ReadUInt16();
         _this.MinParticleSize = reader.ReadSingle();

@@ -7,11 +7,11 @@ namespace Ruri.RipperHook.Houkai_3_8;
 
 public partial class Houkai_3_8_Hook
 {
-    [RetargetMethod(typeof(GraphicsSettings_2017_3_0))]
-    public void GraphicsSettings_2017_3_0_ReadRelease(ref EndianSpanReader reader)
+    [RetargetMethod(typeof(GraphicsSettings_2017_3))]
+    public void GraphicsSettings_2017_3_ReadRelease(ref EndianSpanReader reader)
     {
-        var _this = (object)this as GraphicsSettings_2017_3_0;
-        var type = typeof(GraphicsSettings_2017_3_0);
+        var _this = (object)this as GraphicsSettings_2017_3;
+        var type = typeof(GraphicsSettings_2017_3);
 
         _this.Deferred.ReadRelease(ref reader);
         _this.DeferredReflections.ReadRelease(ref reader);
@@ -23,7 +23,7 @@ public partial class Houkai_3_8_Hook
         _this.LensFlare.ReadRelease(ref reader);
         BuiltinShaderSettings depthDownSample = new();
         depthDownSample.ReadRelease(ref reader);
-        SetAssetListField<PPtr_Shader_5_0_0>(type, "m_AlwaysIncludedShaders", ref reader);
+        SetAssetListField<PPtr_Shader_5>(type, "m_AlwaysIncludedShaders", ref reader);
         _this.PreloadedShaders.ReadRelease_ArrayAlign_Asset(ref reader);
         _this.SpritesDefaultMaterial.ReadRelease(ref reader);
         _this.CustomRenderPipeline.ReadRelease(ref reader);

@@ -5,11 +5,11 @@ namespace Ruri.RipperHook.Houkai_7_1;
 
 public partial class Houkai_7_1_Hook
 {
-    [RetargetMethod(typeof(QualitySetting_2017_1_0))]
-    public void QualitySetting_2017_1_0_ReadRelease(ref EndianSpanReader reader)
+    [RetargetMethod(typeof(QualitySetting_2017))]
+    public void QualitySetting_2017_ReadRelease(ref EndianSpanReader reader)
     {
-        var _this = (object)this as QualitySetting_2017_1_0;
-        var type = typeof(QualitySetting_2017_1_0);
+        var _this = (object)this as QualitySetting_2017;
+        var type = typeof(QualitySetting_2017);
 
         _this.Name = reader.ReadRelease_Utf8StringAlign();
         _this.PixelLightCount = reader.ReadInt32();
