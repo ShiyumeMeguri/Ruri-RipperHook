@@ -11,7 +11,7 @@ public partial class AR_ShaderDecompiler_Hook
 {
     // DXDecompile Retarget
     [RetargetMethodCtorFunc(typeof(ProjectExporter), [typeof(LibraryConfiguration),typeof(IAssemblyManager)])]
-    private static bool Ctor(ILContext il)
+    public static bool Ctor(ILContext il)
     {
         var ilCursor = new ILCursor(il);
 

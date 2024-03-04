@@ -8,7 +8,7 @@ public partial class AR_ShaderDecompiler_Hook
 {
     // Set DXDecompile Default Value
     [RetargetMethodCtorFunc(typeof(ExportSettings))]
-    private static bool ResetToDefaultValues(ILContext il)
+    public static bool ResetToDefaultValues(ILContext il)
     {
         var ilCursor = new ILCursor(il);
         while (ilCursor.TryGotoNext(MoveType.After, instr => instr.OpCode == OpCodes.Ret)) ;
