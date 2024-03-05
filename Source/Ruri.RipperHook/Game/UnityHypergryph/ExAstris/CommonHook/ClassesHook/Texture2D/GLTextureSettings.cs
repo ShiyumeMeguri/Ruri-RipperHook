@@ -6,7 +6,7 @@ namespace Ruri.RipperHook.ExAstrisCommon;
 public partial class ExAstrisCommon_Hook
 {
     [RetargetMethod(typeof(GLTextureSettings_2017))]
-    public void Texture2D_2020_2_0_a16_ReadRelease(ref EndianSpanReader reader)
+    public void GLTextureSettings_2017_ReadRelease(ref EndianSpanReader reader)
     {
         var _this = (object)this as GLTextureSettings_2017;
         var type = typeof(GLTextureSettings_2017);
