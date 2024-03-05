@@ -13,6 +13,7 @@ internal static class Program
 
     private static void Hook(string[] args)
     {
+        RuriRuntimeHook.Init(GameHookType.AR_ShaderDecompiler);
         RuriRuntimeHook.Init(GameHookType.AR_StaticMeshSeparation);
         RuriRuntimeHook.Init(GameHookType.AR_PrefabOutlining);
     }
