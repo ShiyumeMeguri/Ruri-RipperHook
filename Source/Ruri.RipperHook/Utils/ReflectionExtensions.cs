@@ -66,6 +66,16 @@ public static class ReflectionExtensions
         Console.WriteLine($"Created Hook of {srcMethod.DeclaringType.Name}.{srcMethod.Name} Success");
     }
 
+    /// <summary>
+    /// 默认的情况下是从起点插入并直接返回(替换原函数)
+    /// isBefore可以选择从前后插入代码
+    /// isReturn可以选择不返回 也就是继续执行原函数之后的代码
+    /// </summary>
+    /// <param name="srcMethod"></param>
+    /// <param name="targetMethod"></param>
+    /// <param name="argsCount"></param>
+    /// <param name="isBefore"></param>
+    /// <param name="isReturn"></param>
     public static void RetargetCall(MethodInfo srcMethod, MethodInfo targetMethod, int argsCount = 1, bool isBefore = true, bool isReturn = true)
     {
         var hookDest = new ILContext.Manipulator(il =>

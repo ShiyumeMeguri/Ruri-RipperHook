@@ -44,7 +44,7 @@ public class BundleFileBlockReaderHook : CommonHook
         }
         long entryOffsetInsideBlock = entry.Offset - blockDecompressedOffset;
 
-        using SmartStream entryStream = (SmartStream)CreateStream.Invoke(null, new object[] { entry.Size });
+        using SmartStream entryStream = (SmartStream)CreateStream.Invoke(this, new object[] { entry.Size });
         long left = entry.Size;
         m_stream.Position = m_dataOffset + blockCompressedOffset;
 
@@ -79,7 +79,7 @@ public class BundleFileBlockReaderHook : CommonHook
                     blockStreamOffset = 0;
                     m_cachedBlockIndex = blockIndex;
                     object[] parameters = new object[] { block.UncompressedSize, null };
-                    m_cachedBlockStream.Move((SmartStream)CreateTemporaryStream.Invoke(null, parameters));
+                    m_cachedBlockStream.Move((SmartStream)CreateTemporaryStream.Invoke(this, parameters));
                     rentedArray = (byte[]?)parameters[1];
 
                     // 回调自定义处理

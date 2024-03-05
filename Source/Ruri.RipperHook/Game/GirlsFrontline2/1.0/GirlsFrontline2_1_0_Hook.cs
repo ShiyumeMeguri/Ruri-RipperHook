@@ -1,5 +1,6 @@
 ﻿using Ruri.RipperHook.GirlsFrontline2Common;
 using Ruri.RipperHook.HookUtils.GameBundleHook;
+using Ruri.RipperHook.HookUtils.PlatformGameStructureHook;
 
 namespace Ruri.RipperHook.GirlsFrontline2_1_0;
 
@@ -11,12 +12,14 @@ public partial class GirlsFrontline2_1_0_Hook : RipperHook
     {
         RuriRuntimeHook.commonDecryptor = new XorDecryptor(XorKey);
         GameBundleHook.CustomFilePreInitialize = GirlsFrontline2Common_Hook.CustomFilePreInitialize;
+        PlatformGameStructureHook.CustomAssetBundlesCheck = GirlsFrontline2Common_Hook.CustomAssetBundlesCheck;
     }
 
     protected override void InitAttributeHook()
     {
         additionalNamespaces.Add(typeof(GirlsFrontline2Common_Hook).Namespace);
         additionalNamespaces.Add(typeof(GameBundleHook).Namespace);
+        additionalNamespaces.Add(typeof(PlatformGameStructureHook).Namespace);
         base.InitAttributeHook();
     }
 }

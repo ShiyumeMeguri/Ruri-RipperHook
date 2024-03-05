@@ -10,7 +10,7 @@ using AssetRipper.Primitives;
 
 namespace Ruri.RipperHook.HookUtils.GameBundleHook;
 
-public partial class GameBundleHook
+public class GameBundleHook : CommonHook
 {
     private static readonly MethodInfo FromSerializedFile = typeof(SerializedAssetCollection).GetMethod("FromSerializedFile", ReflectionExtensions.PrivateStaticBindFlag());
 
@@ -32,7 +32,7 @@ public partial class GameBundleHook
             switch (RemoveLastItem(fileStack))
             {
                 case SerializedFile serializedFile:
-                    FromSerializedFile.Invoke(null, new object[] { this, serializedFile, assetFactory, defaultVersion });
+                    FromSerializedFile.Invoke(this, new object[] { this, serializedFile, assetFactory, defaultVersion });
                     break;
                 case FileContainer container:
                     var serializedBundle = SerializedBundle.FromFileContainer(container, assetFactory, defaultVersion);

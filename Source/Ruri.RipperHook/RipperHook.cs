@@ -41,7 +41,7 @@ public abstract class RipperHook
                     methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags, attr.MethodParameters);
                 }
 
-                ReflectionExtensions.RetargetCall(methodSrc, methodDest, attr.ArgCount);
+                ReflectionExtensions.RetargetCall(methodSrc, methodDest, attr.ArgCount, attr.IsBefore,attr.IsReturn);
             }
         }
         // 字节码插入处理
