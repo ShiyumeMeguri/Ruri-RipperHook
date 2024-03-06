@@ -5,7 +5,7 @@ using MonoMod.Cil;
 
 namespace Ruri.RipperHook.GirlsFrontline2Common;
 
-public static class ImportSettingsHook
+public partial class GirlsFrontline2Common_Hook
 {
     [RetargetMethodCtorFunc(typeof(ImportSettings))]
     public static bool Ctor(ILContext il)
