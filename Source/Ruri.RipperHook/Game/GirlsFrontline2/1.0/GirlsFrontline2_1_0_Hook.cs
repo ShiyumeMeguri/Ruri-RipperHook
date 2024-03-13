@@ -13,6 +13,7 @@ public partial class GirlsFrontline2_1_0_Hook : RipperHook
         RuriRuntimeHook.commonDecryptor = new XorDecryptor(XorKey);
         GameBundleHook.CustomFilePreInitialize = GirlsFrontline2Common_Hook.CustomFilePreInitialize;
         PlatformGameStructureHook.CustomAssetBundlesCheck = GirlsFrontline2Common_Hook.CustomAssetBundlesCheck;
+        PlatformGameStructureHook.CustomCollectStreamingAssets = GirlsFrontline2Common_Hook.CustomCollectStreamingAssets;
     }
 
     protected override void InitAttributeHook()

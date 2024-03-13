@@ -57,4 +57,16 @@ public static class ByteArrayExtensions
 
         return -1;
     }
+
+    public static bool StartsWith(this byte[] src, byte[] dest)
+    {
+        if (src.Length < dest.Length) return false;
+
+        for (int i = 0; i < dest.Length; i++)
+        {
+            if (src[i] != dest[i]) return false;
+        }
+
+        return true;
+    }
 }
