@@ -3,7 +3,7 @@
 public static class DebugExtension
 {
     /// <summary>
-    ///     子类查找器
+    /// 子类查找器
     /// </summary>
     public static void SubClassFinder(Type baseType, string targetAssemblyName, string targetNamespace)
     {
