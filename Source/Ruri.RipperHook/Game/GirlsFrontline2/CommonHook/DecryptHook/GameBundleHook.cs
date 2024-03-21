@@ -24,7 +24,7 @@ public partial class GirlsFrontline2Common_Hook
                     continue; // 文件头 "GFF" 这应该是数据文件
                 
                 if (extension == ".bundle")
-                    if (fileData.StartsWith(unityFSHead))
+                    if (!fileData.StartsWith(unityFSHead))
                         fileData = RuriRuntimeHook.commonDecryptor.Decrypt(fileData).ToArray(); // 解密处
 
                 fileStack.AddRange(GameBundleHook.LoadFilesAndDependencies(fileData, MultiFileStream.GetFilePath(path), MultiFileStream.GetFileName(path), dependencyProvider));
