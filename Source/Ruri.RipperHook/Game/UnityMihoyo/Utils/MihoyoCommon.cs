@@ -3,7 +3,6 @@ using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Exceptions;
 using AssetRipper.IO.Files.Streams.Smart;
 using K4os.Compression.LZ4;
-using Ruri.RipperHook.UnityMihoyo;
 
 namespace Ruri.RipperHook.UnityMihoyo;
 
