@@ -5,9 +5,9 @@ using AssetRipper.IO.Files.Streams.Smart;
 using K4os.Compression.LZ4;
 using Ruri.RipperHook.UnityMihoyo;
 
-namespace Ruri.RipperHook.HoukaiCommon;
+namespace Ruri.RipperHook.UnityMihoyo;
 
-public partial class HoukaiCommon_Hook
+public static class MihoyoCommon
 {
     public static void CustomBlockCompression(Stream m_stream, StorageBlock block, SmartStream m_cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex)
     {

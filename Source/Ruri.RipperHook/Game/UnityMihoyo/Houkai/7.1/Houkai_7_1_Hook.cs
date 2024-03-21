@@ -16,7 +16,7 @@ public partial class Houkai_7_1_Hook : RipperHook
     {
         RuriRuntimeHook.commonDecryptor = new Mr0kDecryptor(BH3ExpansionKey, BH3SBox, BH3InitVector, BH3BlockKey);
         GameBundleHook.CustomFilePreInitialize = HoukaiCommon_Hook.CustomFilePreInitialize;
-        BundleFileBlockReaderHook.CustomBlockCompression = HoukaiCommon_Hook.CustomBlockCompression;
+        BundleFileBlockReaderHook.CustomBlockCompression = MihoyoCommon.CustomBlockCompression;
     }
 
     protected override void InitAttributeHook()
