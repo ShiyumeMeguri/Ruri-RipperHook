@@ -1,6 +1,7 @@
 ﻿using Ruri.RipperHook.GirlsFrontline2Common;
 using Ruri.RipperHook.HookUtils.GameBundleHook;
-using Ruri.RipperHook.HookUtils.PlatformGameStructureHook;
+using Ruri.RipperHook.HookUtils.PlatformGameStructureHook_CollectAssetBundles;
+using Ruri.RipperHook.HookUtils.PlatformGameStructureHook_CollectStreamingAssets;
 
 namespace Ruri.RipperHook.GirlsFrontline2_1_0;
 
@@ -11,16 +12,14 @@ public partial class GirlsFrontline2_1_0_Hook : RipperHook
     protected GirlsFrontline2_1_0_Hook()
     {
         RuriRuntimeHook.commonDecryptor = new XorDecryptor(XorKey);
-        GameBundleHook.CustomFilePreInitialize = GirlsFrontline2Common_Hook.CustomFilePreInitialize;
-        PlatformGameStructureHook.CustomAssetBundlesCheck = GirlsFrontline2Common_Hook.CustomAssetBundlesCheck;
-        PlatformGameStructureHook.CustomCollectStreamingAssets = GirlsFrontline2Common_Hook.CustomCollectStreamingAssets;
     }
 
     protected override void InitAttributeHook()
     {
         additionalNamespaces.Add(typeof(GirlsFrontline2Common_Hook).Namespace);
-        additionalNamespaces.Add(typeof(GameBundleHook).Namespace);
-        additionalNamespaces.Add(typeof(PlatformGameStructureHook).Namespace);
+        AddExtraHook(typeof(GameBundleHook).Namespace, () => { GameBundleHook.CustomFilePreInitialize = GirlsFrontline2Common_Hook.CustomFilePreInitialize; });
+        AddExtraHook(typeof(PlatformGameStructureHook_CollectAssetBundles).Namespace, () => { PlatformGameStructureHook_CollectAssetBundles.CustomAssetBundlesCheck = GirlsFrontline2Common_Hook.CustomAssetBundlesCheck; });
+        AddExtraHook(typeof(PlatformGameStructureHook_CollectStreamingAssets).Namespace, () => { PlatformGameStructureHook_CollectStreamingAssets.CustomCollectStreamingAssets = GirlsFrontline2Common_Hook.CustomCollectStreamingAssets; });
         base.InitAttributeHook();
     }
 }

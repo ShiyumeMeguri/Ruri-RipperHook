@@ -1,5 +1,6 @@
 ﻿using AssetRipper.Import.Logging;
 using AssetRipper.Import.Structure.Platforms;
+using AssetRipper.IO.Endian;
 using System.Reflection;
 
 namespace Ruri.RipperHook.GirlsFrontline2Common;

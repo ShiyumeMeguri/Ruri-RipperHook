@@ -10,13 +10,12 @@ public partial class ArknightsEndfield_0_1_Hook : RipperHook
     {
         ArknightsEndfieldCommon_Hook.CustomLZ4 = new LZ4_ArknightsEndfield();
         RuriRuntimeHook.commonDecryptor = new FairGuardDecryptor();
-        BundleFileBlockReaderHook.CustomBlockCompression = ArknightsEndfieldCommon_Hook.CustomBlockCompression;
     }
 
     protected override void InitAttributeHook()
     {
         additionalNamespaces.Add(typeof(ArknightsEndfieldCommon_Hook).Namespace);
-        additionalNamespaces.Add(typeof(BundleFileBlockReaderHook).Namespace);
+        AddExtraHook(typeof(BundleFileBlockReaderHook).Namespace, () => { BundleFileBlockReaderHook.CustomBlockCompression = ArknightsEndfieldCommon_Hook.CustomBlockCompression; });
         base.InitAttributeHook();
     }
 }

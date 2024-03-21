@@ -16,6 +16,11 @@ public abstract class RipperHook
         InitAttributeHook();
     }
 
+    protected virtual void AddExtraHook(string nameSpace, Action action)
+    {
+        additionalNamespaces.Add(nameSpace);
+        action();
+    }
     protected virtual void InitAttributeHook()
     {
         var bindingFlags = ReflectionExtensions.AnyBindFlag();
