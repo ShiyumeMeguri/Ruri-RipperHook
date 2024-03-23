@@ -1,5 +1,4 @@
 ﻿using AssetRipper.Assets.Bundles;
-using AssetRipper.Import.Logging;
 using AssetRipper.IO.Files;
 using AssetRipper.IO.Files.Streams.MultiFile;
 using AssetRipper.IO.Files.Streams.Smart;
@@ -24,8 +23,6 @@ public partial class StarRailCommon_Hook
                     var assets = MihoyoCommon.FindBlockFiles(stream, encrHead, path);
                     foreach (var asset in assets)
                     {
-                        Logger.Info($"找到Block {asset.FilePath}");
-
                         var fileData = new byte[asset.FileSize];
                         stream.Position = asset.Offset;
                         stream.Read(fileData, 0, fileData.Length);
