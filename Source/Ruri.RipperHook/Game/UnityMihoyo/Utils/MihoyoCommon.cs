@@ -1,4 +1,5 @@
-﻿using AssetRipper.IO.Files.BundleFiles;
+﻿using AssetRipper.Import.Logging;
+using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Exceptions;
 using AssetRipper.IO.Files.Streams.Smart;
@@ -80,9 +81,16 @@ public static class MihoyoCommon
                             // Found the pattern
                             if (currentFile.Count > findSpan.Length)
                             {
-                                files.Add(currentFile.GetRange(0, currentFile.Count - findSpan.Length).ToArray());
-                                currentFile.Clear();
-                                i -= findSpan.Length;
+                                if (i - findSpan.Length >= 0)
+                                {
+                                   i -= findSpan.Length;
+                                    files.Add(currentFile.GetRange(0, currentFile.Count - findSpan.Length).ToArray());
+                                    currentFile.Clear();
+                                }
+                                else
+                                {
+                                    Logger.Warning($"遇到错误头 {files.Count}");
+                                }
                             }
                             findIndex = 0;
                         }
