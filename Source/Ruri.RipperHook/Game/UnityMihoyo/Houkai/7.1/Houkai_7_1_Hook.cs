@@ -15,15 +15,15 @@ public partial class Houkai_7_1_Hook : RipperHook
     protected Houkai_7_1_Hook()
     {
         RuriRuntimeHook.commonDecryptor = new Mr0kDecryptor(BH3ExpansionKey, BH3SBox, BH3InitVector, BH3BlockKey);
-        GameBundleHook.CustomFilePreInitialize = HoukaiCommon_Hook.CustomFilePreInitialize;
-        BundleFileBlockReaderHook.CustomBlockCompression = MihoyoCommon.CustomBlockCompression;
+        
+        
     }
 
     protected override void InitAttributeHook()
     {
         additionalNamespaces.Add(typeof(HoukaiCommon_Hook).Namespace);
-        additionalNamespaces.Add(typeof(GameBundleHook).Namespace);
-        additionalNamespaces.Add(typeof(BundleFileBlockReaderHook).Namespace);
+        AddExtraHook(typeof(GameBundleHook).Namespace, () => { GameBundleHook.CustomFilePreInitialize = HoukaiCommon_Hook.CustomFilePreInitialize; });
+        AddExtraHook(typeof(BundleFileBlockReaderHook).Namespace, () => { BundleFileBlockReaderHook.CustomBlockCompression = MihoyoCommon.CustomBlockCompression; });
         base.InitAttributeHook();
     }
 }

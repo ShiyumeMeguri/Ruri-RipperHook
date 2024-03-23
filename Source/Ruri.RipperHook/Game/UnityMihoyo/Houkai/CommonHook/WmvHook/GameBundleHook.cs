@@ -4,6 +4,7 @@ using AssetRipper.IO.Files;
 using AssetRipper.IO.Files.Streams.MultiFile;
 using AssetRipper.IO.Files.Streams.Smart;
 using Ruri.RipperHook.HookUtils.GameBundleHook;
+using Ruri.RipperHook.UnityMihoyo;
 
 namespace Ruri.RipperHook.HoukaiCommon;
 
@@ -91,11 +92,11 @@ public partial class HoukaiCommon_Hook
             reader.ReadInt32();
             wmvInfo.FileSize = reader.ReadInt32();
             wmvInfo.FileCount = reader.ReadInt32();
-            var assets = new WMVInfo.UnitAssetInfo[wmvInfo.FileCount];
+            var assets = new BlockAssetInfo[wmvInfo.FileCount];
 
             for (var i = 0; i < wmvInfo.FileCount; i++)
             {
-                assets[i] = new WMVInfo.UnitAssetInfo();
+                assets[i] = new BlockAssetInfo();
                 var count = reader.ReadInt16();
                 var path = new string(reader.ReadChars(count));
                 assets[i].FilePath = Path.Combine(path, fileName, path);

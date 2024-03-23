@@ -1,6 +1,7 @@
 ﻿using AssetRipper.IO.Endian;
 using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
+using AssetRipper.Text.Html;
 
 namespace Ruri.RipperHook.StarRailCommon;
 

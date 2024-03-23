@@ -1,5 +1,4 @@
-﻿using AssetRipper.Import.Structure.Platforms;
-using AssetRipper.IO.Endian;
+﻿using AssetRipper.IO.Endian;
 using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
 using System.Reflection;

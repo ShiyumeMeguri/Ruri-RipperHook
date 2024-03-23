@@ -1,4 +1,6 @@
-﻿using Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
+﻿using AssetRipper.SourceGenerated.Classes.ClassID_142;
+using Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
+using Ruri.RipperHook.HookUtils.GameBundleHook;
 using Ruri.RipperHook.HookUtils.PlatformGameStructureHook_IsBundleHeader;
 using Ruri.RipperHook.StarRailCommon;
 using Ruri.RipperHook.UnityMihoyo;
@@ -17,6 +19,7 @@ public partial class StarRail_2_0_Hook : RipperHook
         additionalNamespaces.Add(typeof(StarRailCommon_Hook).Namespace);
         AddExtraHook(typeof(BundleFileBlockReaderHook).Namespace, () => { BundleFileBlockReaderHook.CustomBlockCompression = MihoyoCommon.CustomBlockCompression; });
         AddExtraHook(typeof(PlatformGameStructureHook_IsBundleHeader).Namespace, () => { PlatformGameStructureHook_IsBundleHeader.CustomAssetBundlesCheckMagicNum = StarRailCommon_Hook.CustomAssetBundlesCheckMagicNum; });
+        AddExtraHook(typeof(GameBundleHook).Namespace, () => { GameBundleHook.CustomFilePreInitialize = StarRailCommon_Hook.CustomFilePreInitialize; });
         base.InitAttributeHook();
     }
 }

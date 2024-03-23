@@ -12,13 +12,12 @@ public partial class Houkai_3_8_Hook : RipperHook
     protected Houkai_3_8_Hook()
     {
         RuriRuntimeHook.commonDecryptor = new Mr0kDecryptor(PackExpansionKey, blockKey: PackBlockKey);
-        BundleFileBlockReaderHook.CustomBlockCompression = MihoyoCommon.CustomBlockCompression;
     }
 
     protected override void InitAttributeHook()
     {
         additionalNamespaces.Add(typeof(HoukaiCommon_Hook).Namespace);
-        additionalNamespaces.Add(typeof(BundleFileBlockReaderHook).Namespace);
+        AddExtraHook(typeof(BundleFileBlockReaderHook).Namespace, () => { BundleFileBlockReaderHook.CustomBlockCompression = MihoyoCommon.CustomBlockCompression; });
         base.InitAttributeHook();
     }
 }
