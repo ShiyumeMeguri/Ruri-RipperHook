@@ -33,6 +33,8 @@ def parse_json(json_file):
         print(f"Output written to {output_file_name}")
 
 if __name__ == "__main__":
-    # 遍历TypeTreeDump目录下的所有json文件
+    # 遍历TypeTreeDump目录下的所有json文件    
     for json_file in glob.glob('TypeTreeDump/*.json'):
         parse_json(json_file)
+
+# 官方Dump库 https://github.com/AssetRipper/TypeTreeDumps/tree/main/InfoJson
