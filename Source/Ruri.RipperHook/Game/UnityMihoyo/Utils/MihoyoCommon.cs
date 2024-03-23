@@ -82,6 +82,7 @@ public static class MihoyoCommon
                             {
                                 files.Add(currentFile.GetRange(0, currentFile.Count - findSpan.Length).ToArray());
                                 currentFile.Clear();
+                                i -= findSpan.Length;
                             }
                             findIndex = 0;
                         }
