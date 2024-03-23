@@ -3,6 +3,7 @@ using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Exceptions;
 using AssetRipper.IO.Files.Streams.Smart;
 using K4os.Compression.LZ4;
+using System.Buffers;
 
 namespace Ruri.RipperHook.UnityMihoyo;
 public static class MihoyoCommon
@@ -54,46 +55,57 @@ public static class MihoyoCommon
                 break;
         }
     }
-    public static List<BlockAssetInfo> FindBlockFiles(SmartStream stream, byte[] findBytes, string path)
+    public static List<byte[]> FindBlockFiles(SmartStream stream, byte[] findBytes)
     {
-        List<BlockAssetInfo> assets = new List<BlockAssetInfo>();
-        long fileSize = stream.Length;
-        byte[] buffer = new byte[findBytes.Length];
+        List<byte[]> files = new List<byte[]>();
+        // Allocate a reasonably sized buffer for stream reading. Adjust size as needed.
+        byte[] streamBuffer = ArrayPool<byte>.Shared.Rent(8192);
+        Span<byte> findSpan = findBytes.AsSpan();
+        List<byte> currentFile = new List<byte>();
+        int findIndex = 0;
 
-        long currentOffset = 0;
-        while (currentOffset < fileSize)
+        try
         {
-            stream.Position = currentOffset;
-            stream.Read(buffer, 0, buffer.Length);
-            if (buffer.StartsWith(findBytes))
+            int bytesRead;
+            while ((bytesRead = stream.Read(streamBuffer, 0, streamBuffer.Length)) > 0)
             {
-                long fileBlockStart = currentOffset;
-                long nextEncrStart = fileBlockStart + buffer.Length;
-                bool foundNextHead = false;
-                while (nextEncrStart < fileSize)
+                Span<byte> bufferSpan = streamBuffer.AsSpan(0, bytesRead);
+                for (int i = 0; i < bufferSpan.Length; i++)
                 {
-                    stream.Position = nextEncrStart;
-                    stream.Read(buffer, 0, buffer.Length);
-                    if (buffer.StartsWith(findBytes))
+                    currentFile.Add(bufferSpan[i]);
+
+                    if (bufferSpan[i] == findBytes[findIndex])
                     {
-                        foundNextHead = true;
-                        break;
+                        findIndex++;
+                        if (findIndex == findBytes.Length)
+                        {
+                            // Found the pattern
+                            if (currentFile.Count > findBytes.Length)
+                            {
+                                files.Add(currentFile.GetRange(0, currentFile.Count - findBytes.Length).ToArray());
+                                currentFile.Clear();
+                            }
+                            findIndex = 0;
+                        }
                     }
-                    nextEncrStart++;
+                    else
+                    {
+                        findIndex = 0;
+                    }
                 }
-
-                if (!foundNextHead)
-                    nextEncrStart += buffer.Length;
-
-                long fileBlockSize = nextEncrStart - fileBlockStart;
-                assets.Add(new BlockAssetInfo { FilePath = path + fileBlockStart, FileSize = (int)fileBlockSize, Offset = (int)fileBlockStart });
-                currentOffset = nextEncrStart;
             }
-            else
+
+            // Add any remaining bytes as a file
+            if (currentFile.Count > 0)
             {
-                currentOffset++;
+                files.Add(currentFile.ToArray());
             }
         }
-        return assets;
+        finally
+        {
+            // Always return the buffer to avoid memory leaks
+            ArrayPool<byte>.Shared.Return(streamBuffer);
+        }
+        return files;
     }
 }

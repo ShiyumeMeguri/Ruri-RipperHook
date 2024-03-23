@@ -20,18 +20,14 @@ public partial class StarRailCommon_Hook
             {
                 using (var stream = SmartStream.OpenRead(path))
                 {
-                    var assets = MihoyoCommon.FindBlockFiles(stream, encrHead, path);
-                    foreach (var asset in assets)
+                    var assetBundleBlocks = MihoyoCommon.FindBlockFiles(stream, encrHead);
+                    for (int i = 0;i<assetBundleBlocks.Count;i++)
                     {
-                        var fileData = new byte[asset.FileSize];
-                        stream.Position = asset.Offset;
-                        stream.Read(fileData, 0, fileData.Length);
-
-                        var filePath = asset.FilePath;
+                        var filePath = path + i;
                         var directoryPath = Path.GetDirectoryName(filePath);
                         var fileName = Path.GetFileName(filePath);
 
-                        fileStack.AddRange(GameBundleHook.LoadFilesAndDependencies(fileData, directoryPath, fileName, dependencyProvider));
+                        fileStack.AddRange(GameBundleHook.LoadFilesAndDependencies(assetBundleBlocks[i], directoryPath, fileName, dependencyProvider));
                     }
                 }
             }
