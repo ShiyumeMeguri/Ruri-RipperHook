@@ -55,12 +55,10 @@ public static class MihoyoCommon
                 break;
         }
     }
-    public static List<byte[]> FindBlockFiles(SmartStream stream, byte[] findBytes)
+    public static List<byte[]> FindBlockFiles(SmartStream stream, Span<byte> findSpan)
     {
         List<byte[]> files = new List<byte[]>();
-        // Allocate a reasonably sized buffer for stream reading. Adjust size as needed.
         byte[] streamBuffer = ArrayPool<byte>.Shared.Rent(8192);
-        Span<byte> findSpan = findBytes.AsSpan();
         List<byte> currentFile = new List<byte>();
         int findIndex = 0;
 
@@ -74,15 +72,15 @@ public static class MihoyoCommon
                 {
                     currentFile.Add(bufferSpan[i]);
 
-                    if (bufferSpan[i] == findBytes[findIndex])
+                    if (bufferSpan[i] == findSpan[findIndex])
                     {
                         findIndex++;
-                        if (findIndex == findBytes.Length)
+                        if (findIndex == findSpan.Length)
                         {
                             // Found the pattern
-                            if (currentFile.Count > findBytes.Length)
+                            if (currentFile.Count > findSpan.Length)
                             {
-                                files.Add(currentFile.GetRange(0, currentFile.Count - findBytes.Length).ToArray());
+                                files.Add(currentFile.GetRange(0, currentFile.Count - findSpan.Length).ToArray());
                                 currentFile.Clear();
                             }
                             findIndex = 0;
@@ -95,7 +93,6 @@ public static class MihoyoCommon
                 }
             }
 
-            // Add any remaining bytes as a file
             if (currentFile.Count > 0)
             {
                 files.Add(currentFile.ToArray());
@@ -103,7 +100,6 @@ public static class MihoyoCommon
         }
         finally
         {
-            // Always return the buffer to avoid memory leaks
             ArrayPool<byte>.Shared.Return(streamBuffer);
         }
         return files;
