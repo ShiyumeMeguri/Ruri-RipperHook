@@ -13,3 +13,5 @@ bin
 *.blend1
 launchSettings.json
 AssetRipper.SourceGenerated.xml
+Source/Ruri.RipperHook/PyTools/TypeTreeDump
+Source/Ruri.RipperHook/PyTools/TypeTreeOutput
