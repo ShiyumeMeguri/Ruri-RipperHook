@@ -6,12 +6,11 @@ public partial class AR_StaticMeshSeparation_Hook : RipperHook
 {
     protected AR_StaticMeshSeparation_Hook()
     {
-        ExportHandlerHook.CustomAssetProcessors.Add(StaticMeshProcessor);
     }
 
     protected override void InitAttributeHook()
     {
-        additionalNamespaces.Add(typeof(ExportHandlerHook).Namespace);
+        AddExtraHook(typeof(ExportHandlerHook).Namespace, () => { ExportHandlerHook.CustomAssetProcessors.Add(StaticMeshProcessor); });
         base.InitAttributeHook();
     }
 }

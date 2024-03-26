@@ -15,8 +15,6 @@ public partial class Houkai_7_1_Hook : RipperHook
     protected Houkai_7_1_Hook()
     {
         RuriRuntimeHook.commonDecryptor = new Mr0kDecryptor(BH3ExpansionKey, BH3SBox, BH3InitVector, BH3BlockKey);
-        
-        
     }
 
     protected override void InitAttributeHook()
