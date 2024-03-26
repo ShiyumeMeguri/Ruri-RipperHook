@@ -78,21 +78,13 @@ public static class MihoyoCommon
                         findIndex++;
                         if (findIndex == findSpan.Length)
                         {
-                            // Found the pattern
+                            findIndex = 0;
                             if (currentFile.Count > findSpan.Length)
                             {
-                                if (i - findSpan.Length >= 0)
-                                {
-                                   i -= findSpan.Length;
-                                    files.Add(currentFile.GetRange(0, currentFile.Count - findSpan.Length).ToArray());
-                                    currentFile.Clear();
-                                }
-                                else
-                                {
-                                    Logger.Warning($"遇到错误头 {files.Count}");
-                                }
+                                var file = currentFile.GetRange(0, currentFile.Count - findSpan.Length).ToArray();
+                                files.Add(file);
+                                currentFile.RemoveRange(0, file.Length);
                             }
-                            findIndex = 0;
                         }
                     }
                     else
