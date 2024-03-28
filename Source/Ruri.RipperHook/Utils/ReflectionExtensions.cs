@@ -73,10 +73,10 @@ public static class ReflectionExtensions
     /// </summary>
     /// <param name="srcMethod"></param>
     /// <param name="targetMethod"></param>
-    /// <param name="argsCount"></param>
+    /// <param name="maxArgIndex"></param>
     /// <param name="isBefore"></param>
     /// <param name="isReturn"></param>
-    public static void RetargetCall(MethodInfo srcMethod, MethodInfo targetMethod, int argsCount = 1, bool isBefore = true, bool isReturn = true)
+    public static void RetargetCall(MethodInfo srcMethod, MethodInfo targetMethod, int maxArgIndex = 1, bool isBefore = true, bool isReturn = true)
     {
         var hookDest = new ILContext.Manipulator(il =>
         {
@@ -84,7 +84,7 @@ public static class ReflectionExtensions
             if (!isBefore) // 从起点注入还是末尾注入
                 while (ilCursor.TryGotoNext(MoveType.Before, instr => instr.OpCode == OpCodes.Ret))
                     ;
-            for (var i = 0; i <= argsCount; i++)
+            for (var i = 0; i <= maxArgIndex; i++)
                 switch (i)
                 {
                     case 0:
