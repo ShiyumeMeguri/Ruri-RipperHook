@@ -81,32 +81,41 @@ public static class ReflectionExtensions
         var hookDest = new ILContext.Manipulator(il =>
         {
             var ilCursor = new ILCursor(il);
+            Action inject = () =>
+            {
+                for (var i = 0; i <= maxArgIndex; i++)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            ilCursor.Emit(OpCodes.Ldarg_0);
+                            continue;
+                        case 1:
+                            ilCursor.Emit(OpCodes.Ldarg_1);
+                            continue;
+                        case 2:
+                            ilCursor.Emit(OpCodes.Ldarg_2);
+                            continue;
+                        case 3:
+                            ilCursor.Emit(OpCodes.Ldarg_3);
+                            continue;
+                        default:
+                            ilCursor.Emit(OpCodes.Ldarg, i);
+                            continue;
+                    }
+                }
+                ilCursor.Emit(OpCodes.Call, targetMethod);
+                if (isReturn) { 
+                    ilCursor.Emit(OpCodes.Ret);
+                }
+                ilCursor.SearchTarget = SearchTarget.Next; // 保证插入后从当前位置继续查找避免死循环
+            };
+
             if (!isBefore) // 从起点注入还是末尾注入
                 while (ilCursor.TryGotoNext(MoveType.Before, instr => instr.OpCode == OpCodes.Ret))
-                    ;
-            for (var i = 0; i <= maxArgIndex; i++)
-                switch (i)
-                {
-                    case 0:
-                        ilCursor.Emit(OpCodes.Ldarg_0);
-                        continue;
-                    case 1:
-                        ilCursor.Emit(OpCodes.Ldarg_1);
-                        continue;
-                    case 2:
-                        ilCursor.Emit(OpCodes.Ldarg_2);
-                        continue;
-                    case 3:
-                        ilCursor.Emit(OpCodes.Ldarg_3);
-                        continue;
-                    default:
-                        ilCursor.Emit(OpCodes.Ldarg, i);
-                        continue;
-                }
-
-            ilCursor.Emit(OpCodes.Call, targetMethod);
-            if (isReturn)
-                ilCursor.Emit(OpCodes.Ret);
+                    inject();
+            else
+                inject();
         });
 
         RuriRuntimeHook.ilHooks.Add(new ILHook(srcMethod, hookDest));
