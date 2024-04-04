@@ -11,6 +11,7 @@ public partial class AR_ExportDirectly_Hook
     public static void LoadAndProcess(IReadOnlyList<string> paths)
     {
         var directoryPath = Path.GetDirectoryName(paths[0]);
+        directoryPath = Directory.GetParent(directoryPath)?.FullName ?? directoryPath;
         var outputPath = Path.Combine(directoryPath, "AssetRipperOutput");
         if (!Directory.Exists(outputPath))
         {
