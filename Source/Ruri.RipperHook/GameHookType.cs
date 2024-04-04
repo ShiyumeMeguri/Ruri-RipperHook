@@ -7,6 +7,7 @@ public enum GameHookType
     AR_StaticMeshSeparation,
     AR_PrefabOutlining,
     AR_BundledAssetsExportMode,
+    AR_ExportDirectly,
 	
 	// Game
     PunishingGrayRaven_2_11,

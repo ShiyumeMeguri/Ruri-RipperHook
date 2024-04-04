@@ -19,7 +19,8 @@ internal static class Program
         //RuriRuntimeHook.Init(GameHookType.AR_StaticMeshSeparation);
         RuriRuntimeHook.Init(GameHookType.AR_PrefabOutlining);
         RuriRuntimeHook.Init(GameHookType.AR_BundledAssetsExportMode);
-        RuriRuntimeHook.Init(GameHookType.StarRail_2_0);
+        RuriRuntimeHook.Init(GameHookType.AR_ExportDirectly);
+        RuriRuntimeHook.Init(GameHookType.GirlsFrontline2_1_0);
     }
 
     private static void RunAssetRipper()
