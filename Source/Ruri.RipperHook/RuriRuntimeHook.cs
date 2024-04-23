@@ -27,6 +27,12 @@ public static class RuriRuntimeHook
         Console.ResetColor();
     }
 
+    public static void DestoyHook(ILHook iLHook)
+    {
+        iLHook.Dispose();
+        RuriRuntimeHook.ilHooks.Remove(iLHook);
+    }
+
     private static void InstallHook(GameHookType hookName)
     {
         var name = hookName.ToString();
