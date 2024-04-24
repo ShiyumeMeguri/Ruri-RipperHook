@@ -18,15 +18,16 @@ public class GameBundleHook : CommonHook
 
     public static FilePreInitializeDelegate CustomFilePreInitialize;
 
-    [RetargetMethod(typeof(GameBundle), nameof(InitializeFromPaths), 5)]
-    public void InitializeFromPaths(IEnumerable<string> paths, AssetFactoryBase assetFactory, IDependencyProvider? dependencyProvider, IResourceProvider? resourceProvider, UnityVersion defaultVersion = default)
+    [RetargetMethod(typeof(GameBundle), nameof(InitializeFromPaths), 3)]
+    public void InitializeFromPaths(IEnumerable<string> paths, AssetFactoryBase assetFactory, IGameInitializer? initializer)
     {
         var _this = (object)this as GameBundle;
 
-        _this.ResourceProvider = resourceProvider;
+        _this.ResourceProvider = initializer?.ResourceProvider;
         var fileStack = new List<FileBase>();
+        UnityVersion defaultVersion = initializer is null ? default : initializer.DefaultVersion;
 
-        CustomFilePreInitialize(_this, paths, fileStack, dependencyProvider);
+        CustomFilePreInitialize(_this, paths, fileStack, initializer?.DependencyProvider);
 
         while (fileStack.Count > 0)
             switch (RemoveLastItem(fileStack))
