@@ -12,7 +12,7 @@ public partial class HoukaiCommon_Hook
 {
     private static readonly MethodInfo ReadMetadata = typeof(FileStreamBundleFile).GetMethod("ReadMetadata", ReflectionExtensions.PrivateInstanceBindFlag());
 
-    [RetargetMethod(typeof(FileStreamBundleFile), nameof(ReadFileStreamMetadata), 2)]
+    [RetargetMethod(typeof(FileStreamBundleFile), nameof(ReadFileStreamMetadata))]
     public void ReadFileStreamMetadata(Stream stream, long basePosition)
     {
         var _this = (object)this as FileStreamBundleFile;

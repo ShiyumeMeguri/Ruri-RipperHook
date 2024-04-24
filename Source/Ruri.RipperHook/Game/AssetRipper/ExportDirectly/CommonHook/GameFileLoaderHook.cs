@@ -7,7 +7,7 @@ namespace Ruri.RipperHook.AR_ExportDirectly;
 public partial class AR_ExportDirectly_Hook
 {
 
-    [RetargetMethod(typeof(GameFileLoader), nameof(LoadAndProcess), 0, isBefore:false, isReturn:false)]
+    [RetargetMethod(typeof(GameFileLoader), nameof(LoadAndProcess), isBefore:false, isReturn:false)]
     public static void LoadAndProcess(IReadOnlyList<string> paths)
     {
         var directoryPath = Path.GetDirectoryName(paths[0]);

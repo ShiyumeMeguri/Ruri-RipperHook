@@ -46,7 +46,16 @@ public abstract class RipperHook
                     methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags, attr.MethodParameters);
                 }
 
-                ReflectionExtensions.RetargetCall(methodSrc, methodDest, attr.MaxArgIndex, attr.IsBefore,attr.IsReturn);
+                int srcParameterCount = methodSrc.GetParameters().Length;
+                int destParameterCount = methodDest.GetParameters().Length;
+                if (srcParameterCount != destParameterCount)
+                {
+                    throw new Exception("Hook函数和目标函数参数数量不一致 如果是静态方法 看括号内参数数量 如果是实例方法 需要+1 因为this始终在实例方法中传递");
+                }
+                if (methodSrc.IsStatic)
+                    srcParameterCount--;
+
+                ReflectionExtensions.RetargetCall(methodSrc, methodDest, srcParameterCount, attr.IsBefore,attr.IsReturn);
             }
         }
         // 字节码插入处理

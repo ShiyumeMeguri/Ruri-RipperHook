@@ -12,7 +12,7 @@ public class PlatformGameStructureHook_CollectAssetBundles : CommonHook
 
     public static AssetBundlesCheckDelegate CustomAssetBundlesCheck;
 
-    [RetargetMethod(typeof(PlatformGameStructure), nameof(CollectAssetBundles), 2)]
+    [RetargetMethod(typeof(PlatformGameStructure), nameof(CollectAssetBundles))]
     private void CollectAssetBundles(DirectoryInfo root, IDictionary<string, string> files)
     {
         foreach (FileInfo file in root.EnumerateFiles())

@@ -14,6 +14,6 @@ public class PlatformGameStructureHook_IsBundleHeader : CommonHook
 
     public static AssetBundlesMagicNumCheckDelegate CustomAssetBundlesCheckMagicNum;
 
-    [RetargetMethod(typeof(FileStreamBundleHeader), nameof(IsBundleHeader), 0)]
+    [RetargetMethod(typeof(FileStreamBundleHeader), nameof(IsBundleHeader))]
     public static bool IsBundleHeader(EndianReader reader) => CustomAssetBundlesCheckMagicNum(reader, FromSerializedFile);
 }

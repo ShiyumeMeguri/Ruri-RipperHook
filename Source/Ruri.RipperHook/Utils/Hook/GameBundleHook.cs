@@ -18,7 +18,7 @@ public class GameBundleHook : CommonHook
 
     public static FilePreInitializeDelegate CustomFilePreInitialize;
 
-    [RetargetMethod(typeof(GameBundle), nameof(InitializeFromPaths), 3)]
+    [RetargetMethod(typeof(GameBundle), nameof(InitializeFromPaths))]
     public void InitializeFromPaths(IEnumerable<string> paths, AssetFactoryBase assetFactory, IGameInitializer? initializer)
     {
         var _this = (object)this as GameBundle;
