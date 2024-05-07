@@ -23,7 +23,7 @@ public partial class StarRailCommon_Hook
                     var assetBundleBlocks = MihoyoCommon.FindBlockFiles(stream, encrHead);
                     for (int i = 0;i<assetBundleBlocks.Count;i++)
                     {
-                        var filePath = path + i;
+                        var filePath = path;
                         var directoryPath = Path.GetDirectoryName(filePath);
                         var fileName = Path.GetFileName(filePath);
 
