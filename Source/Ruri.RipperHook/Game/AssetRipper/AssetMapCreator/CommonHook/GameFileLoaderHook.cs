@@ -7,10 +7,10 @@ namespace Ruri.RipperHook.AR_AssetMapCreator;
 
 public partial class AR_AssetMapCreator_Hook
 {
-    [RetargetMethod(typeof(GameFileLoader), nameof(Export), isBefore: false, isReturn: false)]
+    [RetargetMethod(typeof(GameFileLoader), nameof(Export), isReturn: false)]
     public static void Export(string path)
     {
-        var outputPath = Path.Combine(path, $"RuriInfo");
+        var outputPath = path + $"RuriInfo";
         if (!Directory.Exists(outputPath))
         {
             Directory.CreateDirectory(outputPath);
