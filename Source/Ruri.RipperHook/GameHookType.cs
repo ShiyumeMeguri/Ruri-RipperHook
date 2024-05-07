@@ -8,6 +8,7 @@ public enum GameHookType
     AR_PrefabOutlining,
     AR_BundledAssetsExportMode,
     AR_ExportDirectly,
+    AR_AssetMapCreator,
 	
 	// Game
     PunishingGrayRaven_2_11,
