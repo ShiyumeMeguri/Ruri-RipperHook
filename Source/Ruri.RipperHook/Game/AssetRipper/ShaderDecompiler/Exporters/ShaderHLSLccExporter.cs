@@ -6,51 +6,25 @@ using AssetRipper.Export.Modules.Shaders.IO;
 using AssetRipper.Export.Modules.Shaders.ShaderBlob;
 using AssetRipper.Import.Logging;
 using AssetRipper.SourceGenerated.Extensions.Enums.Shader;
+using HLSLccWrapper;
 
 namespace Ruri.RipperHook.AR_ShaderDecompiler.Exporters.DirectX;
 
 public class ShaderHLSLccExporter : ShaderTextExporter
 {
-    public enum GLLang
-    {
-        LANG_DEFAULT, // Depends on the HLSL shader model.
-        LANG_ES_100,
-        LANG_ES_FIRST = LANG_ES_100,
-        LANG_ES_300,
-        LANG_ES_310,
-        LANG_ES_LAST = LANG_ES_310,
-        LANG_120,
-        LANG_GL_FIRST = LANG_120,
-        LANG_130,
-        LANG_140,
-        LANG_150,
-        LANG_330,
-        LANG_400,
-        LANG_410,
-        LANG_420,
-        LANG_430,
-        LANG_440,
-        LANG_GL_LAST = LANG_440,
-        LANG_METAL
-    }
-
     protected readonly GPUPlatform m_graphicApi;
 
     public ShaderHLSLccExporter(GPUPlatform graphicApi)
     {
         m_graphicApi = graphicApi;
     }
-
-    [DllImport("hlslcc", CallingConvention = CallingConvention.StdCall)]
-    private static extern IntPtr TranslateHLSLFromMemCSharp(byte[] shader, uint flags, GLLang language);
-
     public override void Export(ShaderWriter writer, ref ShaderSubProgram subProgram)
     {
-        using (var stream = new MemoryStream(subProgram.ProgramData))
+        using (MemoryStream stream = new MemoryStream(subProgram.ProgramData))
         {
-            using (var reader = new BinaryReader(stream))
+            using (BinaryReader reader = new BinaryReader(stream))
             {
-                var header = new DXDataHeader();
+                DXDataHeader header = new DXDataHeader();
                 header.Read(reader, writer.Version);
 
                 // HACK: since we can't restore UAV info and HLSLcc requires it, process such shader with default exporter
@@ -61,17 +35,22 @@ public class ShaderHLSLccExporter : ShaderTextExporter
                 }
                 else
                 {
-                    var exportData = DXShaderProgramRestorer.RestoreProgramData(reader, writer.Version, ref subProgram);
-                    // todo Fix Memory Leak
-                    uint flag = 0x1;
-                    var language = GLLang.LANG_DEFAULT;
-                    var sourceCode = TranslateHLSLFromMemCSharp(exportData, flag, language);
-                    var sourceC = Marshal.PtrToStringAnsi(sourceCode);
-
-                    if (string.IsNullOrEmpty(sourceC))
+                    byte[] exportData = DXShaderProgramRestorer.RestoreProgramData(reader, writer.Version, ref subProgram);
+                    WrappedGlExtensions ext = new WrappedGlExtensions();
+                    ext.ARB_explicit_attrib_location = 1;
+                    ext.ARB_explicit_uniform_location = 1;
+                    ext.ARB_shading_language_420pack = 0;
+                    ext.OVR_multiview = 0;
+                    ext.EXT_shader_framebuffer_fetch = 0;
+                    WrappedShader shader = WrappedShader.TranslateFromMem(exportData, WrappedGLLang.LANG_DEFAULT, ext);
+                    if (shader.OK == 0)
+                    {
                         base.Export(writer, ref subProgram);
+                    }
                     else
-                        ExportListing(writer, sourceC);
+                    {
+                        ExportListing(writer, shader.Text);
+                    }
                 }
             }
         }
