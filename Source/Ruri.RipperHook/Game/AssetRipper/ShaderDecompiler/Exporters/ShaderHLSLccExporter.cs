@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using AssetRipper.Export.Modules.Shaders;
 using AssetRipper.Export.Modules.Shaders.Exporters;
 using AssetRipper.Export.Modules.Shaders.Exporters.DirectX;
@@ -30,7 +29,9 @@ public class ShaderHLSLccExporter : ShaderTextExporter
                 // HACK: since we can't restore UAV info and HLSLcc requires it, process such shader with default exporter
                 if (header.UAVs > 0)
                 {
-                    Logger.Error("Shader: Unsupported UAVs Export");
+                    var text = "// Shader: Unsupported UAVs Export";
+                    Logger.Error(text);
+                    ExportListing(writer, text);
                     //base.Export(writer, ref subProgram);
                 }
                 else

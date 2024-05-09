@@ -133,6 +133,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(TargetPath)" "..\..\..\AssetRipper\Source\0Bins\AssetRipper\Debug\HLSLccWrapper_x64.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -159,6 +162,9 @@
       <AdditionalDependencies />
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(TargetPath)" "..\..\..\AssetRipper\Source\0Bins\AssetRipper\Debug\HLSLccWrapper_x64.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="HLSLccWrapper.h" />
