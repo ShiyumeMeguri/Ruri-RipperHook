@@ -73,31 +73,17 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Bins\$(Configuration)\x86\</OutDir>
-    <IntDir>$(SolutionDir)Obj\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)_x86</TargetName>
-    <EnableManagedIncrementalBuild>false</EnableManagedIncrementalBuild>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Bins\$(Configuration)\x64\</OutDir>
-    <IntDir>$(SolutionDir)Obj\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>..\..\..\AssetRipper\Source\0Bins\AssetRipper\$(Configuration)\</OutDir>
+    <IntDir>..\..\..\AssetRipper\Source\Obj\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_x64</TargetName>
-    <EnableManagedIncrementalBuild>false</EnableManagedIncrementalBuild>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Bins\$(Configuration)\x86\</OutDir>
-    <IntDir>$(SolutionDir)Obj\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)_x86</TargetName>
     <EnableManagedIncrementalBuild>false</EnableManagedIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Bins\$(Configuration)\x64\</OutDir>
-    <IntDir>$(SolutionDir)Obj\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>..\..\..\AssetRipper\Source\0Bins\AssetRipper\$(Configuration)\</OutDir>
+    <IntDir>..\..\..\AssetRipper\Source\Obj\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_x64</TargetName>
     <EnableManagedIncrementalBuild>false</EnableManagedIncrementalBuild>
   </PropertyGroup>
@@ -134,7 +120,7 @@
       <AdditionalDependencies />
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetPath)" "..\..\..\AssetRipper\Source\0Bins\AssetRipper\Debug\HLSLccWrapper_x64.dll"</Command>
+      <Command>copy "$(TargetPath)" "..\..\Ruri.RipperHook\Libraries\HLSLccWrapper_x64.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -163,7 +149,7 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetPath)" "..\..\..\AssetRipper\Source\0Bins\AssetRipper\Debug\HLSLccWrapper_x64.dll"</Command>
+      <Command>copy "$(TargetPath)" "..\..\Ruri.RipperHook\Libraries\HLSLccWrapper_x64.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
