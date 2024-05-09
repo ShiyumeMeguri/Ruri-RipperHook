@@ -206,10 +206,10 @@ void ToGLSL::AddComparison(Instruction* psInst, ComparisonType eType,
     if (destElemCount > 1)
     {
         const char* glslOpcode[] = {
-            "equal",
-            "lessThan",
-            "greaterThanEqual",
-            "notEqual",
+            "==",
+            "<",
+            ">=",
+            "!=",
         };
 
         int needsParenthesis = 0;
@@ -226,9 +226,9 @@ void ToGLSL::AddComparison(Instruction* psInst, ComparisonType eType,
             bcatcstr(glsl, GetConstructorForTypeGLSL(psContext, floatResult ? SVT_FLOAT : SVT_UINT, destElemCount, false));
             bcatcstr(glsl, "(");
         }
-        bformata(glsl, "%s(", glslOpcode[eType]);
+        bcatcstr(glsl, "(");
         TranslateOperand(&psInst->asOperands[1], typeFlag);
-        bcatcstr(glsl, ", ");
+        bformata(glsl, " %s ", glslOpcode[eType]);
         TranslateOperand(&psInst->asOperands[2], typeFlag);
         bcatcstr(glsl, ")");
         TranslateOperandSwizzle(psContext, &psInst->asOperands[0], 0);
