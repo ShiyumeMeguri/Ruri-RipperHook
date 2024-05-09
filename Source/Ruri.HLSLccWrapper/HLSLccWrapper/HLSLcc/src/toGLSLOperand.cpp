@@ -1204,7 +1204,7 @@ void ToGLSL::TranslateVariableNameWithMask(bstring glsl, const Operand* psOperan
                             if (isSubpassMS)
                                 bformata(glsl, "%s%s%s", " ", fullIndexOss.str().c_str(), ")");
                             else
-                                bformata(glsl, "%s%s%s", squareBrackets[squareBracketType][0], fullIndexOss.str().c_str(), squareBrackets[squareBracketType][1]);
+                                bformata(glsl, "._m0%s_m1%s_m2%s_m3%s", fullIndexOss.str().c_str(), fullIndexOss.str().c_str(), fullIndexOss.str().c_str(), fullIndexOss.str().c_str());
                         }
                     }
                 }
