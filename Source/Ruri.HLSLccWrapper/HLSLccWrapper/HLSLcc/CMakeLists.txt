@@ -18,6 +18,7 @@ set(HLSLCC_SRC
 		src/Instruction.cpp
 		src/LoopTransform.cpp
 		src/Operand.cpp
+		src/Program.cpp
 		src/reflect.cpp
 		src/Shader.cpp
 		src/ShaderInfo.cpp
