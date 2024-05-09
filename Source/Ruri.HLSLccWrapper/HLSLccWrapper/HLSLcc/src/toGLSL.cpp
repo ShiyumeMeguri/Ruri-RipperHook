@@ -775,9 +775,9 @@ bool ToGLSL::Translate()
             bcatcstr(glsl, "}\n");
         }
 
-        bcatcstr(glsl, "void main()\n{\n");
+        //bcatcstr(glsl, "void main()\n{\n");
 
-        psContext->indent++;
+        //psContext->indent++;
 
         // There are cases when there are no control point phases and we have to do passthrough
         if (hasControlPointPhase == 0)
@@ -984,9 +984,9 @@ bool ToGLSL::Translate()
         bconcat(glsl, beforeMainKeyword);
     }
 
-    bcatcstr(glsl, "void main()\n{\n");
+    //bcatcstr(glsl, "void main()\n{\n");
 
-    psContext->indent++;
+    //psContext->indent++;
 
     if (psContext->psShader->asPhases[0].earlyMain->slen > 1)
     {
