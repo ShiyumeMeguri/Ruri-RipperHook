@@ -380,7 +380,7 @@ static void DeclareInput(
                         if (psShader->eShaderType == HULL_SHADER)
                             bformata(glsl, "%s%s%s %s %s%d %s[];\n", locationQualifier.c_str(), Interpolation, StorageQualifier, Precision, vecType, iNumComponents, InputName);
                         else
-                            bformata(glsl, "%s%s%s %s %s%d %s;\n", locationQualifier.c_str(), Interpolation, StorageQualifier, Precision, vecType, iNumComponents, InputName);
+                            bformata(glsl, "\t%s%d %s : %s;\n", vecType, iNumComponents, InputName, InputName + 3);
                     }
                 }
                 break;
@@ -835,7 +835,7 @@ void ToGLSL::AddUserOutput(const Declaration* psDecl)
                             bformata(glsl, "patch %sout %s%s %s;\n", Interpolation, Precision, type->data, OutputName);
                     }
                     else
-                        bformata(glsl, "%sout %s%s %s;\n", Interpolation, Precision, type->data, OutputName);
+                        bformata(glsl, "\t%s %s : %s;\n", type->data, OutputName, OutputName + 3);
                 }
                 else
                 {

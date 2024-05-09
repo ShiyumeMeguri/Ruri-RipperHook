@@ -30,30 +30,30 @@ void ToGLSL::SetIOPrefixes()
     switch (psContext->psShader->eShaderType)
     {
         case VERTEX_SHADER:
-            psContext->inputPrefix = "in_";
-            psContext->outputPrefix = "vs_";
+            psContext->inputPrefix = "in.";
+            psContext->outputPrefix = "vs.";
             break;
 
         case HULL_SHADER:
             // Input always coming from vertex shader
-            psContext->inputPrefix = "vs_";
-            psContext->outputPrefix = "hs_";
+            psContext->inputPrefix = "vs.";
+            psContext->outputPrefix = "hs.";
             break;
 
         case DOMAIN_SHADER:
             // There's no domain shader without hull shader
-            psContext->inputPrefix = "hs_";
-            psContext->outputPrefix = "ds_";
+            psContext->inputPrefix = "hs.";
+            psContext->outputPrefix = "ds.";
             break;
 
         case GEOMETRY_SHADER:
             // The input depends on whether there's a tessellation shader before us
             if (psContext->psDependencies && (psContext->psDependencies->ui32ProgramStages & PS_FLAG_DOMAIN_SHADER))
-                psContext->inputPrefix = "ds_";
+                psContext->inputPrefix = "ds.";
             else
-                psContext->inputPrefix = "vs_";
+                psContext->inputPrefix = "vs.";
 
-            psContext->outputPrefix = "gs_";
+            psContext->outputPrefix = "gs.";
             break;
 
         case PIXEL_SHADER:
@@ -62,20 +62,20 @@ void ToGLSL::SetIOPrefixes()
             {
                 if (psContext->psDependencies->ui32ProgramStages & PS_FLAG_GEOMETRY_SHADER)
                 {
-                    psContext->inputPrefix = "gs_";
+                    psContext->inputPrefix = "gs.";
                 }
                 else if (psContext->psDependencies->ui32ProgramStages & PS_FLAG_DOMAIN_SHADER)
                 {
-                    psContext->inputPrefix = "ds_";
+                    psContext->inputPrefix = "ds.";
                 }
                 else
                 {
-                    psContext->inputPrefix = "vs_";
+                    psContext->inputPrefix = "vs.";
                 }
             }
             else
             {
-                psContext->inputPrefix = "vs_";
+                psContext->inputPrefix = "vs.";
             }
             psContext->outputPrefix = "";
             break;
