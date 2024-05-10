@@ -1679,7 +1679,7 @@ static void TranslateResourceTexture(HLSLCrossCompilerContext* psContext, const 
             GLSLCrossDependencyData::GLSLBufferBindPointInfo slotInfo = psContext->psDependencies->GetGLSLResourceBinding(tname, GLSLCrossDependencyData::BufferType_Texture);
             bformata(glsl, "UNITY_LOCATION(%d) ", slotInfo.slot);
         }
-        bcatcstr(glsl, "uniform ");
+        bcatcstr(glsl, "");
         bcatcstr(glsl, samplerPrecision);
         bcatcstr(glsl, samplerTypeName);
         bcatcstr(glsl, "Shadow ");
