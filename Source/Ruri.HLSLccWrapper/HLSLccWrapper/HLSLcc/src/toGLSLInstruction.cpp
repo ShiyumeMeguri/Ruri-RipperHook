@@ -1100,7 +1100,7 @@ void ToGLSL::TranslateTextureSample(Instruction* psInst,
     Operand* psSrcDy = (ui32Flags & TEXSMP_FLAG_GRAD) ? &psInst->asOperands[5] : 0;
     Operand* psSrcBias = (ui32Flags & TEXSMP_FLAG_BIAS) ? &psInst->asOperands[4] : 0;
 
-    const char* funcName = "texture";
+    const char* funcName = "tex2D";
     const char* offset = "";
     const char* depthCmpCoordType = "";
     const char* gradSwizzle = "";
@@ -2921,7 +2921,7 @@ void ToGLSL::TranslateInstruction(Instruction* psInst, bool isEmbedded /* = fals
                 psContext->AddIndentation();
                 bcatcstr(glsl, "//RSQ\n");
             }
-            CallHelper1("inversesqrt", psInst, 0, 1, 1);
+            CallHelper1("rsqrt", psInst, 0, 1, 1);
             break;
         }
         case OPCODE_EXP:
@@ -2997,7 +2997,7 @@ void ToGLSL::TranslateInstruction(Instruction* psInst, bool isEmbedded /* = fals
                 psContext->AddIndentation();
                 bcatcstr(glsl, "//FRC\n");
             }
-            CallHelper1("fract", psInst, 0, 1, 1);
+            CallHelper1("frac", psInst, 0, 1, 1);
             break;
         }
         case OPCODE_IMAX:
