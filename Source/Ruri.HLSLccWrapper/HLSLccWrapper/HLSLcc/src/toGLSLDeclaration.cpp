@@ -783,7 +783,7 @@ void ToGLSL::AddUserOutput(const Declaration* psDecl)
                                     bcatcstr(glsl, "#endif\n");
                                 }
                                 else
-                                    bformata(glsl, "\t%s vs.%s : %s;\n", type->data, OutputName + 3, OutputName);
+                                    bformata(glsl, "\t%s %s : %s;\n", type->data, OutputName + 3, OutputName);
 
                                 bcstrfree(lq);
                                 bdestroy(layoutQualifier);
@@ -822,7 +822,7 @@ void ToGLSL::AddUserOutput(const Declaration* psDecl)
                 if (HaveInOutLocationQualifier(psContext->psShader->eTargetLanguage))
                 {
                     bool keepLocation = ((psContext->flags & HLSLCC_FLAG_KEEP_VARYING_LOCATIONS) != 0);
-                    bformata(glsl, "layout(location = %d) ", psContext->psDependencies->GetVaryingLocation(std::string(OutputName), psShader->eShaderType, false, keepLocation, psShader->maxSemanticIndex));
+                    //bformata(glsl, "layout(location = %d) ", psContext->psDependencies->GetVaryingLocation(std::string(OutputName), psShader->eShaderType, false, keepLocation, psShader->maxSemanticIndex));
                 }
 
                 if (InOutSupported(psContext->psShader->eTargetLanguage))
@@ -948,7 +948,7 @@ void ToGLSL::DeclareUBOConstants(const uint32_t ui32BindingPoint, const Constant
             bformata(glsl, "UNITY_BINDING(%d) ", slot);
         }
         else
-            bcatcstr(glsl, "layout(std140) ");
+            bcatcstr(glsl, "");
 
         if (slot != 0xffffffff && !isKnown && UseReflection(psContext))
         {
@@ -965,7 +965,7 @@ void ToGLSL::DeclareUBOConstants(const uint32_t ui32BindingPoint, const Constant
 
     const bool reportInReflection = slot != 0xffffffff && !isKnown && UseReflection(psContext);
 
-    bformata(glsl, "uniform %s {\n", cbName.c_str());
+    bformata(glsl, "// %s ConstantBuffers\n", cbName.c_str());
 
     if (psContext->flags & HLSLCC_FLAG_WRAP_UBO)
         bformata(glsl, "#endif\n");
@@ -979,16 +979,16 @@ void ToGLSL::DeclareUBOConstants(const uint32_t ui32BindingPoint, const Constant
             &psCBuf->asVars[i].sType, psCBuf, 0, psContext->flags & HLSLCC_FLAG_WRAP_UBO ? true : false, reportInReflection);
     }
 
-    if (psContext->flags & HLSLCC_FLAG_WRAP_UBO)
-        bformata(glsl, "#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n");
+    //if (psContext->flags & HLSLCC_FLAG_WRAP_UBO)
+    //    bformata(glsl, "#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n");
 
     if (psContext->flags & HLSLCC_FLAG_UNIFORM_BUFFER_OBJECT_WITH_INSTANCE_NAME)
     {
         std::string instanceName = UniformBufferInstanceName(psContext, psCBuf->name);
-        bformata(glsl, "} %s;\n", instanceName.c_str());
+        bformata(glsl, "// %s;\n", instanceName.c_str());
     }
     else
-        bcatcstr(glsl, "};\n");
+        bcatcstr(glsl, "\n");
 
     if (psContext->flags & HLSLCC_FLAG_WRAP_UBO)
         bformata(glsl, "#endif\n");
