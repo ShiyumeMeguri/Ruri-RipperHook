@@ -783,7 +783,7 @@ void ToGLSL::AddUserOutput(const Declaration* psDecl)
                                     bcatcstr(glsl, "#endif\n");
                                 }
                                 else
-                                    bformata(glsl, "%sout %s%s %s;\n", lq, Precision, type->data, OutputName);
+                                    bformata(glsl, "\t%s vs.%s : %s;\n", type->data, OutputName + 3, OutputName);
 
                                 bcstrfree(lq);
                                 bdestroy(layoutQualifier);
