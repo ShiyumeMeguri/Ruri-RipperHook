@@ -1553,6 +1553,7 @@ const char* GetSamplerType(HLSLCrossCompilerContext* psContext,
 
 static const char *GetSamplerPrecision(const HLSLCrossCompilerContext *psContext, REFLECT_RESOURCE_PRECISION ePrec)
 {
+    return "";
     if (!HavePrecisionQualifiers(psContext))
         return " ";
 
@@ -1637,7 +1638,7 @@ static void TranslateResourceTexture(HLSLCrossCompilerContext* psContext, const 
             for (i = psDecl->samplersUsed.begin(); i != psDecl->samplersUsed.end(); i++)
             {
                 std::string tname = TextureSamplerName(&psShader->sInfo, psDecl->asOperands[0].ui32RegisterNumber, *i, 1);
-                bcatcstr(glsl, "uniform ");
+                bcatcstr(glsl, "");
                 bcatcstr(glsl, samplerPrecision);
                 bcatcstr(glsl, samplerTypeName);
                 bcatcstr(glsl, "Shadow ");
@@ -1648,7 +1649,7 @@ static void TranslateResourceTexture(HLSLCrossCompilerContext* psContext, const 
         for (i = psDecl->samplersUsed.begin(); i != psDecl->samplersUsed.end(); i++)
         {
             std::string tname = TextureSamplerName(&psShader->sInfo, psDecl->asOperands[0].ui32RegisterNumber, *i, 0);
-            bcatcstr(glsl, "uniform ");
+            bcatcstr(glsl, "");
             bcatcstr(glsl, samplerPrecision);
             bcatcstr(glsl, samplerTypeName);
             bcatcstr(glsl, " ");
@@ -1659,7 +1660,7 @@ static void TranslateResourceTexture(HLSLCrossCompilerContext* psContext, const 
 
     std::string tname = ResourceName(psContext, RGROUP_TEXTURE, psDecl->asOperands[0].ui32RegisterNumber, 0);
 
-    bcatcstr(glsl, "uniform ");
+    bcatcstr(glsl, "");
     bcatcstr(glsl, samplerPrecision);
     bcatcstr(glsl, samplerTypeName);
     bcatcstr(glsl, " ");
