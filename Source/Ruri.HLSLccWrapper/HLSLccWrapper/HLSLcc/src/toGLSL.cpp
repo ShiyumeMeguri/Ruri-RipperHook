@@ -613,8 +613,8 @@ bool ToGLSL::Translate()
 
     psContext->indent = 0;
 
-    glsl = bfromcstralloc(1024 * 10, "\n");
-    bstring extensions = bfromcstralloc(1024 * 10, GetVersionString(language));
+    glsl = bfromcstralloc(1024 * 10, "");
+    bstring extensions = bfromcstralloc(1024 * 10, "");
     psContext->extensions = extensions;
 
     psContext->glsl = glsl;
@@ -627,20 +627,20 @@ bool ToGLSL::Translate()
     psShader->eTargetLanguage = language;
     psContext->currentPhase = MAIN_PHASE;
 
-    if (psShader->extensions)
-    {
-        if (psContext->flags & HLSLCC_FLAG_NVN_TARGET)
-        {
-            psContext->EnableExtension("GL_ARB_separate_shader_objects");
-            psContext->EnableExtension("GL_NV_desktop_lowp_mediump"); // This flag allow FP16 operations (mediump in GLSL)
-        }
-        if (psShader->extensions->ARB_explicit_attrib_location)
-            psContext->RequireExtension("GL_ARB_explicit_attrib_location");
-        if (psShader->extensions->ARB_explicit_uniform_location)
-            psContext->RequireExtension("GL_ARB_explicit_uniform_location");
-        if (psShader->extensions->ARB_shading_language_420pack)
-            psContext->RequireExtension("GL_ARB_shading_language_420pack");
-    }
+    //if (psShader->extensions)
+    //{
+    //    if (psContext->flags & HLSLCC_FLAG_NVN_TARGET)
+    //    {
+    //        psContext->EnableExtension("GL_ARB_separate_shader_objects");
+    //        psContext->EnableExtension("GL_NV_desktop_lowp_mediump"); // This flag allow FP16 operations (mediump in GLSL)
+    //    }
+    //    if (psShader->extensions->ARB_explicit_attrib_location)
+    //        psContext->RequireExtension("GL_ARB_explicit_attrib_location");
+    //    if (psShader->extensions->ARB_explicit_uniform_location)
+    //        psContext->RequireExtension("GL_ARB_explicit_uniform_location");
+    //    if (psShader->extensions->ARB_shading_language_420pack)
+    //        psContext->RequireExtension("GL_ARB_shading_language_420pack");
+    //}
 
     psContext->ClearDependencyData();
 
@@ -664,31 +664,31 @@ bool ToGLSL::Translate()
         bcatcstr(glsl, "#endif\n");
     }
 
-    if (psContext->psShader->eTargetLanguage != LANG_ES_100)
-    {
-        bool hasConstantBuffers = psContext->psShader->sInfo.psConstantBuffers.size() > 0;
-        if (hasConstantBuffers)
-        {
-            // This value will be replaced at runtime with 0 if we need to disable UBO.
-            bcatcstr(glsl, "#define HLSLCC_ENABLE_UNIFORM_BUFFERS 1\n");
-            bcatcstr(glsl, "#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define UNITY_UNIFORM\n#else\n#define UNITY_UNIFORM uniform\n#endif\n");
-        }
-        bool hasTextures = false;
-        for (i = 0; i < psShader->asPhases[0].psDecl.size(); ++i)
-        {
-            if (psShader->asPhases[0].psDecl[i].eOpcode == OPCODE_DCL_RESOURCE)
-            {
-                hasTextures = true;
-                break;
-            }
-        }
-        if (hasTextures || hasConstantBuffers)
-        {
-            // This value will be replaced at runtime with 0 if we need to disable explicit uniform locations.
-            bcatcstr(glsl, "#define UNITY_SUPPORTS_UNIFORM_LOCATION 1\n");
-            bcatcstr(glsl, "#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define UNITY_LOCATION(x) layout(location = x)\n#define UNITY_BINDING(x) layout(binding = x, std140)\n#else\n#define UNITY_LOCATION(x)\n#define UNITY_BINDING(x) layout(std140)\n#endif\n");
-        }
-    }
+    //if (psContext->psShader->eTargetLanguage != LANG_ES_100)
+    //{
+    //    bool hasConstantBuffers = psContext->psShader->sInfo.psConstantBuffers.size() > 0;
+    //    if (hasConstantBuffers)
+    //    {
+    //        // This value will be replaced at runtime with 0 if we need to disable UBO.
+    //        bcatcstr(glsl, "#define HLSLCC_ENABLE_UNIFORM_BUFFERS 1\n");
+    //        bcatcstr(glsl, "#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define UNITY_UNIFORM\n#else\n#define UNITY_UNIFORM uniform\n#endif\n");
+    //    }
+    //    bool hasTextures = false;
+    //    for (i = 0; i < psShader->asPhases[0].psDecl.size(); ++i)
+    //    {
+    //        if (psShader->asPhases[0].psDecl[i].eOpcode == OPCODE_DCL_RESOURCE)
+    //        {
+    //            hasTextures = true;
+    //            break;
+    //        }
+    //    }
+    //    if (hasTextures || hasConstantBuffers)
+    //    {
+    //        // This value will be replaced at runtime with 0 if we need to disable explicit uniform locations.
+    //        bcatcstr(glsl, "#define UNITY_SUPPORTS_UNIFORM_LOCATION 1\n");
+    //        bcatcstr(glsl, "#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define UNITY_LOCATION(x) layout(location = x)\n#define UNITY_BINDING(x) layout(binding = x, std140)\n#else\n#define UNITY_LOCATION(x)\n#define UNITY_BINDING(x) layout(std140)\n#endif\n");
+    //    }
+    //}
 
     for (ui32Phase = 0; ui32Phase < psShader->asPhases.size(); ui32Phase++)
     {
