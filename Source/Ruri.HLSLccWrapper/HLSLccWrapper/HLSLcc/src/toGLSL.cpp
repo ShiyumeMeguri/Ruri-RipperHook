@@ -30,7 +30,7 @@ void ToGLSL::SetIOPrefixes()
     switch (psContext->psShader->eShaderType)
     {
         case VERTEX_SHADER:
-            psContext->inputPrefix = "in.";
+            psContext->inputPrefix = "ip.";
             psContext->outputPrefix = "vs.";
             break;
 
