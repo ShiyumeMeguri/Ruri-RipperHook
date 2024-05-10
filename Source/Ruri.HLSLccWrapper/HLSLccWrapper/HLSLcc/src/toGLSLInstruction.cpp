@@ -44,10 +44,10 @@ void ToGLSL::AddOpAssignToDestWithMask(const Operand* psDest,
         char const *t, *s;
         switch (eDestDataType)
         {
-            case SVT_BOOL: t = "bvec4"; break;
-            case SVT_INT: t = "ivec4"; break;
-            case SVT_FLOAT: t = "vec4"; break;
-            case SVT_UINT: t = "uvec4"; break;
+            case SVT_BOOL: t = "bool4"; break;
+            case SVT_INT: t = "int4"; break;
+            case SVT_FLOAT: t = "float4"; break;
+            case SVT_UINT: t = "uint4"; break;
             default: ASSERT(0); t = NULL; break;
         }
         switch (ui32DestElementCount)
@@ -875,9 +875,9 @@ void ToGLSL::TranslateTexelFetch(
             bcatcstr(glsl, ", ");
             TranslateOperand(&psInst->asOperands[1], TO_FLAG_INTEGER, OPERAND_4_COMPONENT_MASK_A);
             if (hasOffset && psBinding->eDimension == REFLECT_RESOURCE_DIMENSION_TEXTURE3D)
-                bformata(glsl, ", ivec3(%d, %d, %d)", psInst->iUAddrOffset, psInst->iVAddrOffset, psInst->iWAddrOffset);
+                bformata(glsl, ", int3(%d, %d, %d)", psInst->iUAddrOffset, psInst->iVAddrOffset, psInst->iWAddrOffset);
             if (hasOffset && psBinding->eDimension == REFLECT_RESOURCE_DIMENSION_TEXTURE2DARRAY)
-                bformata(glsl, ", ivec3(%d, %d)", psInst->iUAddrOffset, psInst->iVAddrOffset);
+                bformata(glsl, ", int3(%d, %d)", psInst->iUAddrOffset, psInst->iVAddrOffset);
             bcatcstr(glsl, ")");
             break;
         }
@@ -892,7 +892,7 @@ void ToGLSL::TranslateTexelFetch(
             if (hasOffset && psBinding->eDimension == REFLECT_RESOURCE_DIMENSION_TEXTURE1DARRAY)
                 bformata(glsl, ", %d", psInst->iUAddrOffset);
             if (hasOffset && psBinding->eDimension == REFLECT_RESOURCE_DIMENSION_TEXTURE2D)
-                bformata(glsl, ", ivec3(%d, %d)", psInst->iUAddrOffset, psInst->iVAddrOffset);
+                bformata(glsl, ", int3(%d, %d)", psInst->iUAddrOffset, psInst->iVAddrOffset);
             bcatcstr(glsl, ")");
             break;
         }
@@ -1024,14 +1024,14 @@ void ToGLSL::GetResInfoData(Instruction* psInst, int index, int destElem)
             if (eResInfoReturnType == RESINFO_INSTRUCTION_RETURN_UINT)
             {
                 if (HaveUnsignedTypes(psContext->psShader->eTargetLanguage))
-                    bformata(glsl, "uvec%d(", dim);
+                    bformata(glsl, "uint%d(", dim);
                 else
-                    bformata(glsl, "ivec%d(", dim);
+                    bformata(glsl, "int%d(", dim);
             }
             else if (eResInfoReturnType == RESINFO_INSTRUCTION_RETURN_RCPFLOAT)
-                bformata(glsl, "vec%d(1.0) / vec%d(", dim, dim);
+                bformata(glsl, "float%d(1.0) / float%d(", dim, dim);
             else
-                bformata(glsl, "vec%d(", dim);
+                bformata(glsl, "float%d(", dim);
 
             if (isUAV)
                 bcatcstr(glsl, "imageSize(");
@@ -1127,7 +1127,7 @@ void ToGLSL::TranslateTextureSample(Instruction* psInst,
     {
         case RESOURCE_DIMENSION_TEXTURE1D:
         {
-            depthCmpCoordType = "vec2";
+            depthCmpCoordType = "float2";
             gradSwizzle = ".x";
             ui32NumOffsets = 1;
             if (!iHaveOverloadedTexFuncs)
@@ -1142,7 +1142,7 @@ void ToGLSL::TranslateTextureSample(Instruction* psInst,
         }
         case RESOURCE_DIMENSION_TEXTURE2D:
         {
-            depthCmpCoordType = "vec3";
+            depthCmpCoordType = "float3";
             gradSwizzle = ".xy";
             ui32NumOffsets = 2;
             if (!iHaveOverloadedTexFuncs)
@@ -1157,7 +1157,7 @@ void ToGLSL::TranslateTextureSample(Instruction* psInst,
         }
         case RESOURCE_DIMENSION_TEXTURECUBE:
         {
-            depthCmpCoordType = "vec4";
+            depthCmpCoordType = "float4";
             gradSwizzle = ".xyz";
             ui32NumOffsets = 3;
             if (!iHaveOverloadedTexFuncs)
@@ -1168,7 +1168,7 @@ void ToGLSL::TranslateTextureSample(Instruction* psInst,
         }
         case RESOURCE_DIMENSION_TEXTURE3D:
         {
-            depthCmpCoordType = "vec4";
+            depthCmpCoordType = "float4";
             gradSwizzle = ".xyz";
             ui32NumOffsets = 3;
             if (!iHaveOverloadedTexFuncs)
@@ -1179,14 +1179,14 @@ void ToGLSL::TranslateTextureSample(Instruction* psInst,
         }
         case RESOURCE_DIMENSION_TEXTURE1DARRAY:
         {
-            depthCmpCoordType = "vec3";
+            depthCmpCoordType = "float3";
             gradSwizzle = ".x";
             ui32NumOffsets = 1;
             break;
         }
         case RESOURCE_DIMENSION_TEXTURE2DARRAY:
         {
-            depthCmpCoordType = "vec4";
+            depthCmpCoordType = "float4";
             gradSwizzle = ".xy";
             ui32NumOffsets = 2;
             break;
@@ -1310,7 +1310,7 @@ void ToGLSL::TranslateTextureSample(Instruction* psInst,
     // Add LOD/grad parameters based on the flags
     if (needsLodWorkaround)
     {
-        bcatcstr(glsl, ", vec2(0.0, 0.0), vec2(0.0, 0.0)");
+        bcatcstr(glsl, ", float2(0.0, 0.0), float2(0.0, 0.0)");
     }
     else if (ui32Flags & TEXSMP_FLAG_LOD)
     {
@@ -1331,11 +1331,11 @@ void ToGLSL::TranslateTextureSample(Instruction* psInst,
     }
     else if (ui32Flags & TEXSMP_FLAG_GRAD)
     {
-        bcatcstr(glsl, ", vec4(");
+        bcatcstr(glsl, ", float4(");
         TranslateOperand(psSrcDx, TO_AUTO_BITCAST_TO_FLOAT);
         bcatcstr(glsl, ")");
         bcatcstr(glsl, gradSwizzle);
-        bcatcstr(glsl, ", vec4(");
+        bcatcstr(glsl, ", float4(");
         TranslateOperand(psSrcDy, TO_AUTO_BITCAST_TO_FLOAT);
         bcatcstr(glsl, ")");
         bcatcstr(glsl, gradSwizzle);
@@ -1351,13 +1351,13 @@ void ToGLSL::TranslateTextureSample(Instruction* psInst,
         }
         else if (ui32NumOffsets == 2)
         {
-            bformata(glsl, ", ivec2(%d, %d)",
+            bformata(glsl, ", int2(%d, %d)",
                 psInst->iUAddrOffset,
                 psInst->iVAddrOffset);
         }
         else if (ui32NumOffsets == 3)
         {
-            bformata(glsl, ", ivec3(%d, %d, %d)",
+            bformata(glsl, ", int3(%d, %d, %d)",
                 psInst->iUAddrOffset,
                 psInst->iVAddrOffset,
                 psInst->iWAddrOffset);
@@ -3361,7 +3361,7 @@ void ToGLSL::TranslateInstruction(Instruction* psInst, bool isEmbedded /* = fals
             if (numoverall_elements == 1)
                 bformata(glsl, "int(");
             else
-                bformata(glsl, "ivec%d(", numoverall_elements);
+                bformata(glsl, "int%d(", numoverall_elements);
 
             k = 0;
             for (i = 0; i < 4; ++i)
@@ -4077,11 +4077,11 @@ void ToGLSL::TranslateInstruction(Instruction* psInst, bool isEmbedded /* = fals
                 if (psContext->psShader->ui32MajorVersion == 1)
                 {
                     /* SM1.X only kills based on the rgb channels */
-                    bcatcstr(glsl, ").xyz, vec3(0)))){discard;}\n");
+                    bcatcstr(glsl, ").xyz, float3(0)))){discard;}\n");
                 }
                 else
                 {
-                    bcatcstr(glsl, "), vec4(0)))){discard;}\n");
+                    bcatcstr(glsl, "), float4(0)))){discard;}\n");
                 }
             }
             else if (psInst->eBooleanTestType == INSTRUCTION_TEST_ZERO)
@@ -4479,7 +4479,7 @@ void ToGLSL::TranslateInstruction(Instruction* psInst, bool isEmbedded /* = fals
                 psInst->asOperands[0].eSelMode = OPERAND_4_COMPONENT_MASK_MODE;
                 AddAssignToDest(&psInst->asOperands[0], SVT_UINT, 1, psInst->ui32PreciseMask, &numParenthesis);
 
-                bcatcstr(glsl, "packHalf2x16(vec2(");
+                bcatcstr(glsl, "packHalf2x16(float2(");
                 TranslateOperand(&psInst->asOperands[1], TO_FLAG_NONE, (1 << i));
                 bcatcstr(glsl, ", 0.0))");
                 AddAssignPrologue(numParenthesis);
@@ -4573,9 +4573,9 @@ void ToGLSL::TranslateInstruction(Instruction* psInst, bool isEmbedded /* = fals
             }
             psContext->AddIndentation();
             TranslateOperand(&psInst->asOperands[0], TO_FLAG_DESTINATION);
-            bcatcstr(glsl, " = dot(vec2(");
+            bcatcstr(glsl, " = dot(float2(");
             TranslateOperand(&psInst->asOperands[1], TO_FLAG_NONE);
-            bcatcstr(glsl, "), vec2(");
+            bcatcstr(glsl, "), float2(");
             TranslateOperand(&psInst->asOperands[2], TO_FLAG_NONE);
             bcatcstr(glsl, ")) + ");
             TranslateOperand(&psInst->asOperands[3], TO_FLAG_NONE);

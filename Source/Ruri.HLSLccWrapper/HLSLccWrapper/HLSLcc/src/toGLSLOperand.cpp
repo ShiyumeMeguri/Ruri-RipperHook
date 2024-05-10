@@ -618,7 +618,7 @@ void ToGLSL::TranslateVariableNameWithMask(bstring glsl, const Operand* psOperan
         if (((numComponents < requestedComponents) || (scalarWithSwizzle != 0)) && (hasCtor == 0))
         {
 //          ASSERT(numComponents == 1);
-            bformata(glsl, "%s(", GetConstructorForType(psContext, eType, requestedComponents, false));
+            bformata(glsl, "(");
             numParenthesis++;
             hasCtor = 1;
         }
@@ -670,7 +670,7 @@ void ToGLSL::TranslateVariableNameWithMask(bstring glsl, const Operand* psOperan
             }
             else
             {
-                bformata(glsl, "dvec4(%.17g, %.17g, %.17g, %.17g)",
+                bformata(glsl, "double4(%.17g, %.17g, %.17g, %.17g)",
                     psOperand->adImmediates[0],
                     psOperand->adImmediates[1],
                     psOperand->adImmediates[2],
@@ -1354,7 +1354,7 @@ void ToGLSL::TranslateVariableNameWithMask(bstring glsl, const Operand* psOperan
                 // On ES2 we can pass this as an argument to a function, e.g. fake integer operations that we do. See case 1124159.
                 bcatcstr(glsl, "null");
                 bool alreadyDeclared = false;
-                std::string toDeclare = "vec4 null;";
+                std::string toDeclare = "float4 null;";
                 for (size_t i = 0; i < m_AdditionalDefinitions.size(); ++i)
                 {
                     if (toDeclare == m_AdditionalDefinitions[i])

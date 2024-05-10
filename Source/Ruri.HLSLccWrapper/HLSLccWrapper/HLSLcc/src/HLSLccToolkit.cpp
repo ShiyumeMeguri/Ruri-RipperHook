@@ -57,6 +57,7 @@ namespace HLSLcc
 
     const char * GetConstructorForTypeGLSL(const HLSLCrossCompilerContext *context, const SHADER_VARIABLE_TYPE eType, const int components, bool useGLSLPrecision)
     {
+        return GetConstructorForTypeMetal(eType, components);
         static const char * const uintTypes[] = { " ", "uint", "uvec2", "uvec3", "uvec4" };
         static const char * const uint16Types[] = { " ", "mediump uint", "mediump uvec2", "mediump uvec3", "mediump uvec4" };
         static const char * const intTypes[] = { " ", "int", "ivec2", "ivec3", "ivec4" };
@@ -166,13 +167,11 @@ namespace HLSLcc
             switch (eBaseType)
             {
                 case SVT_FLOAT:
-                    oss << "mat" << columns << "x" << rows;
+                    oss << "float" << columns << "x" << rows;
                     break;
                 case SVT_FLOAT16:
-                    oss << "mediump mat" << columns << "x" << rows;
-                    break;
                 case SVT_FLOAT10:
-                    oss << "lowp mat" << columns << "x" << rows;
+                    oss << "half" << columns << "x" << rows;
                     break;
                 default:
                     ASSERT(0);

@@ -330,10 +330,10 @@ static void AddVersionDependentCode(HLSLCrossCompilerContext* psContext)
     if (psContext->psShader->eShaderType == PIXEL_SHADER && psContext->psShader->eTargetLanguage >= LANG_150)
     {
         if (psContext->flags & HLSLCC_FLAG_ORIGIN_UPPER_LEFT)
-            bcatcstr(glsl, "layout(origin_upper_left) in vec4 gl_FragCoord;\n");
+            bcatcstr(glsl, "layout(origin_upper_left) in float4 gl_FragCoord;\n");
 
         if (psContext->flags & HLSLCC_FLAG_PIXEL_CENTER_INTEGER)
-            bcatcstr(glsl, "layout(pixel_center_integer) in vec4 gl_FragCoord;\n");
+            bcatcstr(glsl, "layout(pixel_center_integer) in float4 gl_FragCoord;\n");
     }
 
 
@@ -477,13 +477,13 @@ static void DoHullShaderPassthrough(HLSLCrossCompilerContext *psContext)
         {
             default:
             case INOUT_COMPONENT_FLOAT32:
-                Type = ui32NumComponents > 1 ? "vec" : "float";
+                Type = ui32NumComponents > 1 ? "float" : "float";
                 break;
             case INOUT_COMPONENT_SINT32:
-                Type = ui32NumComponents > 1 ? "ivec" : "int";
+                Type = ui32NumComponents > 1 ? "int" : "int";
                 break;
             case INOUT_COMPONENT_UINT32:
-                Type = ui32NumComponents > 1 ? "uvec" : "uint";
+                Type = ui32NumComponents > 1 ? "uint" : "uint";
                 break;
         }
         if ((psSig->eSystemValueType == NAME_POSITION || psSig->semanticName == "POS") && psSig->ui32SemanticIndex == 0)
@@ -650,7 +650,7 @@ bool ToGLSL::Translate()
         HaveLimitedInOutLocationQualifier(language, psShader->extensions) &&
         psContext->flags & HLSLCC_FLAG_NVN_TARGET)
     {
-        bcatcstr(glsl, "out gl_PerVertex { vec4 gl_Position; };\n");
+        bcatcstr(glsl, "out gl_PerVertex { float4 gl_Position; };\n");
     }
 
     if (!psContext->psDependencies->m_ExtBlendModes.empty() && psShader->eShaderType == PIXEL_SHADER)
@@ -1119,55 +1119,55 @@ void ToGLSL::UseExtraFunctionDependency(const std::string &name)
     if (name == "trunc")
     {
         PrintTrunc(code, "float");
-        PrintTrunc(code, "vec2");
-        PrintTrunc(code, "vec3");
-        PrintTrunc(code, "vec4");
+        PrintTrunc(code, "float2");
+        PrintTrunc(code, "float3");
+        PrintTrunc(code, "float4");
     }
     else if (name == "roundEven")
     {
         bformata(code, "float roundEven(float x) { float y = floor(x + 0.5); return (y - x == 0.5) ? floor(0.5*y) * 2.0 : y; }\n");
-        PrintComponentWrapper1(code, "roundEven", "vec2", "vec3", "vec4");
+        PrintComponentWrapper1(code, "roundEven", "float2", "float3", "float4");
     }
     else if (name == "op_modi")
     {
         bformata(code, "const int BITWISE_BIT_COUNT = 32;\nint op_modi(int x, int y) { return x - y * (x / y); }\n");
-        PrintComponentWrapper2(code, "op_modi", "ivec2", "ivec3", "ivec4");
+        PrintComponentWrapper2(code, "op_modi", "int2", "int3", "int4");
     }
     else if (name == "op_and")
     {
         UseExtraFunctionDependency("op_modi");
 
         bformata(code, "int op_and(int a, int b) { int result = 0; int n = 1; for (int i = 0; i < BITWISE_BIT_COUNT; i++) { if ((op_modi(a, 2) != 0) && (op_modi(b, 2) != 0)) { result += n; } a = a / 2; b = b / 2; n = n * 2; if (!(a > 0 && b > 0)) { break; } } return result; }\n");
-        PrintComponentWrapper2(code, "op_and", "ivec2", "ivec3", "ivec4");
+        PrintComponentWrapper2(code, "op_and", "int2", "int3", "int4");
     }
     else if (name == "op_or")
     {
         UseExtraFunctionDependency("op_modi");
 
         bformata(code, "int op_or(int a, int b) { int result = 0; int n = 1; for (int i = 0; i < BITWISE_BIT_COUNT; i++) { if ((op_modi(a, 2) != 0) || (op_modi(b, 2) != 0)) { result += n; } a = a / 2; b = b / 2; n = n * 2; if (!(a > 0 || b > 0)) { break; } } return result; }\n");
-        PrintComponentWrapper2(code, "op_or", "ivec2", "ivec3", "ivec4");
+        PrintComponentWrapper2(code, "op_or", "int2", "int3", "int4");
     }
     else if (name == "op_xor")
     {
         UseExtraFunctionDependency("op_and");
 
         bformata(code, "int op_xor(int a, int b) { return (a + b - 2 * op_and(a, b)); }\n");
-        PrintComponentWrapper2(code, "op_xor", "ivec2", "ivec3", "ivec4");
+        PrintComponentWrapper2(code, "op_xor", "int2", "int3", "int4");
     }
     else if (name == "op_shr")
     {
         bformata(code, "int op_shr(int a, int b) { return int(floor(float(a) / pow(2.0, float(b)))); }\n");
-        PrintComponentWrapper2(code, "op_shr", "ivec2", "ivec3", "ivec4");
+        PrintComponentWrapper2(code, "op_shr", "int2", "int3", "int4");
     }
     else if (name == "op_shl")
     {
         bformata(code, "int op_shl(int a, int b) { return int(floor(float(a) * pow(2.0, float(b)))); }\n");
-        PrintComponentWrapper2(code, "op_shl", "ivec2", "ivec3", "ivec4");
+        PrintComponentWrapper2(code, "op_shl", "int2", "int3", "int4");
     }
     else if (name == "op_not")
     {
         bformata(code, "int op_not(int value) { return -value - 1; }\n");
-        PrintComponentWrapper1(code, "op_not", "ivec2", "ivec3", "ivec4");
+        PrintComponentWrapper1(code, "op_not", "int2", "int3", "int4");
     }
     else if (name == "int_bitfieldInsert")
     {
