@@ -1,4 +1,5 @@
 ﻿using Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
+using Ruri.RipperHook.HookUtils.GameBundleHook;
 using Ruri.RipperHook.HoukaiCommon;
 using Ruri.RipperHook.UnityMihoyo;
 
@@ -17,6 +18,7 @@ public partial class Houkai_3_8_Hook : RipperHook
     protected override void InitAttributeHook()
     {
         additionalNamespaces.Add(typeof(HoukaiCommon_Hook).Namespace);
+        AddExtraHook(typeof(GameBundleHook).Namespace, () => { GameBundleHook.CustomFilePreInitialize = HoukaiCommon_Hook.CustomFilePreInitialize; });
         AddExtraHook(typeof(BundleFileBlockReaderHook).Namespace, () => { BundleFileBlockReaderHook.CustomBlockCompression = MihoyoCommon.CustomBlockCompression; });
         base.InitAttributeHook();
     }
