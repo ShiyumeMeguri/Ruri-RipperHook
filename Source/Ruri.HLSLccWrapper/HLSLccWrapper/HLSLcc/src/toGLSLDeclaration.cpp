@@ -1481,7 +1481,7 @@ const char* GetSamplerType(HLSLCrossCompilerContext* psContext,
                 case RETURN_TYPE_UINT:
                     return "usamplerCube";
                 default:
-                    return "samplerCube";
+                    return "samplerCUBE";
             }
             break;
         }
