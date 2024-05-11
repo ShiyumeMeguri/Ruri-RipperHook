@@ -1259,8 +1259,10 @@ void ToGLSL::TranslateTextureSample(Instruction* psInst,
             ui32Flags & (TEXSMP_FLAG_LOD | TEXSMP_FLAG_FIRSTLOD | TEXSMP_FLAG_GRAD))
             ext = "EXT";
 
+        funcName = "texCUBE";
+
         if (ui32Flags & (TEXSMP_FLAG_LOD | TEXSMP_FLAG_FIRSTLOD) && !needsLodWorkaroundES2)
-            bformata(glsl, "%sLod%s%s(", funcName, ext, offset);
+            bformata(glsl, "%slod%s%s(", funcName, ext, offset);
         else if (ui32Flags & TEXSMP_FLAG_GRAD)
             bformata(glsl, "%sGrad%s%s(", funcName, ext, offset);
         else
