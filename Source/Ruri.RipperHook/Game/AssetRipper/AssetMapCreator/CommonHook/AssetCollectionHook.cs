@@ -17,8 +17,14 @@ public partial class AR_AssetMapCreator_Hook
         }
         assetClassIDLookup[bundleName].Add((ClassIDType)asset.ClassID);
         ResolveDependencies(asset.Collection);
+        string assetName = asset.ToString() == null ? "" : asset.ToString();
+        if (!assetListLookup.ContainsKey(bundleName))
+        {
+            assetListLookup[bundleName] = new HashSet<string>();
+        }
+        assetListLookup[bundleName].Add(assetName);
     }
-	
+
     private void ResolveDependencies(AssetCollection assetCollection)
     {
         if (!assetDependenciesLookup.ContainsKey(assetCollection.Bundle.Name))

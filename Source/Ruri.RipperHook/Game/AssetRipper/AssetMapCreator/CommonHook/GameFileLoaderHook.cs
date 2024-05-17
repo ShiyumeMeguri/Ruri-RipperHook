@@ -17,6 +17,7 @@ public partial class AR_AssetMapCreator_Hook
         }
         ExportDictionaryToFile(assetClassIDLookup, Path.Combine(outputPath, "AssetClassIDLookup.txt"));
         ExportDictionaryToFile(assetDependenciesLookup, Path.Combine(outputPath, "AssetDependenciesLookup.txt"));
+        ExportDictionaryToFile(assetListLookup, Path.Combine(outputPath, "AssetListLookup.txt"));
     }
 
     public static void ExportDictionaryToFile<T>(Dictionary<string, HashSet<T>> dictionary, string filePath)
