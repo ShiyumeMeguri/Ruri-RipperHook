@@ -1,7 +1,7 @@
 using AssetRipper.Assets;
-using AssetRipper.Assets.Export;
 using AssetRipper.Export.Modules.Shaders.Exporters;
 using AssetRipper.Export.Modules.Shaders.IO;
+using AssetRipper.Export.UnityProjects;
 using AssetRipper.Export.UnityProjects.Shaders;
 using AssetRipper.SourceGenerated.Classes.ClassID_48;
 using AssetRipper.SourceGenerated.Extensions.Enums.Shader;

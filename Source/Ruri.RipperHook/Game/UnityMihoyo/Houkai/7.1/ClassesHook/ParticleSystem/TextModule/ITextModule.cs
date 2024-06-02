@@ -1,5 +1,4 @@
 using AssetRipper.Assets;
-using AssetRipper.Assets.Export.Yaml;
 using AssetRipper.Assets.IO.Writing;
 using AssetRipper.IO.Endian;
 using AssetRipper.SourceGenerated.Subclasses.PPtr_Camera;
@@ -7,7 +6,7 @@ using AssetRipper.SourceGenerated.Subclasses.PPtr_GameObject;
 
 namespace Ruri.RipperHook.Houkai_7_1.Classes.Subclasses.TextModule;
 
-public interface ITextModule : IUnityAssetBase, IEndianSpanReadable, IAssetWritable, IYamlExportable
+public interface ITextModule : IUnityAssetBase, IEndianSpanReadable, IAssetWritable
 {
     bool Enabled { get; set; }
     PPtr_Camera_5 SceneCamera { get; set; }
