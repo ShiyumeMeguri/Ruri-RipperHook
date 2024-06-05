@@ -28,7 +28,15 @@ public abstract class RipperHook
         namespacesToConsider.AddRange(additionalNamespaces); // 添加一些通用空间 避免写编写重复代码
         namespacesToConsider = namespacesToConsider.Where(ns => !excludedNamespaces.Contains(ns)).ToList(); // 排除继承等情况导致重复的hook
 
-        var methods = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace != null && namespacesToConsider.Any(ns => t.Namespace.StartsWith(ns))).SelectMany(t => t.GetMethods(bindingFlags));
+        var assembly = this.GetType().Assembly; // 要用this获取真实类型
+        var types = assembly.GetTypes();
+
+        // 包括处理嵌套类
+        var allTypes = types.Concat(types.SelectMany(t => t.GetNestedTypes(bindingFlags)));
+        var methods = allTypes
+            .Where(t => t.Namespace != null && namespacesToConsider.Any(ns => t.Namespace.StartsWith(ns)))
+            .SelectMany(t => t.GetMethods(bindingFlags));
+
         // 方法转发处理
         var targetMethods = methods.Where(m => m.GetCustomAttributes<RetargetMethodAttribute>(true).Any());
         foreach (var methodDest in targetMethods)
