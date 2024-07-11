@@ -20,9 +20,9 @@ internal static class Program
         RuriRuntimeHook.Init(GameHookType.AR_BundledAssetsExportMode);
         RuriRuntimeHook.Init(GameHookType.AR_ExportDirectly);
         RuriRuntimeHook.Init(GameHookType.AR_AssetMapCreator);
-        RuriRuntimeHook.Init(GameHookType.AR_ShaderDecompiler);
+        //RuriRuntimeHook.Init(GameHookType.AR_ShaderDecompiler);
         //RuriRuntimeHook.Init(GameHookType.AR_USCShaderDecompiler);
-        RuriRuntimeHook.Init(GameHookType.GirlsFrontline2_1_0);
+        RuriRuntimeHook.Init(GameHookType.StarRail_2_0);
     }
 
     private static void RunAssetRipper()

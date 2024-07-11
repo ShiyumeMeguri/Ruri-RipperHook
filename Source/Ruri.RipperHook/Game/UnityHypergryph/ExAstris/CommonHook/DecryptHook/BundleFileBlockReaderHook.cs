@@ -1,5 +1,4 @@
-﻿using AsmResolver.PE.DotNet.Metadata.Blob;
-using AssetRipper.IO.Files.BundleFiles;
+﻿using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Exceptions;
 using AssetRipper.IO.Files.Streams.Smart;

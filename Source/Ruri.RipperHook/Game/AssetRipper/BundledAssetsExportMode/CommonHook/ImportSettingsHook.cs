@@ -1,5 +1,6 @@
 using AssetRipper.Import.Configuration;
 using AssetRipper.Primitives;
+using AssetRipper.Processing.Configuration;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 
@@ -7,7 +8,7 @@ namespace Ruri.RipperHook.AR_BundledAssetsExportMode;
 
 public partial class AR_BundledAssetsExportMode_Hook
 {
-    [RetargetMethodCtorFunc(typeof(ImportSettings))]
+    [RetargetMethodCtorFunc(typeof(ProcessingSettings))]
     public static bool Ctor(ILContext il)
     {
         var ilCursor = new ILCursor(il);
@@ -15,7 +16,7 @@ public partial class AR_BundledAssetsExportMode_Hook
         ilCursor.GotoPrev();
         ilCursor.Emit(OpCodes.Ldarg_0);
         ilCursor.Emit(OpCodes.Ldc_I4_2);
-        var destMethod = typeof(ImportSettings).GetMethod("set_BundledAssetsExportMode");
+        var destMethod = typeof(ProcessingSettings).GetMethod("set_BundledAssetsExportMode");
         ilCursor.Emit(OpCodes.Call, destMethod);
         return true;
     }

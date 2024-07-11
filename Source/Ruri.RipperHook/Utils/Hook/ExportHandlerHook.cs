@@ -42,7 +42,7 @@ public class ExportHandlerHook : CommonHook
         yield return new MainAssetProcessor();
         yield return new AnimatorControllerProcessor();
         yield return new AudioMixerProcessor();
-        yield return new EditorFormatProcessor(Settings.ImportSettings.BundledAssetsExportMode);
+        yield return new EditorFormatProcessor(Settings.ProcessingSettings.BundledAssetsExportMode);
 
         // 自定义处理 这里不能利用委托的 += 因为这会导致只接收到最后次返回的值
         foreach (var CustomAssetProcessor in CustomAssetProcessors)
