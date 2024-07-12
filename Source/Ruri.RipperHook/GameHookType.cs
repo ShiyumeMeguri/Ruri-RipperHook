@@ -20,4 +20,5 @@ public enum GameHookType
     Houkai_3_8,
     Houkai_7_1,
     Houkai_7_2,
+    Zenless_1_0,
 }
