@@ -16,6 +16,9 @@ public class BundleFileBlockReaderHook : CommonHook
 
     public delegate void BlockCompressionDelegate(Stream mStream, StorageBlock block, SmartStream cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex);
 
+    /// <summary>
+    /// 针对StorageBlock压缩加密的回调 解决解压错误不支持的类型 5 这种错误的自定义解压处理
+    /// </summary>
     public static BlockCompressionDelegate CustomBlockCompression;
 
     [RetargetMethod(TYPE, nameof(ReadEntry))]

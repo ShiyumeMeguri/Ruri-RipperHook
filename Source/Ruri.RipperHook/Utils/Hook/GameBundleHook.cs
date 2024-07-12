@@ -16,6 +16,9 @@ public class GameBundleHook : CommonHook
 
     public delegate void FilePreInitializeDelegate(GameBundle _this, IEnumerable<string> paths, List<FileBase> fileStack, IDependencyProvider? dependencyProvider);
 
+    /// <summary>
+    /// 自定义文件处理 比如原神的Blk文件 可以通过这个回调决定如何初始化
+    /// </summary>
     public static FilePreInitializeDelegate CustomFilePreInitialize;
 
     [RetargetMethod(typeof(GameBundle), nameof(InitializeFromPaths))]
@@ -27,7 +30,9 @@ public class GameBundleHook : CommonHook
         var fileStack = new List<FileBase>();
         UnityVersion defaultVersion = initializer is null ? default : initializer.DefaultVersion;
 
+        // 修改开始
         CustomFilePreInitialize(_this, paths, fileStack, initializer?.DependencyProvider);
+        // 修改结束 其他的是源码没动
 
         while (fileStack.Count > 0)
             switch (RemoveLastItem(fileStack))

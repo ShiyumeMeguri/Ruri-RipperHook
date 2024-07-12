@@ -8,9 +8,12 @@ public class PlatformGameStructureHook_CollectStreamingAssets : CommonHook
 {
     private static readonly MethodInfo CollectAssetBundlesRecursively = typeof(PlatformGameStructure).GetMethod("CollectAssetBundlesRecursively", ReflectionExtensions.PrivateInstanceBindFlag());
 
-    // 自定义流文件夹检测
     public delegate bool CollectStreamingAssetsDelegate(PlatformGameStructure _this, IDictionary<string, string> files, MethodInfo CollectAssetBundlesRecursively);
 
+    /// <summary>
+    /// 自定义流文件夹检测 针对少前的LocalCache文件夹读取AB包 或者恋活的
+    /// 如果游戏在StreamingAssets文件夹以外的地方放了AB包默认是检测不到的
+    /// </summary>
     public static CollectStreamingAssetsDelegate CustomCollectStreamingAssets;
 
     [RetargetMethod(typeof(PlatformGameStructure), nameof(CollectStreamingAssets))]

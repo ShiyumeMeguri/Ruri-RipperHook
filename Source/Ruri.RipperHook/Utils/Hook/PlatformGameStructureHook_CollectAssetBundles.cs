@@ -7,9 +7,12 @@ public class PlatformGameStructureHook_CollectAssetBundles : CommonHook
 {
     private static readonly MethodInfo AddAssetBundle = typeof(PlatformGameStructure).GetMethod("AddAssetBundle", ReflectionExtensions.PrivateInstanceBindFlag());
 
-    // 自定义文件检测 针对XOR这种无法识别的情况用
     public delegate bool AssetBundlesCheckDelegate(FileInfo file);
 
+    /// <summary>
+    /// 自定义AB文件检测 针对少前2的XOR这种无法识别包的情况用
+    /// 可以改为用后缀识别
+    /// </summary>
     public static AssetBundlesCheckDelegate CustomAssetBundlesCheck;
 
     [RetargetMethod(typeof(PlatformGameStructure), nameof(CollectAssetBundles))]

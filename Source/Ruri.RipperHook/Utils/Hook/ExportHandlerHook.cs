@@ -18,7 +18,7 @@ public class ExportHandlerHook : CommonHook
 
     public static List<AssetProcessorDelegate> CustomAssetProcessors = new List<AssetProcessorDelegate>();
 
-    // 协程插入不现实 PC和state控制地狱级
+    // 协程插入代码不现实 PC和state控制地狱级 所以就直接复制源码过来改了
     [RetargetMethod(typeof(ExportHandler), nameof(Process))]
     private void Process(GameData gameData)
     {
