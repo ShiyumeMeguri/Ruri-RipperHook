@@ -28,7 +28,6 @@
         <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Assets\AssetRipper.Assets.csproj" />
         <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Export.UnityProjects\AssetRipper.Export.UnityProjects.csproj" />
         <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.GUI.Web\AssetRipper.GUI.Web.csproj" />
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.IO.Endian\AssetRipper.IO.Endian.csproj" />
         <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.IO.Files\AssetRipper.IO.Files.csproj" />
         <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Numerics\AssetRipper.Numerics.csproj" />
         <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SerializationLogic\AssetRipper.SerializationLogic.csproj" />
