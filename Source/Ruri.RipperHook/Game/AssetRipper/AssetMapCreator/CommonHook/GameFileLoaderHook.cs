@@ -1,14 +1,11 @@
-﻿using AssetRipper.Assets;
-using AssetRipper.Assets.Collections;
-using AssetRipper.GUI.Web;
-using AssetRipper.SourceGenerated;
+﻿using AssetRipper.GUI.Web;
 
 namespace Ruri.RipperHook.AR_AssetMapCreator;
 
 public partial class AR_AssetMapCreator_Hook
 {
-    [RetargetMethod(typeof(GameFileLoader), nameof(Export), isReturn: false)]
-    public static void Export(string path)
+    [RetargetMethod(typeof(GameFileLoader), nameof(GameFileLoader.ExportUnityProject), isReturn: false)]
+    public static void ExportUnityProject(string path)
     {
         var outputPath = path + $"RuriInfo";
         if (!Directory.Exists(outputPath))

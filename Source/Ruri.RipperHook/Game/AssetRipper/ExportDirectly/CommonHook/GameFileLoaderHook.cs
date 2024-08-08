@@ -18,6 +18,6 @@ public partial class AR_ExportDirectly_Hook
             Directory.CreateDirectory(outputPath);
         }
         Logger.Info($"直接导出到了 : {outputPath}");
-        GameFileLoader.Export(outputPath);
+        GameFileLoader.ExportUnityProject(outputPath);
     }
 }

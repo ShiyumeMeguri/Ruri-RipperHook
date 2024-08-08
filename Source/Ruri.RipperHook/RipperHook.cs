@@ -53,7 +53,6 @@ public abstract class RipperHook
                 {
                     methodSrc = attr.SourceType.GetMethod(attr.SourceMethodName, bindingFlags, attr.MethodParameters);
                 }
-
                 int srcParameterCount = methodSrc.GetParameters().Length;
                 int destParameterCount = methodDest.GetParameters().Length;
                 if (srcParameterCount != destParameterCount)
