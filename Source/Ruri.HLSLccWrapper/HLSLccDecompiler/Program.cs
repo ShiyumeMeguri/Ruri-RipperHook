@@ -1,4 +1,7 @@
 ﻿using HLSLccWrapper;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace HLSLccDecompiler
 {
@@ -12,7 +15,33 @@ namespace HLSLccDecompiler
                 return;
             }
 
-            string inputFilePath = args[0];
+            string inputFilePath = null;
+            string outputDirectory = null;
+            bool outputToConsole = false;
+
+            // 解析参数
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == "-o" && i + 1 < args.Length)
+                {
+                    outputDirectory = args[i + 1];
+                    i++; // 跳过下一个参数
+                }
+                else if (args[i] == "-r")
+                {
+                    outputToConsole = true;
+                }
+                else
+                {
+                    inputFilePath = args[i];
+                }
+            }
+
+            if (inputFilePath == null)
+            {
+                Console.WriteLine("请提供一个文件路径作为参数.");
+                return;
+            }
 
             if (!File.Exists(inputFilePath))
             {
@@ -54,8 +83,17 @@ namespace HLSLccDecompiler
                     return;
                 }
 
-                string outputDirectory = Path.Combine(Path.GetDirectoryName(inputFilePath), Path.GetFileNameWithoutExtension(inputFilePath) + "Output");
-                Directory.CreateDirectory(outputDirectory);
+                // 如果未指定输出目录且未要求输出到控制台，则使用默认输出目录
+                if (outputDirectory == null && !outputToConsole)
+                {
+                    outputDirectory = Path.Combine(Path.GetDirectoryName(inputFilePath), Path.GetFileNameWithoutExtension(inputFilePath) + "Output");
+                }
+
+                // 创建输出目录（如果指定了目录且未要求输出到控制台）
+                if (outputDirectory != null)
+                {
+                    Directory.CreateDirectory(outputDirectory);
+                }
 
                 WrappedGlExtensions ext = new WrappedGlExtensions
                 {
@@ -72,23 +110,38 @@ namespace HLSLccDecompiler
                     byte[] exportData = dxbcSections[i];
                     var shader = WrappedShader.TranslateFromMem(exportData, WrappedGLLang.LANG_DEFAULT, ext);
 
-                    // 确定输出文件名格式为 *_index.hlsl
-                    string outputFileName = $"{Path.GetFileNameWithoutExtension(inputFilePath)}_{i}.hlsl";
-                    string outputFilePath = Path.Combine(outputDirectory, outputFileName);
-
-                    using (StreamWriter writer = new StreamWriter(outputFilePath))
+                    // 输出到控制台或文件
+                    if (outputToConsole)
                     {
                         if (shader.OK == 0)
                         {
-                            writer.Write("Failed to decompile");
+                            Console.WriteLine("Failed to decompile");
                         }
                         else
                         {
-                            writer.Write(shader.Text);
+                            Console.WriteLine(shader.Text);
                         }
                     }
+                    else if (outputDirectory != null)
+                    {
+                        // 确定输出文件名格式为 *_index.hlsl
+                        string outputFileName = $"{Path.GetFileNameWithoutExtension(inputFilePath)}_{i}.hlsl";
+                        string outputFilePath = Path.Combine(outputDirectory, outputFileName);
 
-                    Console.WriteLine($"反编译完成，输出文件: {outputFilePath}");
+                        using (StreamWriter writer = new StreamWriter(outputFilePath))
+                        {
+                            if (shader.OK == 0)
+                            {
+                                writer.Write("Failed to decompile");
+                            }
+                            else
+                            {
+                                writer.Write(shader.Text);
+                            }
+                        }
+
+                        Console.WriteLine($"反编译完成，输出文件: {outputFilePath}");
+                    }
                 }
             }
             catch (Exception ex)
