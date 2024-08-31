@@ -10,7 +10,7 @@ internal static class Program
     {
         Hook(args);
         //Debug();
-        RunAssetRipper();
+        RunAssetRipper(args);
     }
 
     private static void Hook(string[] args)
@@ -26,9 +26,9 @@ internal static class Program
         //RuriRuntimeHook.Init(GameHookType.Zenless_1_0);
     }
 
-    private static void RunAssetRipper()
+    private static void RunAssetRipper(string[] args)
     {
-        WebApplicationLauncher.Launch();
+        WebApplicationLauncher.Launch(args);
     }
     private static void Debug()
     {
