@@ -7,7 +7,7 @@ public partial class AR_AssetMapCreator_Hook
     [RetargetMethod(typeof(GameFileLoader), nameof(GameFileLoader.ExportUnityProject), isReturn: false)]
     public static void ExportUnityProject(string path)
     {
-        var outputPath = path + $"RuriInfo";
+        var outputPath = path + $"RuriInfo"; // 放里面会被后处理清空 时机问题
         if (!Directory.Exists(outputPath))
         {
             Directory.CreateDirectory(outputPath);
