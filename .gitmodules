@@ -1,3 +1,6 @@
 [submodule "AssetRipper"]
 	path = AssetRipper
 	url = https://github.com/AssetRipper/AssetRipper
+[submodule "AssetRipper.AssemblyDumper"]
+	path = AssetRipper.AssemblyDumper
+	url = https://github.com/AssetRipper/AssemblyDumper
