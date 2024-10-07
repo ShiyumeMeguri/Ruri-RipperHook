@@ -4,3 +4,6 @@
 [submodule "AssetRipper.AssemblyDumper"]
 	path = AssetRipper.AssemblyDumper
 	url = https://github.com/AssetRipper/AssemblyDumper
+[submodule "Tpk"]
+	path = Tpk
+	url = https://github.com/AssetRipper/Tpk
