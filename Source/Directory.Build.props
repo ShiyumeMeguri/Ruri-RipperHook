@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <LangVersion>Latest</LangVersion>
         <IsTrimmable>true</IsTrimmable>
@@ -10,10 +10,10 @@
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
 
-        <Version>0.3.4.0</Version>
+        <Version>1.0.0.0</Version>
         <AssemblyVersion>$(Version)</AssemblyVersion>
-        <Copyright>Copyright © ds5678</Copyright>
-        <Authors>ds5678</Authors>
+        <Copyright>Copyright © ShiyumeMeguri</Copyright>
+        <Authors>ShiyumeMeguri</Authors>
     </PropertyGroup>
 
     <ItemGroup>
