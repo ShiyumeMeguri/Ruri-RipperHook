@@ -16,14 +16,14 @@ public class PlatformGameStructureHook_CollectAssetBundles : CommonHook
     public static AssetBundlesCheckDelegate CustomAssetBundlesCheck;
 
     [RetargetMethod(typeof(PlatformGameStructure), nameof(CollectAssetBundles))]
-    private void CollectAssetBundles(DirectoryInfo root, IDictionary<string, string> files)
+    private static void CollectAssetBundles(DirectoryInfo root, List<KeyValuePair<string, string>> files)
     {
         foreach (FileInfo file in root.EnumerateFiles())
         {
             if (CustomAssetBundlesCheck(file))
             {
                 string name = Path.GetFileNameWithoutExtension(file.Name).ToLowerInvariant();
-                AddAssetBundle.Invoke(this, new object[] { files, name, file.FullName });
+                AddAssetBundle.Invoke(null, new object[] { files, name, file.FullName });
             }
         }
     }

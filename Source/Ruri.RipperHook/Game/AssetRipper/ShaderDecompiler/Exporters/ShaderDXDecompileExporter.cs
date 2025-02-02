@@ -3,6 +3,7 @@ using AssetRipper.Export.Modules.Shaders.Exporters;
 using AssetRipper.Export.Modules.Shaders.IO;
 using AssetRipper.Export.UnityProjects;
 using AssetRipper.Export.UnityProjects.Shaders;
+using AssetRipper.IO.Files;
 using AssetRipper.SourceGenerated.Classes.ClassID_48;
 using AssetRipper.SourceGenerated.Extensions.Enums.Shader;
 using Ruri.RipperHook.AR_ShaderDecompiler.Exporters.DirectX;
@@ -11,7 +12,7 @@ namespace Ruri.RipperHook.AR_ShaderDecompiler;
 
 public sealed class ShaderDXDecompileExporter : ShaderExporterBase
 {
-    public override bool Export(IExportContainer container, IUnityObjectBase asset, string path)
+    public override bool Export(IExportContainer container, IUnityObjectBase asset, string path, FileSystem fileSystem)
     {
         using Stream fileStream = File.Create(path);
         ExportBinary((IShader)asset, fileStream, ShaderExporterInstantiator);

@@ -11,7 +11,7 @@ public partial class GirlsFrontline2Common_Hook
     {
         return file.Extension == ".bundle";
     }
-    public static bool CustomCollectStreamingAssets(PlatformGameStructure _this, IDictionary<string, string> files, MethodInfo CollectAssetBundlesRecursively)
+    public static bool CustomCollectStreamingAssets(PlatformGameStructure _this, List<KeyValuePair<string, string>> files, MethodInfo CollectAssetBundlesRecursively)
     {
         string localCachePath = Path.Combine(Path.GetDirectoryName(_this.StreamingAssetsPath), "LocalCache");
         if (string.IsNullOrWhiteSpace(_this.StreamingAssetsPath) && string.IsNullOrWhiteSpace(localCachePath)) return false;

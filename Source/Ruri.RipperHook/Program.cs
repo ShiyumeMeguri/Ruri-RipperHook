@@ -21,7 +21,7 @@ internal static class Program
         RuriRuntimeHook.Init(GameHookType.AR_ExportDirectly);
         RuriRuntimeHook.Init(GameHookType.AR_AssetMapCreator);
         //RuriRuntimeHook.Init(GameHookType.AR_ShaderDecompiler);
-        //RuriRuntimeHook.Init(GameHookType.AR_USCShaderDecompiler);
+        RuriRuntimeHook.Init(GameHookType.AR_USCShaderDecompiler);
         //RuriRuntimeHook.Init(GameHookType.GirlsFrontline2_1_0);
         //RuriRuntimeHook.Init(GameHookType.Zenless_1_0);
     }

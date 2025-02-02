@@ -8,7 +8,7 @@ public class PlatformGameStructureHook_CollectStreamingAssets : CommonHook
 {
     private static readonly MethodInfo CollectAssetBundlesRecursively = typeof(PlatformGameStructure).GetMethod("CollectAssetBundlesRecursively", ReflectionExtensions.PrivateInstanceBindFlag());
 
-    public delegate bool CollectStreamingAssetsDelegate(PlatformGameStructure _this, IDictionary<string, string> files, MethodInfo CollectAssetBundlesRecursively);
+    public delegate bool CollectStreamingAssetsDelegate(PlatformGameStructure _this, List<KeyValuePair<string, string>> files, MethodInfo CollectAssetBundlesRecursively);
 
     /// <summary>
     /// 自定义流文件夹检测 针对少前的LocalCache文件夹读取AB包 或者恋活的
@@ -17,10 +17,10 @@ public class PlatformGameStructureHook_CollectStreamingAssets : CommonHook
     public static CollectStreamingAssetsDelegate CustomCollectStreamingAssets;
 
     [RetargetMethod(typeof(PlatformGameStructure), nameof(CollectStreamingAssets))]
-    protected void CollectStreamingAssets(IDictionary<string, string> files)
+    protected void CollectStreamingAssets()
     {
         var _this = (object)this as PlatformGameStructure;
-        if (CustomCollectStreamingAssets(_this, files, CollectAssetBundlesRecursively)) return;
+        if (CustomCollectStreamingAssets(_this, _this.Files, CollectAssetBundlesRecursively)) return;
 
         if (string.IsNullOrWhiteSpace(_this.StreamingAssetsPath))
         {
@@ -31,7 +31,7 @@ public class PlatformGameStructureHook_CollectStreamingAssets : CommonHook
         DirectoryInfo streamingDirectory = new DirectoryInfo(_this.StreamingAssetsPath);
         if (streamingDirectory.Exists)
         {
-            CollectAssetBundlesRecursively.Invoke(this, new object[] { streamingDirectory, files });
+            CollectAssetBundlesRecursively.Invoke(this, new object[] { streamingDirectory, _this.Files });
         }
     }
 
