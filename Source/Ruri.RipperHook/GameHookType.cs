@@ -14,6 +14,7 @@ public enum GameHookType
 	// Game
     PunishingGrayRaven_2_11,
     ArknightsEndfield_0_1,
+    ArknightsEndfield_0_5,
     GirlsFrontline2_1_0,
     ExAstris_1_0,
     StarRail_2_0,

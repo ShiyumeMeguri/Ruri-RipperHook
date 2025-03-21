@@ -3,9 +3,9 @@ using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Exceptions;
 using AssetRipper.IO.Files.Streams.Smart;
 
-namespace Ruri.RipperHook.ArknightsEndfieldCommon;
+namespace Ruri.RipperHook.ArknightsEndfield_0_1;
 
-public partial class ArknightsEndfieldCommon_Hook
+public partial class ArknightsEndfield_0_1_Hook
 {
     public static void CustomBlockCompression(Stream m_stream, StorageBlock block, SmartStream m_cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex)
     {
@@ -26,7 +26,7 @@ public partial class ArknightsEndfieldCommon_Hook
                 if (m_cachedBlockIndex == 0)
                     compressedBytes = RuriRuntimeHook.commonDecryptor.Decrypt(compressedBytes);
 
-                var bytesWritten = CustomLZ4.Decompress(compressedBytes, uncompressedBytes);
+                var bytesWritten = customLZ4.Decompress(compressedBytes, uncompressedBytes);
                 if (bytesWritten < 0)
                 {
                     throw new Exception($"bytesWritten < 0");
