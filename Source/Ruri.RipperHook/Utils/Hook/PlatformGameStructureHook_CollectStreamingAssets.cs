@@ -6,7 +6,7 @@ namespace Ruri.RipperHook.HookUtils.PlatformGameStructureHook_CollectStreamingAs
 
 public class PlatformGameStructureHook_CollectStreamingAssets : CommonHook
 {
-    private static readonly MethodInfo CollectAssetBundlesRecursively = typeof(PlatformGameStructure).GetMethod("CollectAssetBundlesRecursively", ReflectionExtensions.PrivateInstanceBindFlag());
+    private static readonly MethodInfo CollectAssetBundlesRecursively = typeof(PlatformGameStructure).GetMethod("CollectAssetBundlesRecursively", ReflectionExtensions.AnyBindFlag());
 
     public delegate bool CollectStreamingAssetsDelegate(PlatformGameStructure _this, List<KeyValuePair<string, string>> files, MethodInfo CollectAssetBundlesRecursively);
 

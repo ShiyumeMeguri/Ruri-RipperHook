@@ -5,7 +5,7 @@ namespace Ruri.RipperHook.HookUtils.PlatformGameStructureHook_CollectAssetBundle
 
 public class PlatformGameStructureHook_CollectAssetBundles : CommonHook
 {
-    private static readonly MethodInfo AddAssetBundle = typeof(PlatformGameStructure).GetMethod("AddAssetBundle", ReflectionExtensions.PrivateInstanceBindFlag());
+    private static readonly MethodInfo AddAssetBundle = typeof(PlatformGameStructure).GetMethod("AddAssetBundle", ReflectionExtensions.AnyBindFlag());
 
     public delegate bool AssetBundlesCheckDelegate(FileInfo file);
 
