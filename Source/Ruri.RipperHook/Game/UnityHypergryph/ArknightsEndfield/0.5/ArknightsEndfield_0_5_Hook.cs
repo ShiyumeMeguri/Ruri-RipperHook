@@ -18,7 +18,6 @@ public partial class ArknightsEndfield_0_5_Hook : RipperHook
     {
         additionalNamespaces.Add(typeof(ArknightsEndfieldCommon_Hook).Namespace);
         AddExtraHook(typeof(BundleFileBlockReaderHook).Namespace, () => { BundleFileBlockReaderHook.CustomBlockCompression = CustomBlockCompression; });
-        AddExtraHook(typeof(PlatformGameStructureHook_CollectAssetBundles).Namespace, () => { PlatformGameStructureHook_CollectAssetBundles.CustomAssetBundlesCheck = CustomAssetBundlesCheck; });
         base.InitAttributeHook();
     }
 }
