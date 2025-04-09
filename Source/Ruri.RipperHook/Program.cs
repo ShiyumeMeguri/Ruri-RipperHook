@@ -15,10 +15,11 @@ internal static class Program
 
     private static void Hook(string[] args)
     {
-        RuriRuntimeHook.Init(GameHookType.AR_StaticMeshSeparation);
+        //RuriRuntimeHook.Init(GameHookType.AR_StaticMeshSeparation);
         RuriRuntimeHook.Init(GameHookType.AR_PrefabOutlining);
         RuriRuntimeHook.Init(GameHookType.AR_BundledAssetsExportMode);
         RuriRuntimeHook.Init(GameHookType.AR_ExportDirectly);
+        RuriRuntimeHook.Init(GameHookType.AR_SkipProcessingAnimation);
         RuriRuntimeHook.Init(GameHookType.AR_AssetMapCreator);
         RuriRuntimeHook.Init(GameHookType.AR_ShaderDecompiler);
         //RuriRuntimeHook.Init(GameHookType.AR_USCShaderDecompiler);

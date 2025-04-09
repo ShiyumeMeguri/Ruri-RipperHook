@@ -8,6 +8,7 @@ public enum GameHookType
     AR_PrefabOutlining,
     AR_BundledAssetsExportMode,
     AR_ExportDirectly,
+    AR_SkipProcessingAnimation,
     AR_AssetMapCreator,
     AR_USCShaderDecompiler,
 	
