@@ -1,4 +1,6 @@
 ﻿using AssetRipper.GUI.Web;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Ruri.RipperHook.AR_AssetMapCreator;
 
@@ -12,24 +14,22 @@ public partial class AR_AssetMapCreator_Hook
         {
             Directory.CreateDirectory(outputPath);
         }
-        ExportDictionaryToFile(assetClassIDLookup, Path.Combine(outputPath, "AssetClassIDLookup.txt"));
-        ExportDictionaryToFile(assetDependenciesLookup, Path.Combine(outputPath, "AssetDependenciesLookup.txt"));
-        ExportDictionaryToFile(assetListLookup, Path.Combine(outputPath, "AssetListLookup.txt"));
+        // 修改文件扩展名为 .json 更直观
+        ExportDictionaryToFile(assetClassIDLookup, Path.Combine(outputPath, "AssetClassIDLookup.json"));
+        ExportDictionaryToFile(assetDependenciesLookup, Path.Combine(outputPath, "AssetDependenciesLookup.json"));
+        ExportDictionaryToFile(assetListLookup, Path.Combine(outputPath, "AssetListLookup.json"));
     }
 
     public static void ExportDictionaryToFile<T>(Dictionary<string, HashSet<T>> dictionary, string filePath)
     {
-        using (StreamWriter file = new StreamWriter(filePath))
+        var settings = new JsonSerializerSettings
         {
-            foreach (var pair in dictionary)
-            {
-                file.WriteLine($"{pair.Key}:");
-                foreach (var item in pair.Value)
-                {
-                    file.WriteLine($"    {item}");
-                }
-                file.WriteLine();
-            }
-        }
+            Formatting = Formatting.Indented,
+            // 使用 StringEnumConverter 使枚举以字符串形式导出
+            Converters = new List<JsonConverter> { new StringEnumConverter() }
+        };
+        // 序列化整个字典为 JSON 字符串
+        string json = JsonConvert.SerializeObject(dictionary, settings);
+        File.WriteAllText(filePath, json);
     }
 }
