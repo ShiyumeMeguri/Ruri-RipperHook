@@ -81,6 +81,8 @@ public partial class StarRail_3_2_Hook
         _this.SortingLayerID_C25_Int32 = reader.ReadInt32();
         _this.SortingLayer_C25 = reader.ReadInt16();
         _this.SortingOrder_C25 = reader.ReadRelease_Int16Align();
-        var m_RenderFlag = reader.ReadRelease_UInt32Align();
+        var m_RenderFlag = reader.ReadUInt32();
+        var m_StreamingMipmapBias = reader.ReadSingle();
+        reader.Align();
     }
 }
