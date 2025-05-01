@@ -1,6 +1,8 @@
 ﻿using AssetRipper.IO.Endian;
 using AssetRipper.SourceGenerated.Classes.ClassID_137;
 using AssetRipper.SourceGenerated.Subclasses.PPtr_Transform;
+using AssetRipper.SourceGenerated.Subclasses.Vector3f;
+using System.Numerics;
 
 namespace Ruri.RipperHook.StarRail_3_2;
 
@@ -23,6 +25,8 @@ public partial class StarRail_3_2_Hook
         _this.RootBone.ReadRelease(ref reader);
         _this.AABB.ReadRelease(ref reader);
         _this.DirtyAABB = reader.ReadRelease_BooleanAlign();
-        var m_EnableSkinning = reader.ReadRelease_BooleanAlign();
+        Vector3f m_BoundExpandingScale = new();
+        m_BoundExpandingScale.ReadRelease(ref reader);
+        var m_EnableSkinning = reader.ReadBoolean();
     }
 }

@@ -1,5 +1,8 @@
-﻿using AssetRipper.IO.Endian;
+﻿using AssetRipper.Assets.Metadata;
+using AssetRipper.IO.Endian;
+using AssetRipper.SourceGenerated.Classes.ClassID_319;
 using AssetRipper.SourceGenerated.Classes.ClassID_95;
+using AssetRipper.SourceGenerated.Subclasses.PPtr_AvatarMask;
 
 namespace Ruri.RipperHook.StarRail_3_2;
 
@@ -23,5 +26,8 @@ public partial class StarRail_3_2_Hook
         _this.HasTransformHierarchy = reader.ReadBoolean();
         _this.AllowConstantClipSamplingOptimization = reader.ReadBoolean();
         _this.KeepAnimatorControllerStateOnDisable =  reader.ReadRelease_BooleanAlign();
+        PPtr_AvatarMask_5 m_ForceSamplingBonesMask = new();
+        m_ForceSamplingBonesMask.ReadRelease(ref reader);
+        bool OptimizeConstantScaleCurves = reader.ReadRelease_BooleanAlign();
     }
 }
