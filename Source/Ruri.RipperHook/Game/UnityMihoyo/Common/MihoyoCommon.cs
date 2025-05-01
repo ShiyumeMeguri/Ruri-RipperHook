@@ -4,11 +4,19 @@ using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Exceptions;
 using AssetRipper.IO.Files.Streams.Smart;
 using K4os.Compression.LZ4;
+using Ruri.RipperHook.Crypto;
 using System.Buffers;
 
 namespace Ruri.RipperHook.UnityMihoyo;
 public static class MihoyoCommon
 {
+    enum CustomCompressionType
+    {
+        OodleHSR = 6,
+        OodleMr0k = 7,
+        Oodle = 9,
+    }
+
     public static void CustomBlockCompression(Stream m_stream, StorageBlock block, SmartStream m_cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex)
     {
         switch (compressType)
@@ -38,6 +46,27 @@ public static class MihoyoCommon
                     throw new Exception($"bytesWritten != uncompressedSize, {compressType}, {uncompressedSize}, {bytesWritten}");
                 }
                 new MemoryStream(uncompressedBytes).CopyTo(m_cachedBlockStream);
+                break;
+            case (CompressionType)CustomCompressionType.OodleHSR:
+            case (CompressionType)CustomCompressionType.OodleMr0k:
+                var uncompressedSize1 = block.UncompressedSize;
+                var uncompressedBytes1 = new byte[uncompressedSize1];
+                var compressedSize1 = block.CompressedSize;
+                Span<byte> compressedBytes1 = new BinaryReader(m_stream).ReadBytes((int)block.CompressedSize);
+
+                if (compressType == (CompressionType)CustomCompressionType.OodleMr0k && Mr0kDecryptor.IsMr0k(compressedBytes1))
+                    compressedBytes1 = RuriRuntimeHook.commonDecryptor.Decrypt(compressedBytes1);
+                //var bytesWritten1 = LZ4Codec.Decode(compressedBytes1, uncompressedBytes1);
+                var bytesWritten1 = OodleHelper.Decompress(compressedBytes1, uncompressedBytes1);
+                if (bytesWritten1 < 0)
+                {
+                    throw new Exception($"bytesWritten < 0");
+                }
+                else if (bytesWritten1 != uncompressedSize1)
+                {
+                    throw new Exception($"bytesWritten != uncompressedSize, {compressType}, {uncompressedSize1}, {bytesWritten1}");
+                }
+                new MemoryStream(uncompressedBytes1).CopyTo(m_cachedBlockStream);
                 break;
 
             case CompressionType.Lzham:

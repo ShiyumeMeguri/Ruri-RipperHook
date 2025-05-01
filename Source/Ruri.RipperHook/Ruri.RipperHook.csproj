@@ -41,6 +41,10 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <TargetPath>acl.dll</TargetPath>
         </ContentWithTargetPath>
+        <ContentWithTargetPath Include="Libraries\oo2core_9_win64.dll">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <TargetPath>oo2core_9_win64.dll</TargetPath>
+        </ContentWithTargetPath>
 		<Reference Include="HLSLccWrapper_x64">
 			<SpecificVersion>False</SpecificVersion>
 			<HintPath>Libraries\HLSLccWrapper_x64.dll</HintPath>
