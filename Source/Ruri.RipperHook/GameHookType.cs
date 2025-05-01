@@ -5,7 +5,7 @@ public enum GameHookType
 	// AssetRipper
     AR_ShaderDecompiler,
     AR_StaticMeshSeparation,
-    AR_PrefabOutlining,
+    // AR_PrefabOutlining, 新版被删了 用老代码无法正常导出
     AR_BundledAssetsExportMode,
     AR_ExportDirectly,
     AR_SkipProcessingAnimation,
