@@ -12,6 +12,7 @@ public static class MihoyoCommon
 {
     enum CustomCompressionType
     {
+        Lz4Mr0k = 5,
         OodleHSR = 6,
         OodleMr0k = 7,
         Oodle = 9,
@@ -27,16 +28,22 @@ public static class MihoyoCommon
 
             case CompressionType.Lz4:
             case CompressionType.Lz4HC:
-            case (CompressionType)5:
+            case (CompressionType)CustomCompressionType.Lz4Mr0k:
+            case (CompressionType)CustomCompressionType.OodleHSR:
+            case (CompressionType)CustomCompressionType.OodleMr0k:
+                bool isLz4Group = compressType == CompressionType.Lz4 || compressType == CompressionType.Lz4HC || compressType == (CompressionType)CustomCompressionType.Lz4Mr0k;
+                bool isOodleGroup = compressType == (CompressionType)CustomCompressionType.OodleHSR || compressType == (CompressionType)CustomCompressionType.OodleMr0k;
+                bool isMr0kGroup = compressType == (CompressionType)CustomCompressionType.Lz4Mr0k || compressType == (CompressionType)CustomCompressionType.OodleMr0k;
+
                 uint uncompressedSize = block.UncompressedSize;
                 byte[] uncompressedBytes = new byte[uncompressedSize];
                 var compressedSize = block.CompressedSize;
                 Span<byte> compressedBytes = new BinaryReader(m_stream).ReadBytes((int)block.CompressedSize);
 
-                if (compressType == (CompressionType)5 && Mr0kDecryptor.IsMr0k(compressedBytes))
+                if (isMr0kGroup && Mr0kDecryptor.IsMr0k(compressedBytes))
                     compressedBytes = RuriRuntimeHook.commonDecryptor.Decrypt(compressedBytes);
 
-                var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
+                int bytesWritten = isLz4Group ? LZ4Codec.Decode(compressedBytes, uncompressedBytes) : OodleHelper.Decompress(compressedBytes, uncompressedBytes);
                 if (bytesWritten < 0)
                 {
                     throw new Exception($"bytesWritten < 0");
@@ -46,27 +53,6 @@ public static class MihoyoCommon
                     throw new Exception($"bytesWritten != uncompressedSize, {compressType}, {uncompressedSize}, {bytesWritten}");
                 }
                 new MemoryStream(uncompressedBytes).CopyTo(m_cachedBlockStream);
-                break;
-            case (CompressionType)CustomCompressionType.OodleHSR:
-            case (CompressionType)CustomCompressionType.OodleMr0k:
-                var uncompressedSize1 = block.UncompressedSize;
-                var uncompressedBytes1 = new byte[uncompressedSize1];
-                var compressedSize1 = block.CompressedSize;
-                Span<byte> compressedBytes1 = new BinaryReader(m_stream).ReadBytes((int)block.CompressedSize);
-
-                if (compressType == (CompressionType)CustomCompressionType.OodleMr0k && Mr0kDecryptor.IsMr0k(compressedBytes1))
-                    compressedBytes1 = RuriRuntimeHook.commonDecryptor.Decrypt(compressedBytes1);
-                //var bytesWritten1 = LZ4Codec.Decode(compressedBytes1, uncompressedBytes1);
-                var bytesWritten1 = OodleHelper.Decompress(compressedBytes1, uncompressedBytes1);
-                if (bytesWritten1 < 0)
-                {
-                    throw new Exception($"bytesWritten < 0");
-                }
-                else if (bytesWritten1 != uncompressedSize1)
-                {
-                    throw new Exception($"bytesWritten != uncompressedSize, {compressType}, {uncompressedSize1}, {bytesWritten1}");
-                }
-                new MemoryStream(uncompressedBytes1).CopyTo(m_cachedBlockStream);
                 break;
 
             case CompressionType.Lzham:
