@@ -1,11 +1,12 @@
 ﻿using AssetRipper.IO.Endian;
+using AssetRipper.SourceGenerated;
 using AssetRipper.SourceGenerated.Classes.ClassID_20;
 
 namespace Ruri.RipperHook.StarRail_3_2;
 
 public partial class StarRail_3_2_Hook
 {
-    [RetargetMethod(typeof(Camera_2019))]
+    [RetargetMethod(ClassIDType.Camera, ClassHookVersion)]
     public void Camera_2019_ReadRelease(ref EndianSpanReader reader)
     {
         var _this = (object)this as Camera_2019;

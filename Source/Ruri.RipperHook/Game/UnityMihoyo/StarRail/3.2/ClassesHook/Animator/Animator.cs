@@ -1,6 +1,5 @@
-﻿using AssetRipper.Assets.Metadata;
-using AssetRipper.IO.Endian;
-using AssetRipper.SourceGenerated.Classes.ClassID_319;
+﻿using AssetRipper.IO.Endian;
+using AssetRipper.SourceGenerated;
 using AssetRipper.SourceGenerated.Classes.ClassID_95;
 using AssetRipper.SourceGenerated.Subclasses.PPtr_AvatarMask;
 
@@ -8,7 +7,7 @@ namespace Ruri.RipperHook.StarRail_3_2;
 
 public partial class StarRail_3_2_Hook
 {
-    [RetargetMethod(typeof(Animator_2018_3))]
+    [RetargetMethod(ClassIDType.Animator, ClassHookVersion)]
     public void Animator_2018_3_ReadRelease(ref EndianSpanReader reader)
     {
         var _this = (object)this as Animator_2018_3;

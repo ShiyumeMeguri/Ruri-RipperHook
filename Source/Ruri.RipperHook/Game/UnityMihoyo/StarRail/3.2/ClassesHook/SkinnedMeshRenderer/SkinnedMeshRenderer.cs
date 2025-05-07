@@ -1,14 +1,14 @@
 ﻿using AssetRipper.IO.Endian;
+using AssetRipper.SourceGenerated;
 using AssetRipper.SourceGenerated.Classes.ClassID_137;
 using AssetRipper.SourceGenerated.Subclasses.PPtr_Transform;
 using AssetRipper.SourceGenerated.Subclasses.Vector3f;
-using System.Numerics;
 
 namespace Ruri.RipperHook.StarRail_3_2;
 
 public partial class StarRail_3_2_Hook
 {
-    [RetargetMethod(typeof(SkinnedMeshRenderer_2019_3_0_a6))]
+    [RetargetMethod(ClassIDType.SkinnedMeshRenderer, ClassHookVersion)]
     public void SkinnedMeshRenderer_2019_3_0_a6_ReadRelease(ref EndianSpanReader reader)
     {
         var _this = (object)this as SkinnedMeshRenderer_2019_3_0_a6;

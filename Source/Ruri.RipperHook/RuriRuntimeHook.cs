@@ -13,6 +13,8 @@ public static class RuriRuntimeHook
     public static Dictionary<GameHookType, RipperHook> currentGameHook = new();
     public static string gameName;
     public static string gameVer;
+    
+    // 原因如上 禁止在任何Hook类中添加成员字段所以只能写全局
     public static CommonDecryptor commonDecryptor;
     public static UnityChinaDecryptor unityChinaDecryptor;
 

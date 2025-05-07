@@ -1,17 +1,6 @@
 ﻿using AssetRipper.IO.Endian;
-using AssetRipper.SourceGenerated.Classes.ClassID_120;
-using AssetRipper.SourceGenerated.Classes.ClassID_137;
-using AssetRipper.SourceGenerated.Classes.ClassID_1971053207;
-using AssetRipper.SourceGenerated.Classes.ClassID_199;
-using AssetRipper.SourceGenerated.Classes.ClassID_212;
-using AssetRipper.SourceGenerated.Classes.ClassID_227;
-using AssetRipper.SourceGenerated.Classes.ClassID_23;
+using AssetRipper.SourceGenerated;
 using AssetRipper.SourceGenerated.Classes.ClassID_25;
-using AssetRipper.SourceGenerated.Classes.ClassID_331;
-using AssetRipper.SourceGenerated.Classes.ClassID_483693784;
-using AssetRipper.SourceGenerated.Classes.ClassID_646504946;
-using AssetRipper.SourceGenerated.Classes.ClassID_73398921;
-using AssetRipper.SourceGenerated.Classes.ClassID_96;
 using AssetRipper.SourceGenerated.Subclasses.PPtr_Material;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -21,18 +10,17 @@ namespace Ruri.RipperHook.StarRail_3_2;
 
 public partial class StarRail_3_2_Hook
 {
-    [RetargetMethodFunc(typeof(TrailRenderer_2019_3_0_a6))]
-    [RetargetMethodFunc(typeof(VFXRenderer_2019_3_0_a6))]
-    [RetargetMethodFunc(typeof(RendererFake_2019_3_0_a6))]
-    [RetargetMethodFunc(typeof(TilemapRenderer_2019_3_0_a6))]
-    [RetargetMethodFunc(typeof(SpriteMask_2019_3_0_a6))]
-    [RetargetMethodFunc(typeof(MeshRenderer_2019_3_0_a6))]
-    [RetargetMethodFunc(typeof(BillboardRenderer_2019_3_0_a6))]
-    [RetargetMethodFunc(typeof(SpriteRenderer_2019_3_0_a6))]
-    [RetargetMethodFunc(typeof(ParticleSystemRenderer_2019_3_0_a6))]
-    [RetargetMethodFunc(typeof(ParticleSystemRenderer_2020))]
-    [RetargetMethodFunc(typeof(SpriteShapeRenderer_2019_3_0_a6))]
-    [RetargetMethodFunc(typeof(LineRenderer_2019_3_0_a6))]
+    [RetargetMethodFunc(ClassIDType.TrailRenderer, ClassHookVersion)]
+    [RetargetMethodFunc(ClassIDType.VFXRenderer, ClassHookVersion)]
+    [RetargetMethodFunc(ClassIDType.TilemapRenderer, ClassHookVersion)]
+    [RetargetMethodFunc(ClassIDType.SpriteMask, ClassHookVersion)]
+    [RetargetMethodFunc(ClassIDType.MeshRenderer, ClassHookVersion)]
+    [RetargetMethodFunc(ClassIDType.BillboardRenderer, ClassHookVersion)]
+    [RetargetMethodFunc(ClassIDType.SpriteRenderer, ClassHookVersion)]
+    [RetargetMethodFunc(ClassIDType.ParticleSystemRenderer, ClassHookVersion)]
+    [RetargetMethodFunc(ClassIDType.ParticleSystemRenderer, ClassHookVersion)]
+    [RetargetMethodFunc(ClassIDType.SpriteShapeRenderer, ClassHookVersion)]
+    [RetargetMethodFunc(ClassIDType.LineRenderer, ClassHookVersion)]
     private static bool RendererReadRelease(ILContext il)
     {
         var ilCursor = new ILCursor(il);

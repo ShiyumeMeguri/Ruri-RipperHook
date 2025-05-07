@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using AssetRipper.Primitives;
+using AssetRipper.SourceGenerated;
+using System.Diagnostics;
 
 namespace Ruri.RipperHook;
 
@@ -18,6 +20,12 @@ public class RetargetMethodFuncAttribute : Attribute
         Debug.Assert(SourceType != null);
         SourceMethodName = sourceMethodName;
         MethodParameters = methodParameters;
+    }
+    public RetargetMethodFuncAttribute(ClassIDType classIdType, string unityVersion, string sourceMethodName = "ReadRelease", bool isBefore = true, bool isReturn = true, Type[] methodParameters = null) : this(
+            $"{RetargetMethodAttribute.GetSourceTypeFullName(classIdType, UnityVersion.Parse(unityVersion))}, {typeof(ClassIDType).Assembly.GetName().Name}",
+            sourceMethodName,
+            methodParameters)
+    {
     }
 
     public Type[] MethodParameters { get; }
