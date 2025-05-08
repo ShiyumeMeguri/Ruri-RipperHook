@@ -9,12 +9,11 @@ namespace Ruri.RipperHook.StarRail_3_2;
 
 public partial class StarRail_3_2_Hook : RipperHook
 {
-    public static UnityVersion StarRailClassVersion;
+    public static UnityVersion StarRailClassVersion = UnityVersion.Parse("2019.4.320x" + (int)CustomEngineType.StarRail);
     public const string ClassHookVersion = "2019.4.34f1";
     protected StarRail_3_2_Hook()
     {
         RuriRuntimeHook.commonDecryptor = new Mr0kDecryptor(Mr0kKey.Mr0kExpansionKey, initVector: Mr0kKey.Mr0kInitVector, blockKey: Mr0kKey.Mr0kBlockKey);
-        StarRailClassVersion = UnityVersion.Parse("2019.4.320x"+ (int)CustomEngineType.StarRail);
     }
 
     protected override void InitAttributeHook()
