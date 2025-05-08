@@ -20,6 +20,7 @@ using StarRail.SourceGenerated.Classes.ClassID_47;
 using StarRail.SourceGenerated.Classes.ClassID_48;
 using StarRail.SourceGenerated.Classes.ClassID_64;
 using StarRail.SourceGenerated.Classes.ClassID_65;
+using StarRail.SourceGenerated.Classes.ClassID_74;
 using StarRail.SourceGenerated.Classes.ClassID_95;
 
 namespace Ruri.RipperHook.StarRail_3_2;
@@ -31,6 +32,15 @@ public partial class StarRail_3_2_Hook
     {
         var realThis = (object)this as IUnityObjectBase;
         var dummyThis = Animator.Create(realThis.AssetInfo, StarRailClassVersion);
+
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
+    }
+    [RetargetMethod(ClassIDType.AnimationClip, ClassHookVersion)]
+    public void AnimationClip_ReadRelease(ref EndianSpanReader reader)
+    {
+        var realThis = (object)this as IUnityObjectBase;
+        var dummyThis = AnimationClip.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
