@@ -1,25 +1,26 @@
 ﻿using AssetRipper.Assets;
 using AssetRipper.IO.Endian;
+using AssetRipper.Primitives;
 using AssetRipper.SourceGenerated;
-using StarRail320.SourceGenerated.Classes.ClassID_108;
-using StarRail320.SourceGenerated.Classes.ClassID_115;
-using StarRail320.SourceGenerated.Classes.ClassID_135;
-using StarRail320.SourceGenerated.Classes.ClassID_136;
-using StarRail320.SourceGenerated.Classes.ClassID_137;
-using StarRail320.SourceGenerated.Classes.ClassID_143;
-using StarRail320.SourceGenerated.Classes.ClassID_154;
-using StarRail320.SourceGenerated.Classes.ClassID_198;
-using StarRail320.SourceGenerated.Classes.ClassID_20;
-using StarRail320.SourceGenerated.Classes.ClassID_215;
-using StarRail320.SourceGenerated.Classes.ClassID_223;
-using StarRail320.SourceGenerated.Classes.ClassID_30;
-using StarRail320.SourceGenerated.Classes.ClassID_310;
-using StarRail320.SourceGenerated.Classes.ClassID_331;
-using StarRail320.SourceGenerated.Classes.ClassID_47;
-using StarRail320.SourceGenerated.Classes.ClassID_48;
-using StarRail320.SourceGenerated.Classes.ClassID_64;
-using StarRail320.SourceGenerated.Classes.ClassID_65;
-using StarRail320.SourceGenerated.Classes.ClassID_95;
+using StarRail.SourceGenerated.Classes.ClassID_108;
+using StarRail.SourceGenerated.Classes.ClassID_115;
+using StarRail.SourceGenerated.Classes.ClassID_135;
+using StarRail.SourceGenerated.Classes.ClassID_136;
+using StarRail.SourceGenerated.Classes.ClassID_137;
+using StarRail.SourceGenerated.Classes.ClassID_143;
+using StarRail.SourceGenerated.Classes.ClassID_154;
+using StarRail.SourceGenerated.Classes.ClassID_198;
+using StarRail.SourceGenerated.Classes.ClassID_20;
+using StarRail.SourceGenerated.Classes.ClassID_215;
+using StarRail.SourceGenerated.Classes.ClassID_223;
+using StarRail.SourceGenerated.Classes.ClassID_30;
+using StarRail.SourceGenerated.Classes.ClassID_310;
+using StarRail.SourceGenerated.Classes.ClassID_331;
+using StarRail.SourceGenerated.Classes.ClassID_47;
+using StarRail.SourceGenerated.Classes.ClassID_48;
+using StarRail.SourceGenerated.Classes.ClassID_64;
+using StarRail.SourceGenerated.Classes.ClassID_65;
+using StarRail.SourceGenerated.Classes.ClassID_95;
 
 namespace Ruri.RipperHook.StarRail_3_2;
 
@@ -29,7 +30,7 @@ public partial class StarRail_3_2_Hook
     public void Animator_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = Animator.Create(realThis.AssetInfo);
+        var dummyThis = Animator.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -38,7 +39,7 @@ public partial class StarRail_3_2_Hook
     public void Camera_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = Camera.Create(realThis.AssetInfo);
+        var dummyThis = Camera.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -47,7 +48,7 @@ public partial class StarRail_3_2_Hook
     public void SkinnedMeshRenderer_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = SkinnedMeshRenderer.Create(realThis.AssetInfo);
+        var dummyThis = SkinnedMeshRenderer.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -56,7 +57,7 @@ public partial class StarRail_3_2_Hook
     public void BoxCollider_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = BoxCollider.Create(realThis.AssetInfo);
+        var dummyThis = BoxCollider.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -65,7 +66,7 @@ public partial class StarRail_3_2_Hook
     public void Canvas_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = Canvas.Create(realThis.AssetInfo);
+        var dummyThis = Canvas.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -74,7 +75,7 @@ public partial class StarRail_3_2_Hook
     public void CapsuleCollider_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = CapsuleCollider.Create(realThis.AssetInfo);
+        var dummyThis = CapsuleCollider.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -83,7 +84,7 @@ public partial class StarRail_3_2_Hook
     public void CharacterController_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = CharacterController.Create(realThis.AssetInfo);
+        var dummyThis = CharacterController.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -92,7 +93,7 @@ public partial class StarRail_3_2_Hook
     public void GraphicsSettings_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = GraphicsSettings.Create(realThis.AssetInfo);
+        var dummyThis = GraphicsSettings.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -101,7 +102,7 @@ public partial class StarRail_3_2_Hook
     public void Light_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = Light.Create(realThis.AssetInfo);
+        var dummyThis = Light.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -110,7 +111,7 @@ public partial class StarRail_3_2_Hook
     public void MeshCollider_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = MeshCollider.Create(realThis.AssetInfo);
+        var dummyThis = MeshCollider.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -119,7 +120,7 @@ public partial class StarRail_3_2_Hook
     public void MonoScript_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = MonoScript.Create(realThis.AssetInfo);
+        var dummyThis = MonoScript.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -128,7 +129,7 @@ public partial class StarRail_3_2_Hook
     public void ParticleSystem_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = ParticleSystem.Create(realThis.AssetInfo);
+        var dummyThis = ParticleSystem.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -137,7 +138,7 @@ public partial class StarRail_3_2_Hook
     public void QualitySettings_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = QualitySettings.Create(realThis.AssetInfo);
+        var dummyThis = QualitySettings.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -146,7 +147,7 @@ public partial class StarRail_3_2_Hook
     public void ReflectionProbe_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = ReflectionProbe.Create(realThis.AssetInfo);
+        var dummyThis = ReflectionProbe.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -155,7 +156,7 @@ public partial class StarRail_3_2_Hook
     public void Shader_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = Shader.Create(realThis.AssetInfo);
+        var dummyThis = Shader.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -164,7 +165,7 @@ public partial class StarRail_3_2_Hook
     public void SphereCollider_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = SphereCollider.Create(realThis.AssetInfo);
+        var dummyThis = SphereCollider.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -173,7 +174,7 @@ public partial class StarRail_3_2_Hook
     public void SpriteMask_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = SpriteMask.Create(realThis.AssetInfo);
+        var dummyThis = SpriteMask.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -182,7 +183,7 @@ public partial class StarRail_3_2_Hook
     public void TerrainCollider_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = TerrainCollider.Create(realThis.AssetInfo);
+        var dummyThis = TerrainCollider.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
@@ -191,7 +192,7 @@ public partial class StarRail_3_2_Hook
     public void UnityConnectSettings_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var dummyThis = UnityConnectSettings.Create(realThis.AssetInfo);
+        var dummyThis = UnityConnectSettings.Create(realThis.AssetInfo, StarRailClassVersion);
 
         dummyThis.ReadRelease(ref reader);
         ReflectionExtensions.ClassCopy(dummyThis, realThis);
