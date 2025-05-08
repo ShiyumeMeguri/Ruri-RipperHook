@@ -1,4 +1,4 @@
-﻿namespace Ruri.RipperHook.ZenlessCommon;
+﻿namespace Ruri.RipperHook.ZenlessZoneZeroCommon;
 
 public partial class ZenlessCommon_Hook : RipperHook
 {

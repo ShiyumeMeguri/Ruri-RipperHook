@@ -3,7 +3,7 @@ using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.Text.Html;
 
-namespace Ruri.RipperHook.ZenlessCommon;
+namespace Ruri.RipperHook.ZenlessZoneZeroCommon;
 
 // m_Header 读取
 public partial class ZenlessCommon_Hook

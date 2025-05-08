@@ -5,7 +5,7 @@ using Ruri.RipperHook.UnityMihoyo;
 using System.Reflection;
 
 // ReadBlocksInfoAndDirectory
-namespace Ruri.RipperHook.ZenlessCommon;
+namespace Ruri.RipperHook.ZenlessZoneZeroCommon;
 public partial class ZenlessCommon_Hook
 {
     private static readonly MethodInfo ReadMetadata = typeof(FileStreamBundleFile).GetMethod("ReadMetadata", ReflectionExtensions.PrivateInstanceBindFlag());

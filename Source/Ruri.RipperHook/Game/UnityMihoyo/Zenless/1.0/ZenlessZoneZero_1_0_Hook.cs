@@ -2,11 +2,11 @@
 using Ruri.RipperHook.HookUtils.GameBundleHook;
 using Ruri.RipperHook.HoukaiCommon;
 using Ruri.RipperHook.UnityMihoyo;
-using Ruri.RipperHook.ZenlessCommon;
+using Ruri.RipperHook.ZenlessZoneZeroCommon;
 
-namespace Ruri.RipperHook.Zenless_1_0;
+namespace Ruri.RipperHook.ZenlessZoneZero_1_0;
 
-public partial class Zenless_1_0_Hook : RipperHook
+public partial class ZenlessZoneZero_1_0_Hook : RipperHook
 {
 
     protected override void InitAttributeHook()
