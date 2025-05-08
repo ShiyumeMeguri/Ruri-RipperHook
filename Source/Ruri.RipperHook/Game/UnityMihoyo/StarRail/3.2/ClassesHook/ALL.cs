@@ -29,171 +29,171 @@ public partial class StarRail_3_2_Hook
     public void Animator_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new Animator_2019(realThis.AssetInfo);
+        var dummyThis = Animator.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.Camera, ClassHookVersion)]
     public void Camera_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new Camera_2019(realThis.AssetInfo);
+        var dummyThis = Camera.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.SkinnedMeshRenderer, ClassHookVersion)]
     public void SkinnedMeshRenderer_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new SkinnedMeshRenderer_2019(realThis.AssetInfo);
+        var dummyThis = SkinnedMeshRenderer.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.BoxCollider, ClassHookVersion)]
     public void BoxCollider_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new BoxCollider_2019(realThis.AssetInfo);
+        var dummyThis = BoxCollider.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.Canvas, ClassHookVersion)]
     public void Canvas_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new Canvas_2019(realThis.AssetInfo);
+        var dummyThis = Canvas.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.CapsuleCollider, ClassHookVersion)]
     public void CapsuleCollider_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new CapsuleCollider_2019(realThis.AssetInfo);
+        var dummyThis = CapsuleCollider.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.CharacterController, ClassHookVersion)]
     public void CharacterController_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new CharacterController_2019(realThis.AssetInfo);
+        var dummyThis = CharacterController.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.GraphicsSettings, ClassHookVersion)]
     public void GraphicsSettings_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new GraphicsSettings_2019(realThis.AssetInfo);
+        var dummyThis = GraphicsSettings.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.Light, ClassHookVersion)]
     public void Light_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new Light_2019(realThis.AssetInfo);
+        var dummyThis = Light.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.MeshCollider, ClassHookVersion)]
     public void MeshCollider_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new MeshCollider_2019(realThis.AssetInfo);
+        var dummyThis = MeshCollider.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.MonoScript, ClassHookVersion)]
     public void MonoScript_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new MonoScript_2019(realThis.AssetInfo);
+        var dummyThis = MonoScript.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.ParticleSystem, ClassHookVersion)]
     public void ParticleSystem_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new ParticleSystem_2019(realThis.AssetInfo);
+        var dummyThis = ParticleSystem.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.QualitySettings, ClassHookVersion)]
     public void QualitySettings_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new QualitySettings_2019(realThis.AssetInfo);
+        var dummyThis = QualitySettings.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.ReflectionProbe, ClassHookVersion)]
     public void ReflectionProbe_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new ReflectionProbe_2019(realThis.AssetInfo);
+        var dummyThis = ReflectionProbe.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.Shader, ClassHookVersion)]
     public void Shader_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new Shader_2019(realThis.AssetInfo);
+        var dummyThis = Shader.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.SphereCollider, ClassHookVersion)]
     public void SphereCollider_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new SphereCollider_2019(realThis.AssetInfo);
+        var dummyThis = SphereCollider.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.SpriteMask, ClassHookVersion)]
     public void SpriteMask_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new SpriteMask_2019(realThis.AssetInfo);
+        var dummyThis = SpriteMask.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.TerrainCollider, ClassHookVersion)]
     public void TerrainCollider_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new TerrainCollider_2019(realThis.AssetInfo);
+        var dummyThis = TerrainCollider.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
     [RetargetMethod(ClassIDType.UnityConnectSettings, ClassHookVersion)]
     public void UnityConnectSettings_ReadRelease(ref EndianSpanReader reader)
     {
         var realThis = (object)this as IUnityObjectBase;
-        var customThis = new UnityConnectSettings_2019(realThis.AssetInfo);
+        var dummyThis = UnityConnectSettings.Create(realThis.AssetInfo);
 
-        customThis.ReadRelease(ref reader);
-        ReflectionExtensions.ClassCopy(customThis, realThis);
+        dummyThis.ReadRelease(ref reader);
+        ReflectionExtensions.ClassCopy(dummyThis, realThis);
     }
 }
