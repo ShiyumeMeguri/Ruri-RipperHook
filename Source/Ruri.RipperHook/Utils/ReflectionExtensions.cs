@@ -1,8 +1,10 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
-using Mono.Cecil.Cil;
+﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
+using MonoMod.Utils;
+using System.Collections.Concurrent;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Ruri.RipperHook;
 
@@ -105,7 +107,8 @@ public static class ReflectionExtensions
                     }
                 }
                 ilCursor.Emit(OpCodes.Call, targetMethod);
-                if (isReturn) { 
+                if (isReturn)
+                {
                     ilCursor.Emit(OpCodes.Ret);
                 }
                 ilCursor.SearchTarget = SearchTarget.Next; // 保证插入后从当前位置继续查找避免死循环
@@ -123,4 +126,72 @@ public static class ReflectionExtensions
     }
 
     #endregion
+
+    private static readonly ConcurrentDictionary<string, Action<object, object>> _cache = new();
+
+    /// <summary>
+    /// 将 src 实例中所有同名且类型兼容的字段值拷贝到 dst 实例。
+    /// </summary>
+    public static void ClassCopy(object src, object dst)
+    {
+        if (src == null) throw new ArgumentNullException(nameof(src));
+        if (dst == null) throw new ArgumentNullException(nameof(dst));
+
+        var key = src.GetType().FullName + "->" + dst.GetType().FullName;
+        var copier = _cache.GetOrAdd(key, _ => CreateCopier(src.GetType(), dst.GetType()));
+        copier(src, dst);
+    }
+
+    private static Action<object, object> CreateCopier(Type srcType, Type dstType)
+    {
+        const BindingFlags flag = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        var srcFields = srcType.GetFields(flag);
+        var dstFields = dstType.GetFields(flag);
+        var dstMap = new ConcurrentDictionary<string, FieldInfo>();
+        foreach (var df in dstFields)
+            dstMap[df.Name] = df;
+
+        // 创建 DynamicMethodDefinition: void Copy(object src, object dst)
+        var dmd = new DynamicMethodDefinition(
+            $"Copy_{srcType.Name}_To_{dstType.Name}",
+            typeof(void),
+            new Type[] { typeof(object), typeof(object) }
+        );
+        var methodDef = dmd.Definition;
+        var il = methodDef.Body.GetILProcessor();
+        var module = methodDef.Module;
+
+        // 声明局部变量：srcType loc0, dstType loc1
+        var locSrc = new VariableDefinition(module.ImportReference(srcType));
+        var locDst = new VariableDefinition(module.ImportReference(dstType));
+        methodDef.Body.Variables.Add(locSrc);
+        methodDef.Body.Variables.Add(locDst);
+        methodDef.Body.InitLocals = true;
+
+        // loc0 = (srcType) arg0
+        il.Emit(OpCodes.Ldarg_0);
+        il.Emit(OpCodes.Castclass, module.ImportReference(srcType));
+        il.Emit(OpCodes.Stloc, locSrc);
+        // loc1 = (dstType) arg1
+        il.Emit(OpCodes.Ldarg_1);
+        il.Emit(OpCodes.Castclass, module.ImportReference(dstType));
+        il.Emit(OpCodes.Stloc, locDst);
+
+        // 同名字段拷贝
+        foreach (var sf in srcFields)
+        {
+            if (dstMap.TryGetValue(sf.Name, out var df)
+                && df.FieldType.IsAssignableFrom(sf.FieldType))
+            {
+                il.Emit(OpCodes.Ldloc, locDst);
+                il.Emit(OpCodes.Ldloc, locSrc);
+                il.Emit(OpCodes.Ldfld, module.ImportReference(sf));
+                il.Emit(OpCodes.Stfld, module.ImportReference(df));
+            }
+        }
+
+        il.Emit(OpCodes.Ret);
+        var generated = dmd.Generate();
+        return generated.CreateDelegate<Action<object, object>>();
+    }
 }

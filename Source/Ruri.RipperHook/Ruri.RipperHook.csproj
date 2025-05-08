@@ -49,6 +49,9 @@
 			<SpecificVersion>False</SpecificVersion>
 			<HintPath>Libraries\HLSLccWrapper_x64.dll</HintPath>
 		</Reference>
-    </ItemGroup>                		
-                                		
+		<Reference Include="StarRail320.SourceGenerated.dll">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>Game\UnityMihoyo\StarRail\CommonHook\ClassHook\StarRail320.SourceGenerated.dll</HintPath>
+		</Reference>
+    </ItemGroup>
 </Project>                      		
