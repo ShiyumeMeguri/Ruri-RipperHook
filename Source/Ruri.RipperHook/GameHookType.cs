@@ -2,7 +2,7 @@
 
 public enum GameHookType
 {
-	// AssetRipper
+    // AssetRipper
     AR_ShaderDecompiler,
     AR_StaticMeshSeparation,
     // AR_PrefabOutlining, 新版被删了 用老代码无法正常导出
@@ -11,8 +11,8 @@ public enum GameHookType
     AR_SkipProcessingAnimation,
     AR_AssetMapCreator,
     AR_USCShaderDecompiler,
-	
-	// Game
+
+    // Game
     PunishingGrayRaven_2_11,
     ArknightsEndfield_0_1,
     ArknightsEndfield_0_5,
@@ -23,5 +23,16 @@ public enum GameHookType
     Houkai_3_8,
     Houkai_7_1,
     Houkai_7_2,
-    Zenless_1_0,
+    ZenlessZoneZero_1_0,
+}
+public enum CustomEngineType
+{
+    // Based RazTools
+    Genshit,
+    Houkai,
+    StarRail,
+    ZenlessZoneZero,
+
+    ExAstris,
+    ArknightsEndfield,
 }
