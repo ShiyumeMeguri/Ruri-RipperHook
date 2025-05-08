@@ -188,6 +188,10 @@ public static class ReflectionExtensions
                 il.Emit(OpCodes.Ldfld, module.ImportReference(sf));
                 il.Emit(OpCodes.Stfld, module.ImportReference(df));
             }
+            else
+            {
+                throw new InvalidOperationException($"Cannot write field '{sf.Name}' from {srcType.FullName} to {dstType.FullName}");
+            }
         }
 
         il.Emit(OpCodes.Ret);
