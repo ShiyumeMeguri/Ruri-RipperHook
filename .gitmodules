@@ -7,3 +7,6 @@
 [submodule "Tpk"]
 	path = Tpk
 	url = https://github.com/AssetRipper/Tpk
+[submodule "AsmResolver"]
+	path = AsmResolver
+	url = https://github.com/Washi1337/AsmResolver.git
