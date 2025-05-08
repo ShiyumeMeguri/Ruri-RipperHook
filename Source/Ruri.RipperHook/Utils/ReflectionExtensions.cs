@@ -180,8 +180,7 @@ public static class ReflectionExtensions
         // 同名字段拷贝
         foreach (var sf in srcFields)
         {
-            if (dstMap.TryGetValue(sf.Name, out var df)
-                && df.FieldType.IsAssignableFrom(sf.FieldType))
+            if (dstMap.TryGetValue(sf.Name, out var df) && df.FieldType.GetManagedSize() == sf.FieldType.GetManagedSize())
             {
                 il.Emit(OpCodes.Ldloc, locDst);
                 il.Emit(OpCodes.Ldloc, locSrc);
