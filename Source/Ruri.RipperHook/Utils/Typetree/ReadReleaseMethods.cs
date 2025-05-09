@@ -674,16 +674,6 @@ internal static class ReadReleaseMethods
         }
     }
 
-    public static void ReadRelease_Map_Pair_GUID_Int64_SpriteAtlasData_2017_1_2(this AssetDictionary<AssetPair<GUID, long>, SpriteAtlasData_2017_1_2> value, ref EndianSpanReader reader)
-    {
-        value.Clear();
-        int num = reader.ReadInt32();
-        for (int i = 0; i < num; i++)
-        {
-            value.AddNew().ReadRelease_Pair_Pair_GUID_Int64_SpriteAtlasData_2017_1_2(ref reader);
-        }
-    }
-
     public static void ReadRelease_Map_Pair_GUID_Int64_SpriteAtlasData_2017_2(this AssetDictionary<AssetPair<GUID, long>, SpriteAtlasData_2017_2> value, ref EndianSpanReader reader)
     {
         value.Clear();
@@ -1462,12 +1452,6 @@ internal static class ReadReleaseMethods
     }
 
     public static void ReadRelease_Pair_Pair_GUID_Int64_SpriteAtlasData_2017(this AssetPair<AssetPair<GUID, long>, SpriteAtlasData_2017> value, ref EndianSpanReader reader)
-    {
-        value.Key.ReadRelease_Pair_GUID_Int64(ref reader);
-        value.Value.ReadRelease(ref reader);
-    }
-
-    public static void ReadRelease_Pair_Pair_GUID_Int64_SpriteAtlasData_2017_1_2(this AssetPair<AssetPair<GUID, long>, SpriteAtlasData_2017_1_2> value, ref EndianSpanReader reader)
     {
         value.Key.ReadRelease_Pair_GUID_Int64(ref reader);
         value.Value.ReadRelease(ref reader);

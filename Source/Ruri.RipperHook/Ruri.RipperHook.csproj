@@ -1,57 +1,57 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-        <OutputPath>..\..\AssetRipper\Source\0Bins\AssetRipper\$(Configuration)\</OutputPath>
-        <IntermediateOutputPath>..\..\AssetRipper\Source\0Bins\obj\AssetRipper\$(Configuration)\</IntermediateOutputPath>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <AssemblyName>Ruri.RipperHook</AssemblyName>
-    </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>..\..\AssetRipper\Source\0Bins\AssetRipper\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>..\..\AssetRipper\Source\0Bins\obj\AssetRipper\$(Configuration)\</IntermediateOutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>Ruri.RipperHook</AssemblyName>
+  </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
-    </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
-    </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="AsmResolver.DotNet" Version="6.0.0-beta.3" />
-        <PackageReference Include="AsmResolver.PE.File" Version="6.0.0-beta.3" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="Samboy063.Cpp2IL.Core" Version="2022.1.0-development.1197" />
-        <PackageReference Include="MonoMod.RuntimeDetour" Version="25.2.3" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AsmResolver.DotNet" Version="6.0.0-beta.3" />
+    <PackageReference Include="AsmResolver.PE.File" Version="6.0.0-beta.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Samboy063.Cpp2IL.Core" Version="2022.1.0-development.1262" />
+    <PackageReference Include="MonoMod.RuntimeDetour" Version="25.2.3" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Assets\AssetRipper.Assets.csproj" />
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Export.UnityProjects\AssetRipper.Export.UnityProjects.csproj" />
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.GUI.Web\AssetRipper.GUI.Web.csproj" />
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.IO.Files\AssetRipper.IO.Files.csproj" />
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Numerics\AssetRipper.Numerics.csproj" />
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SerializationLogic\AssetRipper.SerializationLogic.csproj" />
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SourceGenerated.Extensions\AssetRipper.SourceGenerated.Extensions.csproj" />
-        <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Yaml\AssetRipper.Yaml.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Assets\AssetRipper.Assets.csproj" />
+    <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Export.UnityProjects\AssetRipper.Export.UnityProjects.csproj" />
+    <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.GUI.Web\AssetRipper.GUI.Web.csproj" />
+    <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.IO.Files\AssetRipper.IO.Files.csproj" />
+    <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Numerics\AssetRipper.Numerics.csproj" />
+    <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SerializationLogic\AssetRipper.SerializationLogic.csproj" />
+    <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SourceGenerated.Extensions\AssetRipper.SourceGenerated.Extensions.csproj" />
+    <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Yaml\AssetRipper.Yaml.csproj" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ContentWithTargetPath Include="Libraries\acl.dll">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <TargetPath>acl.dll</TargetPath>
-        </ContentWithTargetPath>
-        <ContentWithTargetPath Include="Libraries\oo2core_9_win64.dll">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <TargetPath>oo2core_9_win64.dll</TargetPath>
-        </ContentWithTargetPath>
-		<Reference Include="HLSLccWrapper_x64">
-			<SpecificVersion>False</SpecificVersion>
-			<HintPath>Libraries\HLSLccWrapper_x64.dll</HintPath>
-		</Reference>
-		<Reference Include="StarRail.SourceGenerated.dll">
-			<SpecificVersion>False</SpecificVersion>
-			<HintPath>Game\UnityMihoyo\StarRail\CommonHook\ClassHook\StarRail.SourceGenerated.dll</HintPath>
-		</Reference>
-    </ItemGroup>
-</Project>                      		
+  <ItemGroup>
+    <ContentWithTargetPath Include="Libraries\acl.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>acl.dll</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Libraries\oo2core_9_win64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>oo2core_9_win64.dll</TargetPath>
+    </ContentWithTargetPath>
+    <Reference Include="HLSLccWrapper_x64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\HLSLccWrapper_x64.dll</HintPath>
+    </Reference>
+    <Reference Include="StarRail.SourceGenerated.dll">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Game\UnityMihoyo\StarRail\CommonHook\ClassHook\StarRail.SourceGenerated.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
