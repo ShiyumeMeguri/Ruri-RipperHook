@@ -1,5 +1,7 @@
 ﻿using AssetRipper.GUI.Web;
 using AssetRipper.SourceGenerated.Classes.ClassID_25;
+using StarRail.SourceGenerated.Classes.ClassID_20;
+using System.Reflection;
 
 namespace Ruri.RipperHook;
 
@@ -19,11 +21,11 @@ internal static class Program
         //RuriRuntimeHook.Init(GameHookType.AR_PrefabOutlining);
         RuriRuntimeHook.Init(GameHookType.AR_BundledAssetsExportMode);
         RuriRuntimeHook.Init(GameHookType.AR_ExportDirectly);
-        RuriRuntimeHook.Init(GameHookType.AR_SkipProcessingAnimation);
+        //RuriRuntimeHook.Init(GameHookType.AR_SkipProcessingAnimation);
         RuriRuntimeHook.Init(GameHookType.AR_AssetMapCreator);
-        RuriRuntimeHook.Init(GameHookType.AR_ShaderDecompiler);
+        //RuriRuntimeHook.Init(GameHookType.AR_ShaderDecompiler);
         //RuriRuntimeHook.Init(GameHookType.AR_USCShaderDecompiler);
-        RuriRuntimeHook.Init(GameHookType.StarRail_3_2);
+        //RuriRuntimeHook.Init(GameHookType.StarRail_3_2);
         //RuriRuntimeHook.Init(GameHookType.Zenless_1_0);
     }
 
@@ -34,5 +36,22 @@ internal static class Program
     private static void Debug()
     {
         DebugExtension.SubClassFinder(typeof(Renderer_2019_3_0_a6), "AssetRipper.SourceGenerated", "AssetRipper.SourceGenerated");
+    }
+    private static void AssemblyDumper()
+    {
+        Debug(); // 先强制加载dll
+        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            var type = assembly.GetType("AssetRipper.SourceGenerated.ReferenceAssembliesJsonData", false);
+            if (type == null) continue;
+
+            var field = type.GetField("data", BindingFlags.Static | BindingFlags.NonPublic);
+            if (field == null) continue;
+
+            var data = (byte[])field.GetValue(null);
+            File.WriteAllBytes(@"D:\Downloads\assemblies.json", data);
+            break;
+        }
+
     }
 }
