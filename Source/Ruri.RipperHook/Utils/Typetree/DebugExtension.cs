@@ -8,6 +8,8 @@ public static class DebugExtension
     public static void SubClassFinder(Type baseType, string targetAssemblyName, string targetNamespace)
     {
         foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            Console.WriteLine("Found Assembly: " + assembly.GetName().Name);
             if (assembly.GetName().Name == targetAssemblyName)
             {
                 var typesInNamespace = assembly.GetTypes().Where(t => t.Namespace != null && t.Namespace.StartsWith(targetNamespace));
@@ -16,5 +18,6 @@ public static class DebugExtension
                         Console.WriteLine("Found subclass: " + type.FullName);
                 break;
             }
+        }
     }
 }
