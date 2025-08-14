@@ -1,5 +1,5 @@
-﻿using AssetRipper.IO.Files.BundleFiles.FileStream;
-using AssetRipper.SourceGenerated.Enums;
+﻿using AssetRipper.IO.Files.BundleFiles;
+using AssetRipper.IO.Files.BundleFiles.FileStream;
 using K4os.Compression.LZ4;
 using Ruri.RipperHook.UnityMihoyo;
 using System.Reflection;
@@ -16,6 +16,8 @@ public partial class ZenlessCommon_Hook
         var _this = (object)this as FileStreamBundleFile;
         var Header = _this.Header;
 
+        var metaCompression = Header.Flags.GetCompression();
+
         var blocksInfo = new BinaryReader(stream).ReadBytes(Header.CompressedBlocksInfoSize);
 
         Mhy1Decryptor.DescrambleHeader(blocksInfo);
@@ -29,6 +31,14 @@ public partial class ZenlessCommon_Hook
         var uncompressedSize = Header.UncompressedBlocksInfoSize;
         var uncompressedBytes = new byte[uncompressedSize];
         var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
+        if (bytesWritten < 0)
+        {
+            ARIntelnalReflection.ThrowNoBytesWrittenMethod.Invoke(null, new object[] { _this.NameFixed, metaCompression });
+        }
+        else if (bytesWritten != uncompressedSize)
+        {
+            ARIntelnalReflection.ThrowIncorrectNumberBytesWrittenMethod.Invoke(null, new object[] { _this.NameFixed, metaCompression, (long)uncompressedSize, (long)bytesWritten });
+        }
         if (bytesWritten < 0)
             throw new Exception("EncryptedFileException.Throw(NameFixed)");
         else if (bytesWritten != uncompressedSize)

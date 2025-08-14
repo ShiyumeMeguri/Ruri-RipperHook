@@ -47,16 +47,20 @@ public partial class HoukaiCommon_Hook
 
             case CompressionType.Lz4:
             case CompressionType.Lz4HC:
-            {
-                var uncompressedSize = Header.UncompressedBlocksInfoSize;
-                var uncompressedBytes = new byte[uncompressedSize];
-                var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
-                if (bytesWritten < 0)
-                    throw new Exception("EncryptedFileException.Throw(NameFixed)");
-                else if (bytesWritten != uncompressedSize)
-                    throw new Exception("DecompressionFailedException.ThrowIncorrectNumberBytesWritten(NameFixed, uncompressedSize, bytesWritten)");
-                ReadMetadata.Invoke(this, new object[] { new MemoryStream(uncompressedBytes), uncompressedSize });
-            }
+                {
+                    var uncompressedSize = Header.UncompressedBlocksInfoSize;
+                    var uncompressedBytes = new byte[uncompressedSize];
+                    var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
+                    if (bytesWritten < 0)
+                    {
+                        ARIntelnalReflection.ThrowNoBytesWrittenMethod.Invoke(null, new object[] { _this.NameFixed, metaCompression });
+                    }
+                    else if (bytesWritten != uncompressedSize)
+                    {
+                        ARIntelnalReflection.ThrowIncorrectNumberBytesWrittenMethod.Invoke(null, new object[] { _this.NameFixed, metaCompression, (long)uncompressedSize, (long)bytesWritten });
+                    }
+                    ReadMetadata.Invoke(this, new object[] { new MemoryStream(uncompressedBytes), uncompressedSize });
+                }
                 break;
 
             case (CompressionType)5:

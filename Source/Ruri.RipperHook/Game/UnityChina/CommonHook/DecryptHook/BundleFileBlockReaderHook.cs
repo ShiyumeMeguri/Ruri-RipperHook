@@ -1,14 +1,16 @@
-﻿using AssetRipper.IO.Files.BundleFiles;
+﻿using AssetRipper.IO.Files;
+using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Exceptions;
 using AssetRipper.IO.Files.Streams.Smart;
 using K4os.Compression.LZ4;
+using Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
 
 namespace Ruri.RipperHook.UnityChinaCommon;
 
 public partial class UnityChinaCommon_Hook
 {
-    public static void CustomBlockCompression(Stream m_stream, StorageBlock block, SmartStream m_cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex)
+    public static void CustomBlockCompression(FileStreamNode entry, Stream m_stream, StorageBlock block, SmartStream m_cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex)
     {
         switch (compressType)
         {
@@ -29,11 +31,11 @@ public partial class UnityChinaCommon_Hook
                 var bytesWritten = LZ4Codec.Decode(compressedBytes, uncompressedBytes);
                 if (bytesWritten < 0)
                 {
-                    throw new Exception($"bytesWritten < 0");
+                    ARIntelnalReflection.ThrowNoBytesWrittenMethod.Invoke(null, new object[] { entry.PathFixed, compressType });
                 }
                 else if (bytesWritten != uncompressedSize)
                 {
-                    throw new Exception($"bytesWritten != uncompressedSize, {compressType}, {uncompressedSize}, {bytesWritten}");
+                    ARIntelnalReflection.ThrowIncorrectNumberBytesWrittenMethod.Invoke(null, new object[] { entry.PathFixed, compressType, (long)uncompressedSize, (long)bytesWritten });
                 }
                 new MemoryStream(uncompressedBytes).CopyTo(m_cachedBlockStream);
                 break;

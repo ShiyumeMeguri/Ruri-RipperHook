@@ -5,6 +5,7 @@ using AssetRipper.IO.Files.Exceptions;
 using AssetRipper.IO.Files.Streams.Smart;
 using K4os.Compression.LZ4;
 using Ruri.RipperHook.Crypto;
+using Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
 using System.Buffers;
 
 namespace Ruri.RipperHook.UnityMihoyo;
@@ -18,7 +19,7 @@ public static class MihoyoCommon
         Oodle = 9,
     }
 
-    public static void CustomBlockCompression(Stream m_stream, StorageBlock block, SmartStream m_cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex)
+    public static void CustomBlockCompression(FileStreamNode entry, Stream m_stream, StorageBlock block, SmartStream m_cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex)
     {
         switch (compressType)
         {
@@ -46,11 +47,11 @@ public static class MihoyoCommon
                 int bytesWritten = isLz4Group ? LZ4Codec.Decode(compressedBytes, uncompressedBytes) : OodleHelper.Decompress(compressedBytes, uncompressedBytes);
                 if (bytesWritten < 0)
                 {
-                    throw new Exception($"bytesWritten < 0");
+                    ARIntelnalReflection.ThrowNoBytesWrittenMethod.Invoke(null, new object[] { entry.PathFixed, compressType });
                 }
                 else if (bytesWritten != uncompressedSize)
                 {
-                    throw new Exception($"bytesWritten != uncompressedSize, {compressType}, {uncompressedSize}, {bytesWritten}");
+                    ARIntelnalReflection.ThrowIncorrectNumberBytesWrittenMethod.Invoke(null, new object[] { entry.PathFixed, compressType, (long)uncompressedSize, (long)bytesWritten });
                 }
                 new MemoryStream(uncompressedBytes).CopyTo(m_cachedBlockStream);
                 break;

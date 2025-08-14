@@ -1,9 +1,9 @@
-﻿using System.Buffers;
-using System.Reflection;
-using AssetRipper.IO.Files.BundleFiles;
+﻿using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
 using AssetRipper.IO.Files.Streams;
 using AssetRipper.IO.Files.Streams.Smart;
+using System.Buffers;
+using System.Reflection;
 
 namespace Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
 
@@ -13,8 +13,7 @@ public class BundleFileBlockReaderHook : CommonHook
 
     private static readonly MethodInfo CreateStream = Type.GetType(TYPE).GetMethod("CreateStream", ReflectionExtensions.PrivateStaticBindFlag());
     private static readonly MethodInfo CreateTemporaryStream = Type.GetType(TYPE).GetMethod("CreateTemporaryStream", ReflectionExtensions.PrivateStaticBindFlag());
-
-    public delegate void BlockCompressionDelegate(Stream mStream, StorageBlock block, SmartStream cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex);
+    public delegate void BlockCompressionDelegate(FileStreamNode entry, Stream mStream, StorageBlock block, SmartStream cachedBlockStream, CompressionType compressType, int m_cachedBlockIndex);
 
     /// <summary>
     /// 针对StorageBlock压缩加密的回调 解决解压错误不支持的类型 5 这种错误的自定义解压处理
@@ -86,7 +85,7 @@ public class BundleFileBlockReaderHook : CommonHook
                     rentedArray = (byte[]?)parameters[1];
 
                     // 回调自定义处理
-                    CustomBlockCompression(m_stream, block, m_cachedBlockStream, compressType, m_cachedBlockIndex);
+                    CustomBlockCompression(entry, m_stream, block, m_cachedBlockStream, compressType, m_cachedBlockIndex);
 
                     blockStream = m_cachedBlockStream;
                 }
