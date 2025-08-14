@@ -9,6 +9,8 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        //DebugAssemblyDumperError();
+
         Hook(args);
         //Debug();
         RunAssetRipper(args);
@@ -36,6 +38,11 @@ internal static class Program
     private static void Debug()
     {
         DebugExtension.SubClassFinder(typeof(Renderer_2019_3_0_a6), "AssetRipper.SourceGenerated", "AssetRipper.SourceGenerated");
+    }
+    // todo Analyzing JVM native errors
+    private static void DebugAssemblyDumperError()
+    {
+        var dummyThis = StarRail.SourceGenerated.Classes.ClassID_74.AnimationClip.Create(new AssetRipper.Assets.Metadata.AssetInfo(), AssetRipper.Primitives.UnityVersion.MaxVersion);
     }
     private static void ExportAllGeneratedData()
     {
