@@ -1,6 +1,4 @@
 ﻿using Ruri.RipperHook.HookUtils.BundleFileBlockReaderHook;
-using Ruri.RipperHook.HookUtils.GameBundleHook;
-using Ruri.RipperHook.HoukaiCommon;
 using Ruri.RipperHook.UnityMihoyo;
 using Ruri.RipperHook.ZenlessZoneZeroCommon;
 
