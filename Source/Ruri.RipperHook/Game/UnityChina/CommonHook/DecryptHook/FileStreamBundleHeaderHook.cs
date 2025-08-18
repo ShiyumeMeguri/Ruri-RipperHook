@@ -22,7 +22,7 @@ public partial class UnityChinaCommon_Hook
         _this.CompressedBlocksInfoSize = reader.ReadInt32();
         _this.UncompressedBlocksInfoSize = reader.ReadInt32();
         _this.Flags = (BundleFlags)reader.ReadInt32();
-        if (!_this.Flags.GetBlocksInfoAtTheEnd())
+        if (_this.Flags.GetBlockInfoNeedPaddingAtStart())
         {
             RuriRuntimeHook.unityChinaDecryptor = new UnityChinaDecryptor(reader);
             var version = UnityVersion.Parse(_this.UnityWebMinimumRevision);
