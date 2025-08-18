@@ -31,7 +31,7 @@ public partial class UnityChinaCommon_Hook
                (version.Major == 2021 && version.Minor == 3 && version.Build <= 2) ||   // 2021.3.2 and earlier
                (version.Major == 2022 && version.Minor == 3 && version.Build <= 1))     // 2022.3.1 and earlier
             {
-                _this.Flags &= ~BundleFlags.BlockInfoNeedPaddingAtStart;
+                _this.Flags &= ~BundleFlags.EncryptionOld;
             }
         }
     }
