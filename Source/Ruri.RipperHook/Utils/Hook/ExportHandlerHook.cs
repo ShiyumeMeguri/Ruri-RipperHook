@@ -54,7 +54,7 @@ public class ExportHandlerHook : CommonHook
         }
 
         yield return new LightingDataProcessor();//Needs to be after static mesh separation
-        yield return new PrefabProcessor();
+        //yield return new PrefabProcessor();
         yield return new SpriteProcessor();
     }
 }

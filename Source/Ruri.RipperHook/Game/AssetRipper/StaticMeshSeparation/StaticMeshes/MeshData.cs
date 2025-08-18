@@ -52,7 +52,6 @@ namespace Ruri.RipperHook.AR_StaticMeshSeparation
 				out Vector3[]? normals,
 				out Vector4[]? tangents,
 				out ColorFloat[]? colors,
-				out BoneWeight4[]? skin,
 				out Vector2[]? uv0,
 				out Vector2[]? uv1,
 				out Vector2[]? uv2,
@@ -61,8 +60,9 @@ namespace Ruri.RipperHook.AR_StaticMeshSeparation
 				out Vector2[]? uv5,
 				out Vector2[]? uv6,
 				out Vector2[]? uv7,
+				out BoneWeight4[]? skin,
 				out Matrix4x4[]? bindpose,
-				out uint[] processedIndexBuffer);
+                out uint[] processedIndexBuffer);
 
 			SubMeshData[] subMeshes = GetSubMeshArray(mesh);
 

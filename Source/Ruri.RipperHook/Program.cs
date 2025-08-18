@@ -25,10 +25,12 @@ internal static class Program
         RuriRuntimeHook.Init(GameHookType.AR_SkipProcessingAnimation);
         RuriRuntimeHook.Init(GameHookType.AR_AssetMapCreator);
         //RuriRuntimeHook.Init(GameHookType.AR_ShaderDecompiler);
-        //RuriRuntimeHook.Init(GameHookType.AR_USCShaderDecompiler);
+        RuriRuntimeHook.Init(GameHookType.AR_USCShaderDecompiler);
         //RuriRuntimeHook.Init(GameHookType.StarRail_3_2);
-        //RuriRuntimeHook.Init(GameHookType.Zenless_1_0);
-        RuriRuntimeHook.Init(GameHookType.AzurPromilia_0_1_1_3);
+        //RuriRuntimeHook.Init(GameHookType.ZenlessZoneZero_1_0);
+        //RuriRuntimeHook.Init(GameHookType.ArknightsEndfield_0_5);
+        //RuriRuntimeHook.Init(GameHookType.GirlsFrontline2_1_0);
+        RuriRuntimeHook.Init(GameHookType.AzurPromilia_0_1_1_3); 
     }
 
     private static void RunAssetRipper(string[] args)

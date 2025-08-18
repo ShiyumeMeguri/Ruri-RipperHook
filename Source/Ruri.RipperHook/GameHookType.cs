@@ -22,8 +22,7 @@ public enum GameHookType
     StarRail_2_0,
     StarRail_3_2,
     Houkai_3_8,
-    Houkai_7_1,
-    Houkai_7_2,
+    Houkai_7_1, // Or Newer
     ZenlessZoneZero_1_0,
 }
 public enum CustomEngineType

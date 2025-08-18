@@ -25,11 +25,20 @@ public record struct SubMeshData(
 	MeshTopology Topology,
 	Bounds LocalBounds)
 {
-	public static SubMeshData Create(ISubMesh subMesh, IndexFormat indexFormat)
+    public static int ToSize(IndexFormat format)
+    {
+        return format switch
+        {
+            IndexFormat.UInt16 => 2,
+            IndexFormat.UInt32 => 4,
+            _ => throw new ArgumentOutOfRangeException(nameof(format), format, null)
+        };
+    }
+    public static SubMeshData Create(ISubMesh subMesh, IndexFormat indexFormat)
 	{
 		return new SubMeshData(
 			subMesh.BaseVertex,
-			(int)subMesh.FirstByte / indexFormat.ToSize(),
+			(int)subMesh.FirstByte / ToSize(indexFormat),
 			(int)subMesh.FirstVertex,
 			(int)subMesh.IndexCount,
 			(int)subMesh.TriangleCount,
@@ -41,7 +50,7 @@ public record struct SubMeshData(
 	public readonly void CopyTo(ISubMesh destination, IndexFormat indexFormat)
 	{
 		destination.BaseVertex = BaseVertex;
-		destination.FirstByte = (uint)(FirstIndex * indexFormat.ToSize());
+		destination.FirstByte = (uint)(FirstIndex * ToSize(indexFormat));
 		destination.FirstVertex = (uint)FirstVertex;
 		destination.IndexCount = (uint)IndexCount;
 		destination.TriangleCount = (uint)TriangleCount;

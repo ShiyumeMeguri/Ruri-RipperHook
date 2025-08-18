@@ -587,7 +587,7 @@ namespace Ruri.RipperHook.AR_StaticMeshSeparation
 				return false;
 			}
 
-			string cleanedName = GameObjectNameCleaner.CleanName(gameObject.Name);
+			string cleanedName = gameObject.Name;
 			if (string.IsNullOrEmpty(cleanedName))
 			{
 				cleanName = null;
