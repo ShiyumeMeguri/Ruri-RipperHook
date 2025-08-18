@@ -1,6 +1,7 @@
 ﻿using AssetRipper.IO.Endian;
 using AssetRipper.IO.Files.BundleFiles;
 using AssetRipper.IO.Files.BundleFiles.FileStream;
+using AssetRipper.Primitives;
 using Ruri.RipperHook.Crypto;
 
 namespace Ruri.RipperHook.UnityChinaCommon;
@@ -24,6 +25,14 @@ public partial class UnityChinaCommon_Hook
         if (!_this.Flags.GetBlocksInfoAtTheEnd())
         {
             RuriRuntimeHook.unityChinaDecryptor = new UnityChinaDecryptor(reader);
+            var version = UnityVersion.Parse(_this.UnityWebMinimumRevision);
+            if (version.Major < 2020 ||                                                 // 2019 and earlier
+               (version.Major == 2020 && version.Minor == 3 && version.Build <= 34) ||  // 2020.3.34 and earlier
+               (version.Major == 2021 && version.Minor == 3 && version.Build <= 2) ||   // 2021.3.2 and earlier
+               (version.Major == 2022 && version.Minor == 3 && version.Build <= 1))     // 2022.3.1 and earlier
+            {
+                _this.Flags &= ~BundleFlags.BlockInfoNeedPaddingAtStart;
+            }
         }
     }
 }
