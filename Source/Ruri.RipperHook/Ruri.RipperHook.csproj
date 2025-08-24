@@ -35,6 +35,7 @@
     <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SerializationLogic\AssetRipper.SerializationLogic.csproj" />
     <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.SourceGenerated.Extensions\AssetRipper.SourceGenerated.Extensions.csproj" />
     <ProjectReference Include="..\..\AssetRipper\Source\AssetRipper.Yaml\AssetRipper.Yaml.csproj" />
+    <ProjectReference Include="..\..\USCSandbox\USCSandbox\USCSandbox.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +47,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>oo2core_9_win64.dll</TargetPath>
     </ContentWithTargetPath>
+    <Reference Include="AssetsTools.NET">
+      <HintPath>..\..\USCSandbox\Libs\AssetsTools.NET.dll</HintPath>
+    </Reference>
     <Reference Include="HLSLccWrapper_x64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\HLSLccWrapper_x64.dll</HintPath>

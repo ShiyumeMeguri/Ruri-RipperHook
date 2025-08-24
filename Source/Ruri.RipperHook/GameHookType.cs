@@ -10,7 +10,6 @@ public enum GameHookType
     AR_ExportDirectly,
     AR_SkipProcessingAnimation,
     AR_AssetMapCreator,
-    AR_USCShaderDecompiler,
 
     // Game
     PunishingGrayRaven_2_11,
